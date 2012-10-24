@@ -98,3 +98,20 @@ footer {
 .mini-basket-dropdown .btn-checkout {
 	clear:none;
 }
+
+.filter-name {
+    font-size:14px;
+    margin: 0 4px 8px 0;
+}
+.filter {
+    margin-botton:10px;
+}
+
+.product-actions {
+    margin-top:10px;
+    padding:0 16px;
+}
+
+.form-search {
+    margin:4px;
+}
