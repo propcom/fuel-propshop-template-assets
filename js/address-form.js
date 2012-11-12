@@ -47,8 +47,6 @@
                     $state_select.append($opt);
                 });
                 
-                // Not styled, no span, no effect.
-                $state_select.next('span.select').html($state_select.find('option:selected').html());
                 $state_select.trigger('change.address-form');
 
                 if (andthen) andthen($state_select);
@@ -63,7 +61,7 @@
             if (values.country_code) {
                 var state_code = values.state_code;
 
-                self.$form.find('.js-country-code').val(values.country_code);
+                self.$form.find('.js-country-code').val(values.country_code).trigger('change.address-form');
 
                 this.update_states(values.country_code, function($state_select) {
                     if (state_code) {
@@ -73,7 +71,7 @@
                 });
             }
             else if (values.state_code) {
-                self.$form.find('.js-state-code').val(values.state_code);
+                self.$form.find('.js-state-code').val(values.state_code).trigger('change.address-form');
             }
 
             delete values['country_code'];
