@@ -33,7 +33,6 @@ $(document).ready(function () {
     $('#addresses_billing, #addresses_shipping').change(function () {
         var id = $(this).val();
         var $fieldset = $(this).next('fieldset');
-        console.log($fieldset);
         var type = $fieldset.data('address-type');
 
         // Set the address shipping ID
