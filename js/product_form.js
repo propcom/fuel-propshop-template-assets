@@ -44,6 +44,7 @@
 (function($) {
 	function ProductForm(form) {
 		var self = this;
+        this.form = form;
 		this.product_id = form.data('productId');
 		this.fields = form.find('.variant-select');
 		this.selected_variant = form.find('input[name=id]');
@@ -64,24 +65,7 @@
 		// Other metadata
 		this.variant_meta = {};
 
-		// I can't think of a better way of doing this without outputting pre-computed data
-		$.each(this.variants, function(name, config) {
-			// Underscore denotes metadata. Hacky but will work for now.
-			if(name.indexOf('_') == 0)
-				return;
-
-			$.each(config.options, function(value, options) {
-				$.each(options.variant_ids, function(i, id) {
-					self.variants_masked[id] = 0;
-
-					var v = self.variants_inverse[id] || [];
-					v.push(value);
-					self.variants_inverse[id] = v;
-				});
-			});
-		});
-
-		$.extend(true, self.variant_meta, this.variants._variant_meta);
+		this.init();
 
 		this.fields.change(function() {
 			self.set_option($(this).attr('name'), $(this).val());
@@ -90,6 +74,28 @@
 
 	ProductForm.prototype = {
 		constructor: ProductForm,
+        init: function() {
+            var self = this;
+            // I can't think of a better way of doing this without outputting pre-computed data
+            $.each(this.variants, function(name, config) {
+                // Underscore denotes metadata. Hacky but will work for now.
+                if(name.indexOf('_') == 0)
+                    return;
+
+                $.each(config.options, function(value, options) {
+                    $.each(options.variant_ids, function(i, id) {
+                        self.variants_masked[id] = 0;
+
+                        var v = self.variants_inverse[id] || [];
+                        v.push(value);
+                        self.variants_inverse[id] = v;
+                    });
+                });
+            });
+
+            $.extend(true, self.variant_meta, this.variants._variant_meta);
+        },
+
 		set_option: function(option, value) {
 			// Could probably avoid re-selecting the field, but that restricts
 			// the API by not allowing simple string values.
@@ -119,8 +125,10 @@
 
 			// this field's options are not masked, as a rule.
 			field.find('option').removeAttr('disabled').end().val(value);
+
 			field.trigger('set_option', { product_form: this });
 		},
+
 		mask_fields: function() {
 			var self = this,
 				v = this.unmasked_variants(),
@@ -142,6 +150,7 @@
 
 			// recalculate options based on what's left
 			v = this.unmasked_variants();
+
 			var v_count = 0, last_vid;
 			$.each(v, function(variant_id) {
 				v_count++;
@@ -176,6 +185,7 @@
 				this.selected_variant.val('');
 			}
 		},
+
 		hobsons_choice: function() {
 			this.unfilled_fields().each(function() {
 				var $this = $(this);
@@ -188,9 +198,13 @@
 				}
 			});
 		},
+
 		unmasked_variants: function() {
-			var v = {},
-				f = this.filled_fields().length;
+			// Returns all variants that are still available for selection
+            // indicated by the mask.
+
+            var v = {},
+				f = this.filled_fields().find(':selected').length;
 
 			// I don't think I can filter() or grep() a normal object
 			$.each(this.variants_masked, function(variant, count) {
@@ -199,11 +213,13 @@
 
 			return v;
 		},
+
 		filled_fields: function() {
 			return this.fields.filter(function() {
 				return !!$.trim($(this).val());
 			});
 		},
+
 		unfilled_fields: function() {
 			return this.fields.filter(function() {
 				return !$.trim($(this).val());
@@ -219,10 +235,200 @@
 		register: function(form) {
 			if (! (form instanceof ProductForm)) {
 				form.each(function() {
-					productForms.push(new ProductForm($(this)));
+                    productForms.push(new ProductForm($(this)));
 				});
 			}
 
 		}
 	};
+
+    // There is probably a better way of doing all this...
+    var RadioProductForm = function(form){
+        var self = this;
+        this.form = form;
+        this.product_id = form.data('productId');
+        this.fields = form.find('.variant-select');
+
+        // group the inputs by name to make them easier to work with.
+        this.groups = this.get_groups();
+
+        this.selected_variant = form.find('input[name=id]');
+
+        // In the change handler we need to know what it used to be.
+        this.selection = {};
+
+        // variant_data is injected in a <script> tag - not ideal but works for now.
+        // If products turn up via AJAX the handlers should add stuff to it.
+        this.variants = variant_data[this.product_id];
+
+        // map variant IDs to the option values that refer to them.
+        this.variants_inverse = {};
+
+        // Variants with the same value as the number of filled fields are unmasked.
+        this.variants_masked = {};
+
+        // Other metadata
+        this.variant_meta = {};
+
+        this.init();
+
+        this.fields.change(function() {
+            self.set_option($(this).attr('name'), $(this).val());
+        });
+    };
+
+    RadioProductForm.prototype = $.extend({}, ProductForm.prototype);
+    RadioProductForm.prototype.constructor = RadioProductForm;
+
+    RadioProductForm.prototype.get_groups = function() {
+        var groups = {};
+        this.fields.each(function(){
+            groups[$(this).attr('name')] = true;
+        });
+
+        return groups;
+    };
+
+    RadioProductForm.prototype.filled_fields = function() {
+        var group, 
+			filled_groups = [];
+			
+        for (group in this.groups) {
+
+            if (this.form.find('.variant-select[name='+group+']:checked').length > 0)
+            {
+                filled_groups.push(group);
+            }
+        }
+
+        return filled_groups;
+    };
+
+    RadioProductForm.prototype.unfilled_fields = function() {
+        var group,
+			unfilled_groups= [];
+        for (group in this.groups) {
+            if (!this.form.find('.variant-select[name='+group+']:checked').length)
+            {
+                unfilled_groups.push(group);
+            }
+        }
+
+        return unfilled_groups;
+    };
+
+    RadioProductForm.prototype.set_option = function(option, value) {
+        // Could probably avoid re-selecting the field, but that restricts
+        // the API by not allowing simple string values.
+        var self = this,
+            field = this.fields.filter('[name=' + option + ']');
+
+        if (this.selection[option]) {
+            // re-mask variants
+            $.each(
+                this.variants[option].options[this.selection[option]].variant_ids,
+                function(i, id) {
+                    self.variants_masked[id]--;
+                });
+        }
+        this.selection[option] = value;
+
+        if (value) {
+            $.each(
+                this.variants[option].options[this.selection[option]].variant_ids,
+                function(i, id) {
+                    self.variants_masked[id]++;
+                });
+        }
+
+        this.mask_fields();
+        this.hobsons_choice();
+
+        // this field's options are not masked, as a rule.
+        field.removeAttr('disabled');
+        field.trigger('set_option', { product_form: this });
+    };
+
+    RadioProductForm.prototype.hobsons_choice = function() {
+		// Find fields with only one option not disabled, and select that.
+        $.each(this.unfilled_fields(), function() {
+            var $this = $('input[name=' + this + ']');
+
+            var opts = $this.filter(function() {
+                return !$(this).is('[disabled]') && !! $(this).is(':checked');
+            });
+            if (opts.length == 1) {
+                $this.attr('checked', true);
+            }
+        });
+    };
+
+    RadioProductForm.prototype.mask_fields = function() {
+        var self = this,
+            v = this.unmasked_variants(),
+            conf_ids = {};
+
+        $.each(v, function(variant_id) {
+            for(c_id in self.variants_inverse[variant_id]) {
+                conf_ids[self.variants_inverse[variant_id][c_id]] = 1;
+            }
+        });
+
+        $.each(this.filled_fields(), function() {
+			var $this = $('input[name=' + this + ']');
+			
+			$this.filter(':checked').each(function (i, o) {
+				// if the current selection is not in the unmasked lot,
+				// unset the value. Then it'll be picked up in the next loop
+				var name = $(this).attr
+				$(this).find(':checked').attr('checked', false);
+				
+			});
+		});
+		
+        // recalculate options based on what's left
+        v = this.unmasked_variants();
+		
+        var v_count = 0, last_vid;
+        $.each(v, function(variant_id) {
+            v_count++;
+            last_vid = variant_id;
+
+            for(c_id in self.variants_inverse[variant_id]) {
+                conf_ids[self.variants_inverse[variant_id][c_id]] = 1;
+            }
+        });
+
+		
+        if (v_count == 1) {
+            this.selected_variant.val(last_vid);
+        }
+        else {
+            this.selected_variant.val('');
+        }
+    };
+	
+	RadioProductForm.prototype.unmasked_variants = function() {
+			// Returns all variants that are still available for selection
+            // indicated by the mask.
+			
+            var v = {},
+				f = 0;
+				
+			$.each(this.filled_fields(), function() {
+				var $this = $('input[name=' + this + ']');
+
+				// Better not be more than one :checked radio button per group
+				f += $this.filter(':checked').length;
+			});
+
+			// I don't think I can filter() or grep() a normal object
+			$.each(this.variants_masked, function(variant, count) {
+				if (count == f) v[variant] = 1;
+			});
+
+			return v;
+		},
+
+    window.RadioProductForm = RadioProductForm;
 })(jQuery);
