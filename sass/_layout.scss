@@ -1,0 +1,128 @@
+
+/*-----------------------------------------------------------------------------
+---------------------------3----LAYOUT BASE ELEMENTS----------------------------
+-------------------------------------------------------------------------------*/
+html {
+  overflow-x:hidden;
+  min-height:100%;
+  height:100%;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  min-height:100%;
+  height:100%;
+}
+
+
+/*-----------------------------------------------------------------------------
+--------------------------------4--------NAVIGATION----------------------------
+-------------------------------------------------------------------------------*/
+
+
+nav[role="navigation"] {
+
+	&.primary-nav {
+		position:relative;
+
+		a {
+
+			&:hover, &.current {
+		 		background:$primary none repeat 0 0;
+				color:$secondary;
+				@include box-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+			}
+		}
+	}
+
+
+	ul {
+
+		li {
+			position:relative;
+			float:left;
+			display:inline;
+
+			 a {
+				display:block;
+				padding:0;
+				color:$primary;
+				font: $baseFont;
+				@include transition(1s $easeInOut all);
+			}
+			
+		}
+	
+	}
+
+}
+
+/*-----------------------------------------------------------------------------
+------------------------------5----------LAYOUT--------------------------------
+-------------------------------------------------------------------------------*/
+
+/*---------------------------------------------------
+    $Assets for retina display
+---------------------------------------------------*/
+
+/*
+$media only screen and (-webkit-min-device-pixel-ratio: 2),  
+only screen and (min--moz-device-pixel-ratio: 2),  
+only screen and (-o-min-device-pixel-ratio: 2/1),  
+only screen and (min-device-pixel-ratio: 2) {
+  	
+  .logo {
+	  background:url(../_img/logo$2x.png);
+	  background-size:200px 94px;
+  }
+  
+}
+*/
+
+.page_width {
+  width:100%;
+  min-height:100%;
+  height:100%;
+  margin:0;
+  display:block;
+}
+
+.wrapper {
+	width: 100%;
+	display: block;
+	overflow: hidden;
+}
+
+
+header {
+
+	&.main {
+		height:40px;
+
+		a {
+		    padding:10px 0px;
+		    display: inline-block;
+		}
+
+		nav {
+		    text-align: right;
+		    a {
+		        margin-left: (15/320)*100%;
+		        &:first-child {
+		            margin-left: 0px;
+		        }
+		    }
+		}
+	}
+
+}
+
+footer {
+
+    &.l-foot {
+        border-top: solid 1px #ddd;
+        margin: 20px 0 0 0;
+        padding: 20px 0;
+    }
+}
