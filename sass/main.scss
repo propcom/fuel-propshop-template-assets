@@ -1,0 +1,103 @@
+/* =============================================================================
+   Primary styles
+   Author: 
+   ========================================================================== */
+
+
+/*
+  Contents
+  --------
+  0 Normalisation
+  1 Typography
+  2 Headings
+  3 Layout Base Elements
+  4 Navigation
+  5 Layout
+  6 Page Specific Styles
+  7 Form Styles
+  8 Fancybox
+  9 IE Fixes
+  10 Media Queries
+
+
+*/
+
+
+/*============================
+*	Base
+	all base files to reset and get the site started
+*/
+
+	@import "base/variables";
+	@import "base/base";
+	@import "base/typography";
+	@import "base/fonticon";
+	@import "base/skeleton";
+	@import "base/helper-class";
+
+
+/*============================
+*	Layout
+	Main layout elements of site - Header, sidebar footer etc but none of the reusable 
+	elements that are inside of these including headers, links etc. Make these in a 
+	more modular method.
+*/
+
+	@import "layout";
+
+/*============================
+*	Modules
+	this will be the core styles for the site. this should be as modular as possible
+	but no state styles. These are for the next section.
+*/
+
+	@import "module/main";
+	@import "module/forms";
+	@import "module/buttons";
+
+/*============================
+*	State
+	the different states of elements that are styled will be kept in here.
+*/
+
+	@import "state/main";
+
+/*============================
+*	Page
+	all page files are aimed at general major/minor layout in regards to page specificity.
+*/
+
+	// @import "page/home";
+
+/*============================
+*	Print
+	Print Style sheet
+*/
+
+	//@import "module/_print";
+ 
+
+ /*============================
+*	Libraries
+	CSS files for any external libraries like fancybox etc.
+*/
+
+	@import "lib/fancybox";
+	// @import "lib/cloudzoom";
+	@import "lib/jqueryui/jqueryui-1.8.16";
+
+
+ /*============================
+*	Media Queries
+	CSS files for any mobile specific adaptations.
+*/
+
+	//@import "module/mediaqueries";
+
+
+ /*============================
+*	IE
+	CSS fixes for Internet Explorer
+*/
+
+	@import "base/browser";
