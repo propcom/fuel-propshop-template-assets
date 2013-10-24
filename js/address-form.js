@@ -170,6 +170,6 @@ $(function() {
             else
                 $billing_form.data('address-form').decouple();
         }
-    });
+    }).trigger('change');
 
 });
