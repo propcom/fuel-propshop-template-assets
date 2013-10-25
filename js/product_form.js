@@ -455,8 +455,7 @@
         });
 
         return v;
-    },
+    };
 
-        window.RadioProductForm = RadioProductForm;
-
+	window.RadioProductForm = RadioProductForm;
 })(jQuery);
