@@ -117,22 +117,4 @@
 		decrementUrl : '/basket/rest/decr.json',
 		productId : ''
 	};
-	
-	$('document').ready(function(){
-		
-		function setupBasket() {
-			$('[data-basket="item"]').each(function(){
-				var $this = $(this),
-				productId = $this.attr('data-product-id'),
-				option = $.extend({'productId' : productId}, $this.data())				
-				$this.basketItem(option)
-			});
-		}
-		
-		setupBasket();
-		
-		$('body').ajaxComplete(setupBasket);
-	})
-	
-
 })(jQuery)
