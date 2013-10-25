@@ -144,32 +144,3 @@
         }
     };
 })(jQuery);
-
-$(function() {
-    var $billing_form = $('.js-billing-form'),
-        $delivery_form = $('.js-delivery-form');
-
-    AddressForms.register($billing_form, 'billing_');
-    AddressForms.register($delivery_form, 'delivery_');
-
-    $('.js-copy-address').on('change', function() {
-        var $this = $(this);
-        var from = $this.data('from');
-
-        var on = !!$this.is(':checked');
-
-        if (from == 'billing') {
-            if (on)
-                $delivery_form.data('address-form').couple($billing_form.data('address-form'));
-            else
-                $delivery_form.data('address-form').decouple();
-        }
-        else {
-            if (on)
-                $billing_form.data('address-form').couple($delivery_form.data('address-form'));
-            else
-                $billing_form.data('address-form').decouple();
-        }
-    });
-
-});
