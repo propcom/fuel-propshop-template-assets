@@ -58,6 +58,10 @@ $(function(){
         }).on('filter-change', on_filter_change);
     }
 
+	$('.js-search-per-page').on('change', function() {
+		this.form.submit();
+	});
+
     setupFilters();
     setupSort();
 });
