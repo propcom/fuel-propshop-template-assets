@@ -49,7 +49,7 @@
         this.form = form;
         this.product_id = form.data('productId');
         this.fields = form.find('.variant-select');
-        this.selected_variant = form.find('input[name=id]');
+        this.selected_variant = form.find('input[name="id[]"]');
 
         // In the change handler we need to know what it used to be.
         this.selection = {};
@@ -279,7 +279,7 @@
         // group the inputs by name to make them easier to work with.
         this.groups = this.get_groups();
 
-        this.selected_variant = form.find('input[name=id]');
+        this.selected_variant = form.find('input[name="id[]"]');
 
         // In the change handler we need to know what it used to be.
         this.selection = {};
