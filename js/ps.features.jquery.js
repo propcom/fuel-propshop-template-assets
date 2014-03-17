@@ -239,7 +239,7 @@ if (!Function.prototype.bind) {
 
 			if (pos.left > img.width() / 2) {
 				this.elem.css({
-					left: parseInt(this.marker.x) - this.marker.elem.width() - this.elem.width(),
+					left: parseInt(this.marker.x) - this.marker.elem.width() - this.elem.width()
 				});
 			}
 		},
