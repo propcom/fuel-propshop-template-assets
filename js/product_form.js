@@ -378,9 +378,11 @@
     };
 
     RadioProductForm.prototype.hobsons_choice = function() {
+        var self = this;
+
         // Find fields with only one option not disabled, and select that.
         $.each(this.unfilled_fields(), function() {
-            var $this = $('input[name=' + this + ']');
+            var $this = self.form.find('input[name=' + this + ']');
 
             var opts = $this.filter(function() {
                 return !$(this).is('[disabled]') && !! $(this).is(':checked');
@@ -403,7 +405,7 @@
         });
 
         $.each(this.filled_fields(), function() {
-            var $this = $('input[name=' + this + ']');
+            var $this = self.form.find('input[name=' + this + ']');
 
             $this.filter(':checked').each(function (i, o) {
                 // if the current selection is not in the unmasked lot,
@@ -440,10 +442,11 @@
         // indicated by the mask.
 
         var v = {},
+            self = this,
             f = 0;
 
         $.each(this.filled_fields(), function() {
-            var $this = $('input[name=' + this + ']');
+            var $this = self.form.find('input[name=' + this + ']');
 
             // Better not be more than one :checked radio button per group
             f += $this.filter(':checked').length;
