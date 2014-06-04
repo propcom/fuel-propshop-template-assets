@@ -222,13 +222,13 @@
 
         filled_fields: function() {
             return this.fields.filter(function() {
-                return !!$.trim($(this).find('option[selected]').eq(0).val());
+                return !!$.trim($(this).val());
             });
         },
 
         unfilled_fields: function() {
             return this.fields.filter(function() {
-                return !$.trim($(this).find('option[selected]').eq(0).val());
+                return !$.trim($(this).val());
             });
         }
     };
