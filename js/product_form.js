@@ -222,7 +222,7 @@
 
         filled_fields: function() {
             return this.fields.filter(function() {
-                return !!$.trim($(this).val());
+                return !$.trim($(this).val());
             });
         },
 
@@ -239,7 +239,7 @@
             if (unfilled.length)
             {
                 e.preventDefault();
-                
+
                 var fields = [];
 
                 unfilled.each(function(i,o) {
