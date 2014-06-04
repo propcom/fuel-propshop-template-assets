@@ -222,13 +222,13 @@
 
         filled_fields: function() {
             return this.fields.filter(function() {
-                return !!$.trim($(this).val());
+                return !!$.trim($(this).find('option[selected]').eq(0).val());
             });
         },
 
         unfilled_fields: function() {
             return this.fields.filter(function() {
-                return !$.trim($(this).val());
+                return !$.trim($(this).find('option[selected]').eq(0).val());
             });
         }
     };
@@ -238,14 +238,20 @@
             var unfilled = this.unfilled_fields();
             if (unfilled.length)
             {
-                var field = unfilled.pop();
                 e.preventDefault();
+
+                var fields = [];
+
+                unfilled.each(function(i,o) {
+                    fields.push($(this).attr('title'))
+                });
+                fields = fields.join(", ");
 
                 this.form.find('.alert').remove();
 
                 this.form.prepend($('<div />')
                     .addClass('alert alert-error')
-                    .text('Please select a ' + field + ' to add this product to your basket')
+                    .text('Please select the following fields to add this product to your basket: '+fields)
                     .append($('<a />').addClass('close').attr('data-dismiss', 'alert').text('×')));
             }
         }
