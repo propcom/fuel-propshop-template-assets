@@ -132,7 +132,7 @@
 		},
 		decouple: function () {
 			if (this._couple) {
-				this._couple.$form.find(':input').off('change.address-form');
+				this._couple.$form.find(':input').off('change.address-form', this._on_couple_change());
 				this._couple = null;
 			}
 		}
