@@ -1,0 +1,123 @@
+//GRID
+
+//Grid mixin allowing to pass base grid width, number of columns and gap
+
+//Don't gorget to set SASS precision to at leats 10 decimal cases: --precision=10
+
+
+
+//    variables
+$_max-width: 1240; //in px
+$_number-of-columns: 12;
+$_gutter: 20; //in px
+$_grid-margin: percentage(($_gutter/2)/$_max-width);
+
+
+@mixin grid($__max-width: $_max-width, $__col-nr: $_number-of-columns, $__gutter: $_gutter ){
+
+	// calculate and set margin and width
+	$__margin: percentage(($__gutter/2)/$__max-width);
+	$__col-width: percentage(1/$__col-nr);
+
+
+	// Lets define the collumns default behaviour and calculate the variants dimensions
+	.col{
+		float: left;
+		margin-left: $__margin;
+		margin-right: $__margin;
+	}
+
+
+	@for $__i from 1 to $__col-nr+1{
+		.col--#{$__i}{
+			width: $__col-width * $__i - $__margin * 2;
+		}
+	} // usage: .col--$__i
+
+
+
+	@for $__i from 1 to $__col-nr+1{
+		.col--full#{$__i}{
+			width: $__col-width * $__i;
+			margin-left: 0;
+			margin-right: 0;
+		}
+	} //usage: .col--full$__i
+
+	@for $__i from 1 to $__col-nr{
+		.col--offset#{$__i}{
+			margin-left: $__col-width * $__i + $__margin;
+		}
+	} //usage .col--offset$__i
+
+	// Some defaults that may be included in the mixin
+	.col--left {float: left;}
+	.col--right {float: right;}
+	//.col--center { @extend %l-align--center; }
+
+	.col--align-top { vertical-align: top; }
+	.col--align-bottom { vertical-align: bottom; }
+
+	// Lets define the container behaviour
+	.container{
+		position: relative;
+		max-width: #{$_max-width}px;
+		margin: 0 auto;
+
+		//F*** IE8, IE7 and IE6
+		.lt-ie9 &{
+			width: 960px;
+		}
+
+		// max-width: 480px;
+		@include bp-max($small) {
+			max-width: $small;
+		}
+
+		.col {
+			@include bp-max($small) {
+				width: 95.833333333333333333333333333333%;
+				@include block-align--center();
+
+			}
+		}
+	}
+
+	.row {
+		position: relative;
+		width:100%;
+		margin : 0 auto;
+		display: block;
+		//@extend %clearfix;
+
+	}
+
+}
+
+//    Need  to set some widths on the fly? just include columns
+@mixin columns($__columns, $__max-width:$_max-width, $__col-nr:$_number-of-columns, $__gutter:$_gutter){
+	//calculate columns margin and width
+	$__margin: percentage(($__gutter/2)/$__max-width);
+	$__col-width: percentage(1/$__col-nr);
+
+	//set properties
+	width: ($__col-width * $__columns) - ($__margin * 2);
+	margin-left: $__margin;
+	margin-right: $__margin;
+	float: left;
+}
+
+@mixin columns--full($__columns, $__col-nr:$_number-of-columns){
+	//calculate columns margin and width
+	$__col-width: percentage(1/$__col-nr);
+
+	//set properties
+	width: ($__col-width * $__columns);
+	float: left;
+}
+
+
+//    Mixin initialization
+@include grid($_max-width, $_number-of-columns, $_gutter);
+
+

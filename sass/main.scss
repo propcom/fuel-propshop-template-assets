@@ -1,3 +1,5 @@
+@import "helpers/helper--main";
+
 @import "mixins/typography";
 @import "mixins/transforms";
 @import "mixins/box-model";
@@ -7,6 +9,8 @@
 @import "mixins/placeholder";
 @import "mixins/images";
 @import "mixins/animation";
+@import "mixins/breakpoint";
+@import "mixins/grid";
 
 
 
@@ -19,7 +23,7 @@
 @import "base/normalize";
 @import "base/typography";
 
-@import "helpers/helper--main";
+
 
 
 
