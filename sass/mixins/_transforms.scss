@@ -1,0 +1,149 @@
+//	All mixins related to css transforms are placed in this file
+
+
+
+//	TRANSFORM
+
+@mixin transform($transform) {
+       -ms-transform: $transform;  //ie9 targeting, will only work with 2D transforms
+   -webkit-transform: $transform;
+      -moz-transform: $transform;
+        -o-transform: $transform;
+           transform: $transform;
+}
+
+//	usage: @import transform( scale(1,1) );
+
+
+
+
+// Transform Style
+
+// sets and prefixes the transform-style property
+
+@mixin transform-style($transformStyle) {
+   -webkit-transform-style: $transformStyle;
+      -moz-transform-style: $transformStyle;
+        -o-transform-style: $transformStyle;
+           transform-style: $transformStyle;
+}
+
+// usage: @import transform-style(preserve-3d);
+
+
+
+//	TRANSFORM-ORIGIN
+
+//	sets and prefixes the origin of the transform
+
+@mixin transform-origin($transformOrigin) {
+       -ms-transform-origin: $transformOrigin;	//ie9 targeting, will only work with 2D transforms
+   -webkit-transform-origin: $transformOrigin;
+      -moz-transform-origin: $transformOrigin;
+        -o-transform-origin: $transformOrigin;
+           transform-origin: $transformOrigin;
+}
+
+// usage: @import transform-origin( 50% 50% );
+
+
+
+//	ROTATE
+
+//	Sets and prefixes a rotation tranform
+
+@mixin rotate( $degrees ) {
+      -ms-transform: rotate(#{$degrees}deg); //ie9 targeting, will only work with 2D transforms
+  -webkit-transform: rotate(#{$degrees}deg);
+     -moz-transform: rotate(#{$degrees}deg);
+      -ms-transform: rotate(#{$degrees}deg);
+       -o-transform: rotate(#{$degrees}deg);
+          transform: rotate(#{$degrees}deg);
+}
+//	usage: @include rotate(24);
+
+
+
+// TRANSITION
+
+//	sets and prefixes the transition property
+
+@mixin transition ($transition) {
+  -webkit-transition: $transition;
+     -moz-transition: $transition;
+      -ms-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
+}
+
+//	usage: @include transition(.6s $easeInOut all);
+
+
+
+
+// PRESPECTIVE
+
+@mixin perspective ($perspective) {
+  -webkit-perspective: $perspective;
+     -moz-perspective: $perspective;
+      -ms-perspective: $perspective;
+          perspective: $perspective;
+}
+
+// usage: @include perspective( 1000 );
+
+
+
+// PRESPECTIVE-ORIGIN
+
+@mixin perspective-origin ($perspective-origin) {
+  -webkit-perspective-origin: $perspective-origin;
+     -moz-perspective-origin: $perspective-origin;
+      -ms-perspective-origin: $perspective-origin;
+          perspective-origin: $perspective-origin;
+}
+
+// usage: @include perspective( 1000 );
+
+
+
+// BACKFACE-VISIBILITY
+
+//	sets the backface-visibility property to hidden
+
+@mixin backface-visibility {
+  -webkit-backface-visibility:  hidden;
+     -moz-backface-visibility:  hidden;
+      -ms-backface-visibility:  hidden;
+          backface-visibility:  hidden;
+}
+
+//	usage: @include backface-visibility;
+
+
+
+//	HARDWAREACCELERATE
+
+//	forces hardware acceleration via transform properties
+
+@mixin hardwareAccelerate {
+  
+  -webkit-transform: translate3d(0,0,0);
+  -webkit-perspective: 1000;
+  -webkit-backface-visibility: hidden;
+
+  -moz-transform: translate3d(0,0,0);
+  -moz-perspective: 1000;
+  -moz-backface-visibility: hidden;
+
+  -ms-transform: translate3d(0,0,0);
+  -ms-perspective: 1000;
+  -ms-backface-visibility: hidden;
+
+  transform: translate3d(0,0,0);
+  perspective: 1000;
+  backface-visibility: hidden;
+
+}
+
+//	usage: @include hardwareAccelerate;

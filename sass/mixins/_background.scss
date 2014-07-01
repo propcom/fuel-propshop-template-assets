@@ -1,0 +1,35 @@
+//	LINEAR-GRADIENT
+
+//	sets the background-image property to a param defined linear gradient
+
+@mixin linear-gradient ($place, $bcolor1, $bcolor2){
+  background-image: -moz-linear-gradient($place, $bcolor1, $bcolor2);
+  background-image: -webkit-linear-gradient($place, $bcolor1, $bcolor2);
+  background-image: -o-linear-gradient($place, $bcolor1, $bcolor2);
+  background-image: -ms-linear-gradient($place, $bcolor1, $bcolor2);
+
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$bcolor1}', endColorstr='#{$bcolor2}'); /* IE6,IE7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$bcolor1}', endColorstr='#{$bcolor2}')"; /* IE8+ */
+  
+  background-image: linear-gradient($place, $bcolor1, $bcolor2);
+}
+
+//	usage: @include linear-gradient(top, #ffffff, #333333);
+
+
+
+//	DIAGONAL-LINEAR-GRADIENT
+
+//	sets the background-image property to a param defined diagonal gradient
+
+@mixin diagonal-linear-gradient ($deg, $bcolor1, $bcolor2, $place, $bcolor3, $place2, $bgcolor4, $place3){
+
+  background-image: -webkit-repeating-linear-gradient($deg, $bcolor1, #{$bcolor2} #{$place}, #{$bcolor3} #{$place2}, #{$bgcolor4} #{$place3});
+  background-image: -moz-repeating-linear-gradient($deg, $bcolor1, #{$bcolor2} #{$place}, #{$bcolor3} #{$place2}, #{$bgcolor4} #{$place3});
+  background-image: -o-repeating-linear-gradient($deg, $bcolor1, #{$bcolor2} #{$place}, #{$bcolor3} #{$place2}, #{$bgcolor4} #{$place3});
+  background-image: -ms-repeating-linear-gradient($deg, $bcolor1, #{$bcolor2} #{$place}, #{$bcolor3} #{$place2}, #{$bgcolor4} #{$place3});
+  background-image: repeating-linear-gradient($deg, $bcolor1, #{$bcolor2} #{$place}, #{$bcolor3} #{$place2}, #{$bgcolor4} #{$place3});
+}
+
+// usage: @include diagonal-linear-gradient(45deg, #ea4824, #ea4824, 5px, #e36042, 4px, #e36042, 14px);
+

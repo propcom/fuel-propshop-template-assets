@@ -1,0 +1,19 @@
+//	PLACEHOLDER
+
+//	Allows for the styling of the input placeholders
+
+@mixin placeholder {
+  &.placeholder { @content }
+  &::-webkit-input-placeholder { @content }
+  &::-moz-placeholder { @content }
+  &:-ms-input-placeholder { @content }
+}
+
+//	usage:
+//	input {
+//		@include placeholder { 
+//
+//      /some placeholder styles here/ 
+//
+//		}
+//	}

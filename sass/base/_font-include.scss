@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'droid';
+    src: url('#{$fontsrc}/DroidSans-webfont.eot');
+    src: url('#{$fontsrc}/DroidSans-webfont.eot?#iefix') format('embedded-opentype'),
+         url('#{$fontsrc}/DroidSans-webfont.woff') format('woff'),
+         url('#{$fontsrc}/DroidSans-webfont.ttf') format('truetype'),
+         url('#{$fontsrc}/DroidSans-webfont.svg#eausans_book') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
