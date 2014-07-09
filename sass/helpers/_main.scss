@@ -329,13 +329,17 @@
 
 .p-relative, .abs-center__container{position:relative;}
 
-// .abs-center{
-// 	position: absolute;
-// 	top: 50%; 
-// 	left: 50%;
-// 	@include transform(translate(-50%, -50%));
+.absolute-center, %absolute-center{
+	position: absolute;
+	top: 50%; 
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);  //ie9 targeting, will only work with 2D transforms
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
-// }
+}
 
 // .abs-center--left{
 // 	left: 0;

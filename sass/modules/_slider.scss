@@ -1,0 +1,273 @@
+.slider{
+
+	&__title{
+		text-align: center;
+	}
+
+	&__subtitle{
+		text-align: center;
+	}
+
+	&__list{
+		overflow: hidden;
+		position: relative;
+
+	}
+
+	&__item{
+		display: none;
+		position: absolute;
+		top: 0%;
+		left: 0%;
+		width: 100%;
+
+
+		&__link{
+
+
+		}
+
+		&__caption{
+			@extend %absolute-center;
+			background: white;
+		}
+	}
+}
+
+.js-slider{
+	&__item{
+		&--current{
+			display: block;
+  			position: static;
+		}
+	}
+}
+
+
+/*==========  SCALE CONFIG  ==========*/
+// .slider .js-slider__item--hide-previous,
+// .slider .js-slider__item--hide-next {
+//   display: block;
+//   -webkit-animation: scaleOut 350ms cubic-bezier(0.55, 0.055, 0.675, 0.19) both;
+//   -moz-animation: scaleOut 350ms cubic-bezier(0.55, 0.055, 0.675, 0.19) both;
+//   -ms-animation: scaleOut 350ms cubic-bezier(0.55, 0.055, 0.675, 0.19) both;
+//   animation: scaleOut 350ms cubic-bezier(0.55, 0.055, 0.675, 0.19) both;
+// }
+
+/*==========  SCALE ANIMATIONS  ==========*/
+@-webkit-keyframes scaleOut {
+  100% {
+    -webkit-transform: scale(1.6);
+    -moz-transform: scale(1.6);
+    -ms-transform: scale(1.6);
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes scaleOut {
+  100% {
+    -webkit-transform: scale(1.6);
+    -moz-transform: scale(1.6);
+    -ms-transform: scale(1.6);
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@-ms-keyframes scaleOut {
+  100% {
+    -webkit-transform: scale(1.6);
+    -moz-transform: scale(1.6);
+    -ms-transform: scale(1.6);
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes scaleOut {
+  100% {
+    -webkit-transform: scale(1.6);
+    -moz-transform: scale(1.6);
+    -ms-transform: scale(1.6);
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+
+/*==========  SLIDE CONFIG  ==========*/
+/* the 10ms animation-delay fixed some weird rendering issues with iPhone */
+.js-slider .js-slider__item--show-previous {
+  -webkit-animation: slideFromLeft 300ms 10ms linear both;
+  -moz-animation: slideFromLeft 300ms 10ms linear both;
+  -ms-animation: slideFromLeft 300ms 10ms linear both;
+  animation: slideFromLeft 300ms 10ms linear both;
+}
+.js-slider .js-slider__item--show-next {
+  -webkit-animation: slideFromRight 300ms 10ms linear both;
+  -moz-animation: slideFromRight 300ms 10ms linear both;
+  -ms-animation: slideFromRight 300ms 10ms linear both;
+  animation: slideFromRight 300ms 10ms linear both;
+}
+.js-slider .js-slider__item--hide-previous, .js-slider .js-slider__item--hide-next {
+  display: block;
+
+}
+.js-slider .js-slider__item--hide-previous {
+  -webkit-animation: slideToLeft 300ms 10ms linear both;
+  -moz-animation: slideToLeft 300ms 10ms linear both;
+  -ms-animation: slideToLeft 300ms 10ms linear both;
+  animation: slideToLeft 300ms 10ms linear both;
+
+  .no-cssanimations &{
+    display: none;
+  }
+}
+.js-slider .js-slider__item--hide-next {
+  -webkit-animation: slideToRight 300ms 10ms linear both;
+  -moz-animation: slideToRight 300ms 10ms linear both;
+  -ms-animation: slideToRight 300ms 10ms linear both;
+  animation: slideToRight 300ms 10ms linear both;
+
+  .no-cssanimations &{
+    display: none;
+  }
+}
+
+/*==========  SLIDE ANIMATIONS  ==========*/
+@-webkit-keyframes slideFromLeft {
+  0% {
+    @include transform(translate(-100%, 0));
+  }
+}
+
+@-moz-keyframes slideFromLeft {
+  0% {
+    @include transform(translate(-100%, 0))
+  }
+}
+
+@-ms-keyframes slideFromLeft {
+  0% {
+    @include transform(translate(-100%, 0))
+  }
+}
+
+@keyframes slideFromLeft {
+  0% {
+   @include transform(translate(-100%, 0))
+  }
+}
+
+@-webkit-keyframes slideFromRight {
+  0% {
+    @include transform(translate(100%, 0))
+  }
+}
+
+@-moz-keyframes slideFromRight {
+  0% {
+    @include transform(translate(100%, 0))
+  }
+}
+
+@-ms-keyframes slideFromRight {
+  0% {
+    @include transform(translate(100%, 0))
+  }
+}
+
+@keyframes slideFromRight {
+  0% {
+    @include transform(translate(100%, 0))
+  }
+}
+
+@-webkit-keyframes slideToLeft {
+  99% {
+     @include opacity(1);
+  }
+
+  100% {
+    @include opacity(0);
+    @include transform(translate(-100%, 0))
+  }
+}
+
+@-moz-keyframes slideToLeft {
+  99% {
+     @include opacity(1);
+  }
+
+  100% {
+     @include opacity(0);
+    @include transform(translate(-100%, 0))
+  }
+}
+
+@-ms-keyframes slideToLeft {
+  99% {
+     @include opacity(1);
+  }
+
+  100% {
+     @include opacity(0);
+    @include transform(translate(-100%, 0))
+  }
+}
+
+@keyframes slideToLeft {
+  99% {
+     @include opacity(1);
+  }
+
+  100% {
+     @include opacity(0);
+    @include transform(translate(-100%, 0))
+  }
+}
+
+@-webkit-keyframes slideToRight {
+  99% {
+     @include opacity(1);
+  }
+
+  100% {
+     @include opacity(0);
+    @include transform(translate(100%, 0))
+  }
+}
+
+@-moz-keyframes slideToRight {
+  99% {
+     @include opacity(1);
+  }
+
+  100% {
+     @include opacity(0);
+   @include transform(translate(100%, 0))
+  }
+}
+
+@-ms-keyframes slideToRight {
+  99% {
+     @include opacity(1);
+  }
+
+  100% {
+     @include opacity(0);
+    @include transform(translate(100%, 0))
+  }
+}
+
+@keyframes slideToRight {
+  99% {
+     @include opacity(1);
+  }
+
+  100% {
+     @include opacity(0);
+    @include transform(translate(100%, 0))
+  }
+}

@@ -7,7 +7,7 @@
 
 
 //    variables
-$_max-width: 1240; //in px
+$_max-width: 960; //in px
 $_number-of-columns: 12;
 $_gutter: 20; //in px
 $_grid-margin: percentage(($_gutter/2)/$_max-width);
@@ -64,10 +64,12 @@ $_grid-margin: percentage(($_gutter/2)/$_max-width);
 		max-width: #{$_max-width}px;
 		margin: 0 auto;
 
-		//F*** IE8, IE7 and IE6
-		.lt-ie9 &{
-			width: 960px;
+		&:after{
+			content:"";
+		    display:table;
+		    clear:both;
 		}
+
 
 		// max-width: 480px;
 		@include bp-max($small) {
