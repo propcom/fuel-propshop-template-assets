@@ -25,6 +25,8 @@ function Slider(selector, options) {
     this.selector = selector;
     this.$selector = document.querySelectorAll(this.selector)[0];
 
+    if(this.$selector === undefined){return};
+
     this.options = extend(this.options, options);
     this.event = null;
     this.isCycling = false;

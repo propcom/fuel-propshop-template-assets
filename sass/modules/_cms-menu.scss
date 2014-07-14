@@ -1,0 +1,31 @@
+.cms-menu{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-align: center;
+
+	&__item{
+
+		float: left;
+
+	}
+
+	&__anchor{
+		display: block;
+		background: LightGrey;
+	}
+}
+
+
+
+
+$menu-column-class-slug: cms-menu__item--col !default;
+
+
+@for $i from 1 to 8{
+	.#{$menu-column-class-slug}#{$i}{
+		width: percentage(1/$i);
+		padding: 1%;
+	}
+		
+}
