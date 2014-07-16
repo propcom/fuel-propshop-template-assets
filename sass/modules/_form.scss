@@ -1,0 +1,51 @@
+// Input styling
+
+.input{
+
+	width: 100%;
+	padding: 1% 10px;
+	@include font-size(16, 16);
+	vertical-align: text-bottom;
+
+	&--text{}
+
+	&--password{}
+
+
+
+	&--submit{
+		background: LightGrey;
+		color: white;
+		border: none;
+		border-bottom: 3px solid grey;
+		margin-top: 10px;
+		text-transform: lowercase;
+		font-variant: small-caps;
+		@include font-size(20, 20);
+		width: auto;
+		@extend %fr;
+
+		&:hover{
+			background: grey;
+		}
+
+	}
+
+}
+
+
+
+
+
+
+
+
+// Labels
+
+.required{
+	color: red;
+}
+
+.help-block{
+	color: orange;
+}

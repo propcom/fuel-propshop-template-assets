@@ -2,7 +2,10 @@
 
 .scale-with-grid, %scale-width-grid {
 	max-width: 100%;
-	height: auto; 
+	height: auto;
+	
+	// adresses some extra space caused by font line height
+	vertical-align:top; 
 }
 
 .ie7 img { -ms-interpolation-mode: bicubic; }
@@ -29,8 +32,8 @@
 
 // FLOATS
 
-.fl {float: left!important; display:inline; }
-.fr {float: right!important; display:inline;}
+.fl, %fl {float: left!important; display:inline; }
+.fr, %fr {float: right!important; display:inline;}
 
 // CLEARING
 
