@@ -274,7 +274,7 @@ function Slider(selector, options) {
 
     if(window.CustomEvent){
 
-      this.event = new CustomEvent('customChange', {
+      _this.event = new CustomEvent('customChange', {
         detail: {
           parentSelector: _this.selector,
           currentItemIndex: Number(_this.currentItemIndex)
