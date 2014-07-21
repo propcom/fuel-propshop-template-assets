@@ -1,0 +1,52 @@
+.cat{
+	
+}
+
+
+.product-cat-block{
+	
+	&__images{
+ 		position: relative;
+		display: block;
+
+		&__image{
+
+			
+			vertical-align: bottom;
+
+			&--overlay{
+				@include opacity(1);
+				z-index: 10;
+				position: absolute;
+				top: 0;
+				left: 0;
+					
+				@include hardwareAccelerate;
+				@include transition(.6s $easeInOut all);
+			}
+
+		}
+
+	}
+
+	&__name{
+
+		@include font-size(16, 24);
+
+	}
+
+	&__price{
+	@include font-size(16, 16);
+	}
+}
+
+.product-cat-block__images{
+	&:hover{
+		.product-cat-block__images__image--overlay{
+			@include opacity(0);
+		}
+
+	}
+
+}
+

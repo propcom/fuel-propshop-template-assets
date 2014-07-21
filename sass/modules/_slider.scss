@@ -20,6 +20,7 @@
 		top: 0%;
 		left: 0%;
 		width: 100%;
+    @include hardwareAccelerate;
 
 
 		&__link{
