@@ -1,4 +1,4 @@
-(function ($) {
+;(function ($) {
 	function AddressForm(form, prefix) {
 		var self = this;
 		this.$form = $(form);

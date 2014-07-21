@@ -1,4 +1,4 @@
-$(function(){
+;$(function(){
     var filter_request;
 
     function on_filter_change() {

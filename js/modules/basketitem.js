@@ -1,4 +1,4 @@
-(function($){
+;(function($){
 	
 	var BasketItem = function( element, options) {
 		this.options = $.extend({}, $.fn.basketItem.defaults, options)

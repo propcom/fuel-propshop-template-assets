@@ -298,7 +298,7 @@ function Slider(selector, options) {
 
     } else{
 
-      this.event = $.Event('customChange',{
+      _this.event = $.Event('customChange',{
         detail: {
             parentSelector: _this.selector,
             currentItemIndex: Number(_this.currentItemIndex)

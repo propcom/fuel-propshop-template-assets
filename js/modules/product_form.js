@@ -41,7 +41,7 @@
  * with one another based on the values in the window.variant_data object,
  * which will need to somehow be updated if new products appear on the page.
  */
-(function($) {
+;(function($) {
     function ProductForm(form, options) {
         var self = this;
 
