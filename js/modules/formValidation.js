@@ -103,7 +103,7 @@
 
 			},
 			'message': 'Please type in a valid email address.'
-		}, 
+		} 
 
 
 	}

@@ -40,7 +40,7 @@ function Slider(selector, options) {
       this.tPointerType = null;
       this.start = {};
       this.delta = {};
-      this.isScrolling;
+      this.isScrolling = undefined;
       this.isTouchfired = false;
 
       this.tEvents = {
@@ -104,7 +104,7 @@ function Slider(selector, options) {
 
           _self.delta = {
             x: event.touches[0].pageX - _self.start.x,
-            y: event.touches[0].pageY - _self.start.y,
+            y: event.touches[0].pageY - _self.start.y
           };
 
 
