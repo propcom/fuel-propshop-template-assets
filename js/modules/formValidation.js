@@ -136,8 +136,8 @@ function showWarning(element, rule){
 
 	var parent = element.parentNode;
 
-	if(parent.querySelector('.help-block')){
-			parent.querySelector('.help-block').innerText = oRules[rule]['message'];
+	if(parent.querySelector('.form__validation')){
+			parent.querySelector('.form__validation').innerText = oRules[rule]['message'];
 			return false
 		}
 
@@ -145,11 +145,11 @@ function showWarning(element, rule){
 
 		if(newElement.classList){
 
-	      newElement.classList.add('help-block');
+	      newElement.classList.add('form__validation');
 
 	    } else{
 
-	      newElement.className += 'help-block';
+	      newElement.className += 'form__validation';
 
 	  	}
 
@@ -169,9 +169,9 @@ function hideWarning(element){
 
 	var parent = element.parentNode;
 
-	if(parent.querySelector('.help-block')){
+	if(parent.querySelector('.form__validation')){
 
-		parent.removeChild(parent.querySelector('.help-block'));
+		parent.removeChild(parent.querySelector('.form__validation'));
 
 	}
 

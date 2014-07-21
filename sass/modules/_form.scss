@@ -1,11 +1,11 @@
 // Input styling
 
-.input{
+.form__field{
 
 	width: 100%;
 	padding: 1% 10px;
 	@include font-size(16, 16);
-	vertical-align: text-bottom;
+	vertical-align: bottom;
 
 	&--text{}
 
@@ -34,8 +34,12 @@
 }
 
 
+//Groups
 
-
+.controls{
+	margin-bottom: 20px;
+	position: relative;
+}
 
 
 
@@ -46,6 +50,10 @@
 	color: red;
 }
 
-.help-block{
+.form__validation{
 	color: orange;
+	@extend %h_milli;
+	position: absolute;
+	bottom: -20px;
+	right: 0;
 }

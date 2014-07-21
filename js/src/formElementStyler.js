@@ -11,19 +11,27 @@ var wrapSelects = function(){ // Variable cached function in order to retain sco
 
 			var parent = el.parentNode; // caching the select parent element
 
-			var newElement = document.createElement('span');
+			var newElement = document.createElement('div');
 
 			if(newElement.classList){
-		      newElement.classList.add('select-wrap');
+		      newElement.classList.add('styled-select');
 		    } else{
-		      newElement.className += 'select-wrap';
+		      newElement.className += 'styled-select';
 		  	}
 
-			parent.appendChild(newElement);
+			
 
 			newElement.appendChild(el);
 
-			el.insertAdjacentHTML('afterend', '<span class="select__span">'+el.options[el.selectedIndex].innerHTML+'</span>');
+			el.insertAdjacentHTML('afterend', '<span class="styled-select__span">'+el.options[el.selectedIndex].innerHTML+'</span>');
+
+			if(el.classList){
+		      el.classList.add('styled-select__select');
+		    } else{
+		      el.className += ' styled-select__select';
+		  	}
+
+			parent.appendChild(newElement);
 
 			return el;  
 		}
@@ -62,9 +70,6 @@ var wrapSelects = function(){ // Variable cached function in order to retain sco
 
 
 		for( var ii = (selectsCollection.length - 1); ii >= 0; ii-- ){
-
-			;
-
 
 			setSelectEventListener(modifySelectMarkup(selectsCollection[ii]));
 
