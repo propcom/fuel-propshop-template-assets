@@ -2,3 +2,6 @@
 css/main.css
 .sass-cache
 css/main.css.map
+
+js/main.js
+js/main.min.js
