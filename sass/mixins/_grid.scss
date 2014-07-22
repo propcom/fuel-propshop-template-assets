@@ -29,7 +29,7 @@ $_grid-margin: percentage(($_gutter/2)/$_max-width);
 
 
 	@for $__i from 1 to $__col-nr+1{
-		.col--#{$__i}{
+		.col--#{$__i},%col--#{$__i}{
 			width: $__col-width * $__i - $__margin * 2;
 		}
 	} // usage: .col--$__i
@@ -70,19 +70,6 @@ $_grid-margin: percentage(($_gutter/2)/$_max-width);
 		    clear:both;
 		}
 
-
-		// max-width: 480px;
-		@include bp-max($small) {
-			max-width: $small;
-		}
-
-		.col {
-			@include bp-max($small) {
-				width: 95.833333333333333333333333333333%;
-				@include block-align--center();
-
-			}
-		}
 	}
 
 	.row {

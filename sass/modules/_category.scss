@@ -1,9 +1,86 @@
 .cat{
 	
+	position: relative;
+	height: 100%;
+	// @extend %col--offset-padding3;
+
+	// &__filters{
+	// 	position: absolute;
+	// 	top: 0;
+	// 	left: 0;
+	// }	
+	
+}
+
+
+.category-filters{
+	position: relative;
+	padding-right: 10px;
+
+	&__form{
+		width: 100%;
+		position: absolute;
+		top: 60px;
+		left: 0;
+
+		&__filter{
+			margin: 0;
+			padding: 0;
+			width: 100%;
+
+			&__name{
+				background: darkGrey;
+				
+
+				&:hover{
+
+					cursor: pointer;
+
+				}
+
+			}
+
+			&__options{
+				height: 0px;
+				@include opacity(0);
+				overflow: hidden;
+				 @include transition(.6s $easeInOut all);
+				 @include hardwareAccelerate;
+
+				&.is-open{
+
+				    @include opacity(1);
+
+
+				}
+
+				&__option{
+					margin: 0;
+
+				}
+			}
+		}
+	}
 }
 
 
 .product-cat-block{
+
+	float: left;
+	width: percentage(1/3);
+	padding-right: 0.7%;
+	padding-left: 0.7%;
+
+	&--alpha{
+		padding-left: 0;
+		padding-right: 1.4%;
+	}
+	&--omega{
+		padding-right: 0;
+		padding-left: 1.4%;
+
+	}
+
 	
 	&__images{
  		position: relative;
@@ -15,7 +92,9 @@
 			vertical-align: bottom;
 
 			&--overlay{
-				@include opacity(1);
+				display: none;
+				@include opacity(0);
+				
 				z-index: 10;
 				position: absolute;
 				top: 0;
@@ -43,10 +122,74 @@
 .product-cat-block__images{
 	&:hover{
 		.product-cat-block__images__image--overlay{
-			@include opacity(0);
+			display: block;
+			@include opacity(1);
+			
 		}
 
 	}
 
+}
+
+@include bp-max($x-large){
+
+	.product-cat-block{
+		
+	}
+
+}
+
+
+@include bp-max($large){
+	.category-filters, .category-content{
+		width: 100%;
+		float: none;
+	}
+
+	.category-filters{
+		&__form{
+			&__filter{
+				float: left;
+				width: 25%;
+			}
+		}
+	}
+}
+
+@include bp-max($medium){
+
+	.product-cat-block{
+		
+		width: 50%;
+
+		padding-right: 1%;
+	padding-left: 1%;
+
+
+	}
+
+	.category-filters{
+		&__form{
+			&__filter{
+				float: left;
+				width: 50%;
+			}
+		}
+	}
+	
+}
+
+@include bp-max($x-small){
+
+	.product-cat-block{
+		
+		width: 100%;
+
+		padding-right: 2.5%;
+	padding-left: 2.5%;
+
+
+	}
+	
 }
 

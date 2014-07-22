@@ -1,11 +1,18 @@
 @if $global-border-box == true{
 //Let’s make the box model all nice, shall we...?
-    
-    *{
+
+	html{
+		 @include box-sizing(border-box);
+
+		 *{
         &,
         &:before,
         &:after{
-            @include box-sizing(border-box);
+            @include box-sizing(inherit);
         }
     }
+	}
+
+    
+    
 }

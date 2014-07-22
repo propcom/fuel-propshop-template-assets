@@ -12,7 +12,7 @@
         }
 
         filter_request = $.get('/search/index', $form.serialize(), function(response) {
-            $('#search-content').replaceWith(response);
+            $('#js-category-page').replaceWith(response);
             filter_request = null;
             var state = $.param($form.serializeArray());
             if (state.length > 0) {
