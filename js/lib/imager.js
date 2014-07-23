@@ -252,9 +252,9 @@
         var computedWidth, src;
 
         computedWidth = typeof this.availableWidths === 'function' ? this.availableWidths(image)
-                                                                   : this.determineAppropriateResolution(image);
+                                                                   : this.determineAppropriateResolution(image);                                                        
 
-        if(computedWidth === 0){
+        if(computedWidth === 0 || window.getComputedStyle(image, null).getPropertyValue("visibility") === 'hidden'){
             src = this.gif.src;
         } else {
             src = this.changeImageSrcToUseNewImageDimensions(image.getAttribute('data-src'), computedWidth);
@@ -266,7 +266,12 @@
     };
 
     Imager.prototype.determineAppropriateResolution = function (image) {
-        return Imager.getClosestValue(image.clientWidth, this.availableWidths);
+        //return Imager.getClosestValue(image.clientWidth, this.availableWidths); 
+
+        if(image.clientWidth === 0)
+            return Imager.getClosestValue(image.clientWidth, this.availableWidths);
+
+        return Imager.getClosestValue(document.body.clientWidth, this.availableWidths);
     };
 
     /**
