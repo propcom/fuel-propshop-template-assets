@@ -9,5 +9,18 @@
 		}).addClass('is-open');
 
 	});
+
+	$('body').on('click','.js-filter-form-trigger', function(evt){
+								
+		evt.preventDefault();
+
+		var btn = $(this);
+
+		btn.parent().hasClass('is-open')? btn.parent().css('height', function(){
+			return btn.prev('h3').height() +'px';
+		}).removeClass('is-open') : btn.parent().css('height', function(){
+			return (btn.next('form').height() + btn.prev('h3').height()) +'px'; 
+		}).addClass('is-open');
+	});
 	
 })(jQuery);
