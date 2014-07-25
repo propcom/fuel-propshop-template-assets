@@ -255,15 +255,24 @@
         computedWidth = typeof this.availableWidths === 'function' ? this.availableWidths(image)
                                                                    : this.determineAppropriateResolution(image); 
 
-         //@TODO
-         //
-         // || window.getComputedStyle(image, null).getPropertyValue("visibility") === 'hidden'                                                                                                                                                                                                                                 
+         if(window.getComputedStyle){
 
-        if(computedWidth === 0 ){
+            console.log(window.getComputedStyle(image, null).getPropertyValue("visibility"));
+
+            if(computedWidth === 0 || window.getComputedStyle(image, null).getPropertyValue("visibility") === 'hidden'){
+
             src = this.gif.src;
-        } else {
+
+            } else {
+
+                src = this.changeImageSrcToUseNewImageDimensions(image.getAttribute('data-src'), computedWidth);
+            }
+
+         } else{
+
             src = this.changeImageSrcToUseNewImageDimensions(image.getAttribute('data-src'), computedWidth);
-        }
+
+         }
 
         
 
