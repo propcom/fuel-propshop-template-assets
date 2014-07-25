@@ -188,6 +188,7 @@
         gif.width = element.getAttribute('data-width');
         gif.height = element.getAttribute('data-height');
         gif.className = (element.getAttribute('data-class') ? element.getAttribute('data-class')+' ':'') + this.className;
+        if(element.getAttribute('data-zoom-image')){ gif.setAttribute('data-zoom-image', element.getAttribute('data-zoom-image')) };
         gif.setAttribute('data-src', element.getAttribute('data-src'));
         gif.setAttribute('alt', element.getAttribute('data-alt') || this.gif.alt);
 
@@ -252,9 +253,13 @@
         var computedWidth, src;
 
         computedWidth = typeof this.availableWidths === 'function' ? this.availableWidths(image)
-                                                                   : this.determineAppropriateResolution(image);                                                        
+                                                                   : this.determineAppropriateResolution(image); 
 
-        if(computedWidth === 0 || window.getComputedStyle(image, null).getPropertyValue("visibility") === 'hidden'){
+         //@TODO
+         //
+         // || window.getComputedStyle(image, null).getPropertyValue("visibility") === 'hidden'                                                                                                                                                                                                                                 
+
+        if(computedWidth === 0 ){
             src = this.gif.src;
         } else {
             src = this.changeImageSrcToUseNewImageDimensions(image.getAttribute('data-src'), computedWidth);

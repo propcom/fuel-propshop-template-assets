@@ -32,8 +32,12 @@
 
 // FLOATS
 
-.fl, %fl {float: left!important; display:inline; }
-.fr, %fr {float: right!important; display:inline;}
+.fl, %fl {float: left;}
+.fl--i, %fl--i {float: left!important;}
+
+
+.fr, %fr {float: right;}
+.fr--i, %fr--i {float: right!important;}
 
 // CLEARING
 

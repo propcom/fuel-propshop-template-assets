@@ -20,28 +20,36 @@ $_grid-margin: percentage(($_gutter/2)/$_max-width);
 	$__col-width: percentage(1/$__col-nr);
 
 
-	// Lets define the collumns default behaviour and calculate the variants dimensions
-	.col{
-		float: left;
-		margin-left: $__margin;
-		margin-right: $__margin;
-	}
-
-
 	@for $__i from 1 to $__col-nr+1{
-		.col--#{$__i},%col--#{$__i}{
+
+		.col#{$__i},%col#{$__i}{
+			margin-left: $__margin;
+			margin-right: $__margin;
 			width: $__col-width * $__i - $__margin * 2;
 		}
-	} // usage: .col--$__i
 
-
-
-	@for $__i from 1 to $__col-nr+1{
-		.col--full#{$__i}{
+		.col#{$__i}--full{
 			width: $__col-width * $__i;
 			margin-left: 0;
 			margin-right: 0;
 		}
+
+		.col#{$__i}--alpha{
+			width: $__col-width * $__i - $__margin;
+			margin-right: $__margin;
+		}
+
+		.col#{$__i}--omega{
+			width: $__col-width * $__i - $__margin;
+			margin-left: $__margin;
+		}
+
+	} // usage: .col$__i
+
+
+
+	@for $__i from 1 to $__col-nr+1{
+		
 	} //usage: .col--full$__i
 
 	@for $__i from 1 to $__col-nr{

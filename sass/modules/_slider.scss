@@ -11,6 +11,7 @@
 	&__list{
 		overflow: hidden;
 		position: relative;
+    padding-bottom: percentage(500/1240);
 
 	}
 
@@ -39,7 +40,6 @@
 	&__item{
 		&--current{
 			display: block;
-  			position: static;
 		}
 	}
 }
