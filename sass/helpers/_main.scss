@@ -41,7 +41,7 @@
 
 // CLEARING
 
-.clearfix, %clearfix{
+.cleared, %cleared{
 	&:after{
 		content:"";
 	    display:table;
@@ -50,7 +50,7 @@
 }
 
 
-.clear {
+.clearing {
   clear: both;
   display: block;
   overflow: hidden;

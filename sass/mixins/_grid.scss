@@ -72,10 +72,10 @@ $_grid-margin: percentage(($_gutter/2)/$_max-width);
 		max-width: #{$_max-width}px;
 		margin: 0 auto;
 
-		&:after{
-			content:"";
-		    display:table;
-		    clear:both;
+		@extend %cleared;
+
+		.ie8 &{
+			max-width: 960px;
 		}
 
 	}
