@@ -3,12 +3,16 @@
 
 document.getElementById('js-prop-add-to-basket-form') && (function($){
 
-		ProductForms.register($('#js-prop-add-to-basket-form'));
+		var prod_form = $('#js-prop-add-to-basket-form');
+
+		ProductForms.register(prod_form);
+
+ 		prod_form.on('variant_changed', function (e, data) {
+			alert('Variant changed: ' + data.selected_variant_id);
+		});
 
 		$('#js-prop-add-to-basket-form .variant-select').on('set_option', function (e, data) {
 
-			console.log(data);
-			console.log(data.product_form.selected_variant.val());
 			var variant_id = data.product_form.selected_variant.val();
 			if (variant_id) {
 				$('.product-info__price').html(data.product_form.variant_meta[variant_id]['price']);
