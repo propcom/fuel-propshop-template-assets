@@ -56,7 +56,7 @@
 
         // variant_data is injected in a <script> tag - not ideal but works for now.
         // If products turn up via AJAX the handlers should add stuff to it.
-        this.variants = variant_data[this.product_id];
+       
 
         // map variant IDs to the option values that refer to them.
         this.variants_inverse = {};
@@ -67,11 +67,17 @@
         // Other metadata
         this.variant_meta = {};
 
-        this.init();
-
         this.fields.change(function() {
             self.set_option($(this).attr('name'), $(this).val());
         });
+
+        $.get('/product/rest_variants/variant_options/'+this.product_id+'.json').done(function(data){
+
+            self.variants = data;
+            self.init(); 
+
+        });
+
     }
 
     ProductForm.prototype = {
