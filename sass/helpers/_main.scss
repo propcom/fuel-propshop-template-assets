@@ -326,7 +326,7 @@
 .textUpper {text-transform:uppercase;}
 .textNorm {text-transform:none !important;}
 
-.is-hidden {display:none;}
+.is-hidden, %is-hidden {display:none;}
 .is-visible {display:block;}
 
 .overVis {overflow:visible!important;}
