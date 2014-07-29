@@ -55,8 +55,6 @@ var wrapSelects = function(){ // Variable cached function in order to retain sco
 
 				el.addEventListener('change', function(ev){
 
-					console.log(ev.target);
-
 					setSelectOption(el);
 				})
 
