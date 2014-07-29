@@ -210,8 +210,22 @@
                         )                        
                 });
 
-                // Trigger a change on the next_field to kick off the whole process all over again
-                next_field.trigger('change');
+                /**
+                 * A bit of vanilla js so we can trigger the native event, not the jquery namespaced one
+                 */
+                            
+                if (document.createEvent) {
+
+                  var event = document.createEvent('HTMLEvents');
+                  event.initEvent('change', true, false);
+                  next_field.get(0).dispatchEvent(event);
+
+                } else {
+
+                  next_field.get(0).fireEvent('onchange');
+
+                }
+
             }
         },
 
