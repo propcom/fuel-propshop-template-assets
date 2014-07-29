@@ -1,31 +1,45 @@
+// variable implementation - will make it easier to style 
+
+
+$cms-menu-font-size : 16;
+$cms-menu-line-height : 28;
+
+
+
 .cms-menu{
+	list-style: none;
 	margin: 0;
 	padding: 0;
-	list-style: none;
 	text-align: center;
+
+	
 
 	&__item{
 
-		float: left;
+		position: relative;
+
+		&__anchor{
+			display: block;
+			background: LightGrey;
+			@include font-size($cms-menu-font-size, $cms-menu-line-height);
+		}
+
+		&__submenu{
+			margin: 0;
+			padding: 0;
+			position: absolute;
+				top: #{$cms-menu-line-height}px;
+				left: 0;
+			width: 100%;
+			z-index: 100;
+
+			.cms-menu__item__anchor{
+				@include font-size($cms-menu-font-size - 2, $cms-menu-line-height);
+			}
+		}
 
 	}
 
-	&__anchor{
-		display: block;
-		background: LightGrey;
-	}
+
 }
 
-
-
-
-$menu-column-class-slug: cms-menu__item--col !default;
-
-
-@for $i from 1 to 8{
-	.#{$menu-column-class-slug}#{$i}{
-		width: percentage(1/$i);
-		padding: 10px;
-	}
-		
-}

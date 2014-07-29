@@ -64,6 +64,14 @@
 
 							});
 
+							/**
+							 * Using ajaxComplete to trigger an elements update on imager after an ajax request
+							 * @return {void}
+							 */
+							$(document).ajaxComplete(function(){
+								imgr.updateDivs();
+							});
+
 
 							
 

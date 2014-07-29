@@ -37,6 +37,10 @@
 //	usage: @include border-radius(5px 5px 0 0);
 
 
+@mixin round-elem{
+  @include border-radius(50%);
+}
+
 
 //	BOX-SIZING
 

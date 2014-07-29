@@ -1,3 +1,36 @@
+.product{
+
+	&__options{
+
+		&__option{
+
+			&__label{
+
+				display: block;
+
+			}
+
+			&__color{
+
+				float: left;
+				width: 30px;
+				height: 30px;
+				margin-right: 10px;
+				@include hide-text;
+				@include round-elem;
+
+				&.is-active{
+					border: 2px solid red;
+				}
+
+			}
+
+		}
+
+	}
+}
+
+
 .product-info{
 
 }
@@ -20,3 +53,6 @@
 
 
 }
+
+
+

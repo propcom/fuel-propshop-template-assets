@@ -151,6 +151,24 @@
         });
     }
 
+    Imager.prototype.updateDivs = function(){
+
+        var self = this;
+
+        applyEach(document.querySelectorAll(this.selector), function(img){
+
+            self.divs.push(returnDirectValue(img));
+
+        });
+
+        this.changeDivsToEmptyImages();
+
+        nextTick(function(){
+            self.init();
+        });
+
+    };
+
     Imager.prototype.scrollCheck = function(){
         if (this.scrolled) {
             if (!this.imagesOffScreen.length) {

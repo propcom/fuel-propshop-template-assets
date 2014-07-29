@@ -44,13 +44,16 @@ $_grid-margin: percentage(($_gutter/2)/$_max-width);
 			margin-left: $__margin;
 		}
 
+		.col--1by#{$__i}{
+			margin-left: $__margin;
+			margin-right: $__margin;
+			width: percentage(1/$__i) - $__margin * 2;
+		}
+
 	} // usage: .col$__i
 
 
 
-	@for $__i from 1 to $__col-nr+1{
-		
-	} //usage: .col--full$__i
 
 	@for $__i from 1 to $__col-nr{
 		.col--offset#{$__i}{
@@ -58,9 +61,6 @@ $_grid-margin: percentage(($_gutter/2)/$_max-width);
 		}
 	} //usage .col--offset$__i
 
-	// Some defaults that may be included in the mixin
-	.col--left {float: left;}
-	.col--right {float: right;}
 	//.col--center { @extend %l-align--center; }
 
 	.col--align-top { vertical-align: top; }

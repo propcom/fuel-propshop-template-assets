@@ -30,4 +30,21 @@ document.getElementById('js-prop-add-to-basket-form') && (function($){
 			}
 		});
 
+
+		$('body').on('click', '.js-ps-product-color', function(e){
+
+			e.preventDefault();
+
+			var self = $(this), variant = self.attr('data-variant'), url = '/product/view_info/'+variant;
+
+			$.get(url)
+				.done(function(data){
+
+					$('#js-ps-product-info-container').replaceWith(data);
+					history.pushState({variant: variant }, "", '/product/view/'+variant );
+					
+				});
+
+		});
+
 })(jQuery);
