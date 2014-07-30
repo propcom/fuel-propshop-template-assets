@@ -1,30 +1,46 @@
+.slider-headings{
+
+  &__title{
+    text-align: center;
+  }
+
+  &__subtitle{
+    text-align: center;
+  }
+
+}
+
+
 .slider{
 
-	&__title{
-		text-align: center;
-	}
+  position: relative;
 
-	&__subtitle{
-		text-align: center;
-	}
+  padding-bottom: percentage(500/1240);
+
+
 
 	&__list{
 		overflow: hidden;
-		position: relative;
+		position: absolute;
+      left: 0;
+      top: 0;
+    width: 100%;  
     padding-bottom: percentage(500/1240);
+     @include hardwareAccelerate;
 
 	}
 
 	&__item{
 		display: none;
 		position: absolute;
-		top: 0%;
-		left: 0%;
+		top: 0;
+		left: 0;
 		width: 100%;
-    @include hardwareAccelerate;
+     @include hardwareAccelerate;
 
 
 		&__link{
+      display: block;
 
 
 		}
@@ -34,6 +50,39 @@
 			background: white;
 		}
 	}
+
+  &__btn{
+
+     $btn-colour: grey;
+     $btn-size: 40px;
+
+    position: absolute;
+      top: 50%;
+    width: 0;
+    height: 0;
+    border-top: $btn-size solid transparent;
+    border-bottom: $btn-size solid transparent;
+
+    @include hide-text;
+    @include opacity(.4);
+    @include transform( translateY(-50%) );
+
+    z-index: 1000;
+
+
+
+    &--previous{
+       left: 10px; 
+       border-right: $btn-size solid $btn-colour;
+
+    }
+
+    &--next{
+        right: 10px;
+       border-left: $btn-size solid $btn-colour;
+    
+    }
+  }
 }
 
 .js-slider{
