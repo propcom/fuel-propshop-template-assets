@@ -1,25 +1,67 @@
-;document.getElementById('js-is-filter') && (function($){
+;document.getElementById('js-ps-filters') && (function($){ // Basic short circuit checking for the presence of serach ad category filters in phe page - If true triggers IIFE adding the event listeners and handle logic
+	
+	/**
+	 * Body's delegated event targeting the filters trigger
+	 * 
+	 * @param  {event} evt Filter trigger click event listener
+	 * @return {void}
+	 */
+	$(document).on('click', '.js-ps-filter-trigger', function(evt){
 
-	$('body').on('click', '.js-filter-trigger', function(e){
+		evt.preventDefault();
 
-		var _this = $(e.target), sibling = _this.siblings('.js-filter-content');
+		/**
+		 * Caching trigger sibling where handler logic is to be applied
+		 *
+		 * @type {JQuery} Event target sibling
+		 */
+		var sibling = $(evt.target).siblings('.js-ps-filter-content');
 
+
+		/**
+		 * Handler logic: if open remove height and close, if closed add height and open
+		 *  
+		 * @return {void}
+		 */
 		sibling.hasClass('is-open') ? sibling.css({'height': 0}).removeClass('is-open') : sibling.css('height', function(){
 			return ($(this).children().length * $(this).children()['0'].clientHeight) +'px';
 		}).addClass('is-open');
 
 	});
 
-	$('body').on('click','.js-filter-form-trigger', function(evt){
+	
+	 /**
+	  * Body's delegated event targeting the form (trigger) containing the filters
+	  * @param  {event} evt Form trigger click event listener
+	  * @return {[type]}     [description]
+	  */
+	$(document).on('click','.js-filter-form-trigger', function(evt){
 								
 		evt.preventDefault();
 
-		var btn = $(this);
+		/**
+		 * Caching the form trigger jQuery object
+		 * 
+		 * @type {JQuery}
+		 */
+		var btn = $(this), 
 
+		/**
+		 * Caching filter's header height; 
+		 * 
+		 * @type {number}
+		 */
+		headerHeight = document.getElementById('js-ps-filters-header').clientHeight;
+
+
+		/**
+		 * Handler logic: if open remove height and close, if closed add height and open  
+		 * @return {void}
+		 */
 		btn.parent().hasClass('is-open')? btn.parent().css('height', function(){
-			return btn.prev('h3').height() +'px';
+			return headerHeight+'px';
 		}).removeClass('is-open') : btn.parent().css('height', function(){
-			return (btn.next('form').height() + btn.prev('h3').height()) +'px'; 
+			return (btn.parent().children('form').height() + headerHeight)+'px'; 
 		}).addClass('is-open');
 	});
 	
