@@ -1,6 +1,6 @@
 // Input styling
 
-.form__field{
+.input{
 
 	width: 100%;
 	padding: 1% 10px;
@@ -14,20 +14,13 @@
 
 
 	&--submit{
-		background: LightGrey;
-		color: white;
-		border: none;
-		border-bottom: 3px solid grey;
-		margin-top: 10px;
-		text-transform: lowercase;
-		font-variant: small-caps;
-		@include font-size(20, 20);
-		width: auto;
+
+        width: auto;
+		
+		@extend %btn;
 		@extend %fr;
 
-		&:hover{
-			background: grey;
-		}
+		@include font-size(20, 20);
 
 	}
 
@@ -55,5 +48,5 @@
 	@extend %h_milli;
 	position: absolute;
 	bottom: -20px;
-	right: 0;
+	left: 0;
 }

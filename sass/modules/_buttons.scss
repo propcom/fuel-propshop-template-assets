@@ -1,3 +1,23 @@
-.btn{
+.btn, %btn{
 	
+	background: LightGrey;
+	border: none;
+	border-bottom: 3px solid grey;
+	color: white;
+	display: block;
+	font-variant: small-caps;
+	font-style: normal;
+	font-weight: normal;
+	margin-top: 10px;
+	padding: 1% 10px;
+	text-align: center;
+	text-decoration: none;
+	text-transform: lowercase;
+	width: 100%;
+
+	@include font-size(20, 20);
+
+	&:hover{
+		background: grey;
+	}
 }

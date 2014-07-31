@@ -23,7 +23,7 @@ var wrapSelects = function(){ // Variable cached function in order to retain sco
 
 			newElement.appendChild(el);
 
-			el.insertAdjacentHTML('afterend', '<span class="styled-select__span">'+el.options[el.selectedIndex].innerHTML+'</span>');
+			el.options[el.selectedIndex]? el.insertAdjacentHTML('afterend', '<span class="styled-select__span">'+el.options[el.selectedIndex].innerHTML+'</span>') : el.insertAdjacentHTML('afterend', '<span class="styled-select__span"></span>') ;
 
 			if(el.classList){
 		      el.classList.add('styled-select__select');
@@ -67,6 +67,8 @@ var wrapSelects = function(){ // Variable cached function in order to retain sco
 				})
 			}
 		}
+
+
 
 
 		for( var ii = (selectsCollection.length - 1); ii >= 0; ii-- ){

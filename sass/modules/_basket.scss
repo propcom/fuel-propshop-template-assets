@@ -1,0 +1,187 @@
+.basket{
+	display: table;
+	width: 100%;
+
+
+	&__row{
+		display: table-row;
+
+
+		&__div{
+			display: table-cell;
+			text-align: center;
+
+
+			&--product{
+				width: 220px;
+				margin-right: 20px;
+			}
+
+
+			&__name{
+
+				margin: 10px 0 0 0;
+				width: 100%;
+				@include font-size(12, 14);
+
+			}
+		}
+	}
+}
+
+
+@include bp-max($large){
+
+	.basket{
+
+
+		&__row{
+
+
+			&__div{
+
+
+				&--product{
+
+					position: relative;
+
+					&__name{
+						position: absolute;
+						top: 10%;
+						left: 0;
+						margin: 0 auto;
+					}
+
+				}
+			}
+		}
+	}
+}
+
+
+
+@include bp-max($medium){
+
+	.basket{
+
+
+		&__row{
+
+
+			&__div{
+
+
+				&--product{
+
+					width: 160px;
+
+				}
+			}
+		}
+	}
+}
+
+@include bp-max($x-small){
+
+	.basket{
+
+
+		&__row{
+
+
+			&__div{
+
+
+				&--product{
+
+					width: 80px;
+
+					&__name{
+					position: static;
+				}
+
+					img{
+						display: none;
+					}
+
+				}
+			}
+		}
+	}
+}
+
+
+.totals{
+	&__total{
+		margin: 0;
+	}
+}
+
+@include bp-max($large){
+
+	.totals{
+		@include col--alpha(5);
+	}
+}
+
+
+@include bp-max($small){
+
+	.totals{
+		@include col(6);
+	}
+}
+
+$promocode-height: 32;
+
+.promocode{
+
+	&__form{
+
+		display: block;
+		position: relative;
+		border: 1px solid black;
+		padding-right: 16%;
+		height: #{$promocode-height}px;
+
+
+		&__input{
+
+			border: none;
+			height: 100%;
+			line-height: #{$promocode-height}px;
+			padding: 0;
+			width: 100%;
+		}
+
+		&__submit{
+			height: #{$promocode-height - 4}px;
+			line-height: #{$promocode-height - 4}px;
+			text-align: center;
+			padding: 0;
+			width: 15%;
+			position: absolute;
+			top: 1px;
+			right: 1px;
+			border: none;
+			background: grey;
+			@include border-radius(5px);
+		}
+	}
+}
+
+@include bp-max($large){
+
+	.promocode{
+		@include col--alpha(5);
+	}
+
+}
+
+@include bp-max($small){
+
+	.promocode{
+		@include col(6);
+	}
+
+}
