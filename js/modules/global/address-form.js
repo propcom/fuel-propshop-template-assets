@@ -1,16 +1,21 @@
-;(function ($) {
+
+	
+
+document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-delivery-address') && (function($){
+
+
+
 	function AddressForm(form, prefix) {
 		var self = this;
 		this.$form = $(form);
 		this.prefix = prefix;
 
-		this.$form.find('.js-country-code').on('change', function () {
+		this.$form.find('.js-ps-country-code').on('change', function () {
 			self.update_states($(this).val());
 		});
 
-		this.$form.find('.js-address-select').on('change', function () {
-			var $selected = $(this).find('option:selected');
-			var data;
+		this.$form.find('.js-ps-address-select').on('change', function () {
+			var $selected = $(this).find('option:selected'), data;
 			if (data = $selected.data('address')) {
 				self.set_values(data);
 				return;
@@ -34,7 +39,7 @@
 
 	AddressForm.prototype = {
 		constructor: AddressForm,
-		update_states: function (country, andthen) {
+		update_states: function (country, callback) {
 			var self = this;
 
 			$.ajax('/customer/rest/address_states.json', {
@@ -45,7 +50,7 @@
 				},
 				'dataType': 'json',
 				'success': function (data) {
-					var $state_select = self.$form.find('.js-state-code');
+					var $state_select = self.$form.find('.js-ps-state-code');
 
 					$state_select.empty();
 
@@ -58,9 +63,16 @@
 						$state_select.append($opt);
 					});
 
-					$state_select.trigger('change.address-form');
+					// Native event to play nicely with the select
+					if (document.createEvent) {
+					  var event = document.createEvent('HTMLEvents');
+					  event.initEvent('change', true, false);
+					  $state_select.get(0).dispatchEvent(event);
+					} else {
+					  $state_select.get(0).fireEvent('onchange');
+					}
 
-					if (andthen) andthen($state_select);
+					typeof callback === 'function' && callback($state_select);
 				}
 			});
 		},
@@ -73,7 +85,7 @@
 			if (values.country_code) {
 				var state_code = values.state_code;
 
-				self.$form.find('.js-country-code').val(values.country_code).trigger('change.address-form');
+				self.$form.find('.js-ps-country-code').val(values.country_code).trigger('change.address-form');
 
 				self.update_states(values.country_code, function ($state_select) {
 					if (state_code) {
@@ -82,7 +94,7 @@
 					}
 				});
 			} else if (values.state_code) {
-				self.$form.find('.js-state-code').val(values.state_code).trigger('change.address-form');
+				self.$form.find('.js-ps-state-code').val(values.state_code).trigger('change.address-form');
 			}
 
 			delete values['country_code'];
@@ -153,22 +165,23 @@
 			}
 		}
 	};
-})(jQuery);
 
-$(function () {
-	var $billing_form = $('.js-billing-form'),
-		$delivery_form = $('.js-delivery-form');
+	var $billing_form = $('#js-ps-billing-form'),
+		$delivery_form = $('#js-ps-delivery-address');
 
 	AddressForms.register($billing_form, 'billing_');
 	AddressForms.register($delivery_form, 'delivery_');
 
-	$('.js-copy-address').on('change', function () {
-		var $this = $(this);
-		var from = $this.data('from');
 
-		var on = !!$this.is(':checked');
+	/**
+	 * Adding the onchange event listener to the address same as checkbox  
+	 */
 
-		if (from == 'billing') {
+	$(document).on('change','#js-ps-copy-address' function (){
+
+		var $this = $(this), from = $this.data('from'), on = !!$this.is(':checked');
+
+		if (from === 'billing') {
 			if (on)
 				$delivery_form.data('address-form').couple($billing_form.data('address-form'));
 			else
@@ -179,6 +192,6 @@ $(function () {
 			else
 				$billing_form.data('address-form').decouple();
 		}
-	}).trigger('change');
+	});
 
-});
+})(jQuery);
