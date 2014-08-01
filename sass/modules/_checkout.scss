@@ -1,0 +1,38 @@
+.order-summary{
+
+	&__list{
+
+		
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+
+		&__img{
+
+			@extend %fl;
+			@extend %t-align--center;
+			@include col--alpha(5);
+
+		}
+
+		&__qty{
+			@extend %fl;
+			@extend %t-align--center;
+			@include col--alpha(3);
+
+
+		}
+
+		&__price{
+			
+			text-align: right;
+			@extend %fl;
+			@include col--alpha(4);
+
+
+
+		}
+	}
+
+}
