@@ -11,6 +11,10 @@
 			display: table-cell;
 			text-align: center;
 
+			&--last{
+				text-align: right;
+			}
+
 
 			&--product{
 				width: 220px;

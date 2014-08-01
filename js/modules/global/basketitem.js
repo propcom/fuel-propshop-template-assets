@@ -118,21 +118,21 @@
 		productId : ''
 	};
 	
-	$('document').ready(function(){
 		
-		function setupBasket() {
-			$('[data-basket="item"]').each(function(){
-				var $this = $(this),
-				productId = $this.attr('data-product-id'),
-				option = $.extend({'productId' : productId}, $this.data())				
-				$this.basketItem(option)
-			});
-		}
-		
+	function setupBasket() {
+		$('[data-basket="item"]').each(function(){
+			var $this = $(this),
+			productId = $this.attr('data-product-id'),
+			option = $.extend({'productId' : productId}, $this.data())				
+			$this.basketItem(option)
+		});
+	}
+	
+	setupBasket();
+	
+	$(document).ajaxComplete(function(){
 		setupBasket();
-		
-		$('body').ajaxComplete(setupBasket);
-	})
+	});
 	
 
 })(jQuery)

@@ -1,7 +1,7 @@
 
 	
 
-document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-delivery-address') && (function($){
+document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-delivery-form') && (function($){
 
 
 
@@ -44,7 +44,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 
 			$.ajax('/customer/rest/address_states.json', {
 				'type': 'get',
-				'async': false,
+				'async': true,
 				'data': {
 					country_code: country
 				},
@@ -167,7 +167,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 	};
 
 	var $billing_form = $('#js-ps-billing-form'),
-		$delivery_form = $('#js-ps-delivery-address');
+		$delivery_form = $('#js-ps-delivery-form');
 
 	AddressForms.register($billing_form, 'billing_');
 	AddressForms.register($delivery_form, 'delivery_');
@@ -177,21 +177,29 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 	 * Adding the onchange event listener to the address same as checkbox  
 	 */
 
-	$(document).on('change','#js-ps-copy-address' function (){
+	$('#js-ps-copy-address').on('change', function (e){
+		var $this = $(this), from = $this.data('from'), on = !!$this.is(':checked'), updateClass = function(elem, callback){
 
-		var $this = $(this), from = $this.data('from'), on = !!$this.is(':checked');
+			elem.hasClass('is-hidden') ? elem.removeClass('is-hidden') : elem.addClass('is-hidden');
+
+			typeof callback === 'function' && calback();
+
+		};
+
 
 		if (from === 'billing') {
 			if (on)
-				$delivery_form.data('address-form').couple($billing_form.data('address-form'));
+				updateClass($('#js-ps-hidden-address'), $delivery_form.data('address-form').couple($billing_form.data('address-form')));
 			else
-				$delivery_form.data('address-form').decouple();
+				updateClass($('#js-ps-hidden-address'), $delivery_form.data('address-form').decouple());
 		} else {
 			if (on)
-				$billing_form.data('address-form').couple($delivery_form.data('address-form'));
+				updateClass($('#js-ps-hidden-address'),$billing_form.data('address-form').couple($delivery_form.data('address-form')));
 			else
-				$billing_form.data('address-form').decouple();
+				updateClass($('#js-ps-hidden-address'), $billing_form.data('address-form').decouple());
 		}
+
+		
 	});
 
 })(jQuery);

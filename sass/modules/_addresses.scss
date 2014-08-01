@@ -1,0 +1,27 @@
+.addresses{
+	&__address{
+
+
+		&.is-hidden{
+
+
+		@extend %hidden;
+		}
+
+	}
+
+
+}
+
+
+@include bp-max(($small - 1)){
+	.addresses{
+
+
+		&__address{
+
+			padding: 0;
+			@include col--full(12);
+		}
+	}
+}
