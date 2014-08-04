@@ -1,0 +1,23 @@
+
+$account-nav-item-height: 60;
+
+
+.account-nav{
+	&__link{
+
+		background: lightGrey;
+		display: block;
+		font-variant: small-caps;
+		height: #{$account-nav-item-height}px;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		margin-bottom: 10px;
+
+		@include font-size(15, $account-nav-item-height);
+
+		&:hover{
+			background: grey;
+		}
+	}
+}
