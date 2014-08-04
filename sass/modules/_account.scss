@@ -21,3 +21,29 @@ $account-nav-item-height: 60;
 		}
 	}
 }
+
+
+.other-addresses{
+	&__header{
+
+	}
+
+
+	&__list{
+		
+		display: table;
+
+		&__row{
+			
+			display: table-row;
+
+
+			&__div{
+
+				display: table-cell;
+
+			}
+
+		}
+	}
+}
