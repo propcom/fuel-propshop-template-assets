@@ -16,3 +16,28 @@
     
     
 }
+
+
+
+$header-def-nav-height: 40;
+
+.l-header{
+
+    .cleared{
+
+        div{
+            background: lightGrey;
+            min-height: #{$header-def-nav-height}px;
+
+            a{
+                display: block;
+                text-align: center;
+                @include font-size(16, $header-def-nav-height);
+
+                &:hover{
+                    background: grey;
+                }
+            }
+        }
+    }
+}
