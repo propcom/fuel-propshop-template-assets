@@ -1,4 +1,4 @@
-							var imgr = new Imager({
+								var imgr = new Imager({
 								selector: '.js-ps-img',	
 								className:'scale-with-grid',	
 								availableWidths: [ 960, 800, 768,600, 480, 360, 320, 0], 
@@ -70,6 +70,22 @@
 							 */
 							$(document).ajaxComplete(function(){
 								imgr.updateDivs();
+
+								// var selects = document.getElementsByTagName('select'), nativeSelectEv = function(elem){
+									
+								// 	var event = document.createEvent('HTMLEvents');
+								// 	event.initEvent('change', true, false);
+								// 	elem.dispatchEvent(event);
+
+								// };
+
+								// for(i = 0, l = selects.length; i < l; i++){
+									
+								// 	document.createEvent ? nativeSelectEv(selects[i]) : selects[i].fireEvent('onchange');
+
+								// }
+
+
 							});
 
 
