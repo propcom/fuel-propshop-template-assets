@@ -13,6 +13,30 @@
 }
 
 
+.category-header{
+	position: relative;
+
+	&__copy{
+		width: 90%;
+
+		@include font-size(14, 16);
+		@extend %absolute-center;
+
+
+		&__h{
+
+			text-align: center;
+			margin: 0 0 10px;
+		}
+	}
+
+	&__img{
+
+
+	}
+}
+
+
 .category-filters{
 
 	position: relative;
