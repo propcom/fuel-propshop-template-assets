@@ -115,6 +115,80 @@
 }
 
 
+.minibasket{
+
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: 10000;
+
+	@include hardwareAccelerate;
+	@include transition(600ms $easeOut all);
+
+	&.is-hovered{
+		bottom: 40px;
+		@include transform(translateY(100%));
+	}
+
+
+	&__list{
+
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+
+		&__item{
+
+
+			&__img{
+
+				width: percentage(1/3);
+
+				@extend %fl;
+
+			}
+
+
+			&__copy{
+
+				padding: 0 0 0 10px;
+
+				width: percentage(2/3);
+				@extend %fr;
+				
+			}
+		}
+	}
+
+
+	&__total{
+		margin-top: 20px;
+	}
+}
+
+.variant-list{
+
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+
+
+	&__name{
+		width: 50%;
+		@extend %fl;
+	}
+
+
+	&__value{
+		margin: 0;
+		width: 50%;
+		@extend %fr;
+	}
+}
+
+
 .totals{
 	&__total{
 		margin: 0;
