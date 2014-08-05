@@ -6,7 +6,7 @@
 			.delegate('[data-basket-action="increment"]', 'click.increment.basket-item', $.proxy(this.increment, this))
 			.delegate('[data-basket-action="decrement"]', 'click.decrement.basket-item', $.proxy(this.decrement, this))
 			.delegate('[data-basket-action="add"]', 'click.add.basket-item', $.proxy(this.add, this))
-			.delegate('[data-basket-action="remove"]', 'click.add.basket-item', $.proxy(this.remove, this))
+			.delegate('[data-basket-action="remove"]', 'click.add.basket-item', $.proxy(this.remove, this));
     }
 
     /**
@@ -77,6 +77,50 @@
 	function makeRequest(reqData, requestUrl, method, callback) {
 		var that = this;
         method = method || 'POST';
+
+
+        document.getElementById('propshop-basket') && (function () {
+
+
+        	var overlay = document.createElement('div'), box = document.createElement('p');
+
+        	overlay.id = 'js-ps-ajax-overlay';
+ 
+
+
+        	box.innerText = 'Updating Basket...';
+        	box.style.position = 'absolute';
+        	box.style.top = '50%';
+        	box.style.left = '50%';
+        	box.style.backgroundColor = '#000000iter';
+        	box.style.opacity = 0.7;
+        	box.style.width = '300px';
+        	box.style.height = '50px';
+        	box.style.marginLeft = '-150px';
+        	box.style.marginright = '-25px';
+        	box.style.borderRadius = '5px';
+        	box.style.border = '1px solid white';
+        	box.style.textAlign = 'center';
+        	box.style.lineHeight = '50px';
+        	box.style.color = 'white';
+
+
+
+        	overlay.style.position = 'absolute';
+        	overlay.style.top = 0;
+        	overlay.style.left = 0;
+        	overlay.style.backgroundColor = '#222222';
+        	overlay.style.opacity = 0.5;
+        	overlay.style.width = '100%';
+        	overlay.style.height = '100%';
+        	overlay.style.zIndex = '1000000';
+
+        	overlay.appendChild(box);
+
+        	document.body.appendChild(overlay);
+
+
+        })();
 		
 		$.ajax({
 			url: requestUrl,
@@ -119,7 +163,7 @@
 	};
 	
 		
-	function setupBasket() {
+	var setupBasket = function() {
 		$('[data-basket="item"]').each(function(){
 			var $this = $(this),
 			productId = $this.attr('data-product-id'),
@@ -132,6 +176,8 @@
 	
 	$(document).ajaxComplete(function(){
 		setupBasket();
+
+		console.log('refreshed');
 	});
 	
 

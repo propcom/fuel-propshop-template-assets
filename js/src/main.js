@@ -98,48 +98,27 @@
 							});
 
 
-							
+
 
 
 							document.getElementById('propshop-basket') && (function () {
+									
 									$(document).on('basketChanged', function () {
-
-										var $basketSection = $('#propshop-basket-section'), overlay = document.createElement('div'), box = document.createElement('p');
-
-
-										box.innerText = 'Updating Basket...';
-										box.style.position = 'absolute';
-										box.style.top = '50%';
-										box.style.left = '50%';
-										box.style.backgroundColor = '#000000iter';
-										box.style.opacity = 0.7;
-										box.style.width = '300px';
-										box.style.height = '50px';
-										box.style.marginLeft = '-150px';
-										box.style.marginright = '-25px';
-										box.style.borderRadius = '5px';
-										box.style.border = '1px solid white';
-										box.style.textAlign = 'center';
-										box.style.lineHeight = '50px';
-										box.style.color = 'white';
-
-
-
-										overlay.style.position = 'absolute';
-										overlay.style.top = 0;
-										overlay.style.left = 0;
-										overlay.style.backgroundColor = '#222222';
-										overlay.style.opacity = 0.5;
-										overlay.style.width = '100%';
-										overlay.style.height = '100%';
-
-										overlay.appendChild(box);
-
-										$basketSection.get(0).appendChild(overlay);
-
-
-										$.get('/basket/full', function (data) {
-											$('#propshop-basket-section').replaceWith(data);
+										$.ajax({
+											url: '/basket/full',
+											type: 'GET',
+											cache: false,
+											success: function(data) {
+												console.log(data);
+								                $('#propshop-basket-section').replaceWith(data);
+											}
+										}).done(function(){
+											document.getElementById('js-ps-ajax-overlay') && document.body.removeChild(document.getElementById('js-ps-ajax-overlay'));
+										}).fail(function(){
+											alert('we need some validation here');
 										});
 									});
+
+
+
 							})(jQuery);
