@@ -22,7 +22,7 @@ $__col-width: percentage(1/$_number-of-columns);
 		.col#{$__i},%col#{$__i}{
 			margin-left: $__margin;
 			margin-right: $__margin;
-			width: $__col-width * $__i - $__margin * 2;
+			width: ($__col-width * $__i) - ($__margin * 2);
 		}
 
 		.col#{$__i}--full{
@@ -34,11 +34,13 @@ $__col-width: percentage(1/$_number-of-columns);
 		.col#{$__i}--alpha, %col#{$__i}--alpha{
 			width: $__col-width * $__i - $__margin;
 			margin-right: $__margin;
+			margin-left: 0;
 		}
 
 		.col#{$__i}--omega, %col#{$__i}--omega{
 			width: $__col-width * $__i - $__margin;
 			margin-left: $__margin;
+			margin-right: 0
 		}
 
 		.col--1by#{$__i}{
