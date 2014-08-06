@@ -1,20 +1,20 @@
-
-	
-
 document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-delivery-form') && (function($){
 
 
-	//helpers
-	//
-	//
+	/**
+	 * Fires a native browser change event because jQuery does not
+	 *
+	 * 
+	 * @param  {HTMLElement} elem Html element that should fire the event
+	 * @return {undefined} 
+	 */
+	var nativeSelectEv = function(elem){
 
-    var nativeSelectEv = function(elem){
+		var event = document.createEvent('HTMLEvents');
+		event.initEvent('change', true, false);
+		elem.dispatchEvent(event);
 
-							var event = document.createEvent('HTMLEvents');
-							event.initEvent('change', true, false);
-							elem.dispatchEvent(event);
-
-						};
+	};
 
 	function AddressForm(form, prefix) {
 		var self = this;
@@ -103,15 +103,19 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 				self.$form.find('.js-ps-country-code').val(values.country_code).trigger('change');
 
 				self.update_states(values.country_code, function ($state_select) {
+
 					if (state_code) {
+
 						$state_select.val(state_code);
 						document.createEvent ? nativeSelectEv($state_select.get(0)) : $state_select.get(0).fireEvent('onchange');
+
 					}
+
 				});
 			} else if (values.state_code) {
-				//self.$form.find('.js-ps-state-code').val(values.state_code).trigger('change');
 
 				document.createEvent ? nativeSelectEv(self.$form.find('.js-ps-state-code').val(values.state_code).get(0)) : self.$form.find('.js-ps-state-code').val(values.state_code).get(0).fireEvent('onchange');
+			
 			}
 
 			delete values['country_code'];
@@ -144,6 +148,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 			this.set_values(other_form.get_values());
 		},
 		_on_couple_change: function () {
+
 			var self = this;
 
 			this._couple_handler = this._couple_handler || function (event) {
@@ -160,11 +165,16 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 			return this._couple_handler;
 		},
 		decouple: function () {
+
 			if (this._couple) {
+
 				this._couple.$form.find(':input').off('change.address-form', this._on_couple_change());
 				this._couple = null;
+
 			}
+
 		}
+
 	};
 
 	window.AddressForm = AddressForm;
@@ -172,15 +182,25 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 	var addressForms = [];
 
 	window.AddressForms = {
+
 		register: function ($form, prefix) {
+
 			if (!($form instanceof AddressForm)) {
+
 				$form.each(function () {
+
 					addressForms.push(new AddressForm($(this), prefix));
+
 				});
+
 			} else {
+
 				addressForms.push($form, prefix);
+
 			}
+
 		}
+
 	};
 
 	var $billing_form = $('#js-ps-billing-form'),
@@ -191,9 +211,12 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 
 
 	/**
-	 * Adding the onchange event listener to the address same as checkbox  
+	 * Adding the onchange event listener to the address same as checkbox
+	 *
+	 * 
+	 * @param  {event} e On change event of the checkbox
+	 * @return {undefined}
 	 */
-
 	$('#js-ps-copy-address').on('change', function (e){
 		var $this = $(this), from = $this.data('from'), on = !!$this.is(':checked'), updateClass = function(elem, callback){
 
