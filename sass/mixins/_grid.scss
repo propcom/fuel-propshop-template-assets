@@ -11,8 +11,12 @@ $_number-of-columns: 12;
 $_gutter: 20; //in px
 
 // Calculated variables
-$__margin: percentage(($_gutter/2)/$_max-width);
-$__col-width: percentage(1/$_number-of-columns);
+$__margin: percentage(($_gutter)/$_max-width);
+
+$__col-width: (100% - ($__margin * ($_number-of-columns - 1))) / $_number-of-columns ;
+
+$__col-with--full : percentage(1/12);
+
 
 
 @mixin grid(){
@@ -21,46 +25,24 @@ $__col-width: percentage(1/$_number-of-columns);
 
 		.col#{$__i},%col#{$__i}{
 			margin-left: $__margin;
-			margin-right: $__margin;
-			width: ($__col-width * $__i) - ($__margin * 2);
+			width: ($__col-width * $__i) + ($__margin * ($__i - 1));
 		}
 
 		.col#{$__i}--full{
 			width: $__col-width * $__i;
-			margin-left: 0;
-			margin-right: 0;
 		}
 
-		.col#{$__i}--alpha, %col#{$__i}--alpha{
-			width: $__col-width * $__i - $__margin;
-			margin-right: $__margin;
-			margin-left: 0;
-		}
-
-		.col#{$__i}--omega, %col#{$__i}--omega{
-			width: $__col-width * $__i - $__margin;
-			margin-left: $__margin;
-			margin-right: 0
-		}
 
 		.col--1by#{$__i}{
-			margin-left: $__margin;
-			margin-right: $__margin;
-			width: percentage(1/$__i) - $__margin * 2;
+			width: percentage(1/$__i);
 		}
 
 	} // usage: .col$__i
 
 
-
-
-	@for $__i from 1 to $_number-of-columns{
-		.col--offset#{$__i}{
-			margin-left: $__col-width * $__i + $__margin;
-		}
-	} //usage .col--offset$__i
-
-
+	.col--alpha{
+		margin-left: 0;
+	}
 
 	// Lets define the container behaviour
 	.container{

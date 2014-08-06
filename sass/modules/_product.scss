@@ -68,5 +68,18 @@
 
 }
 
+@include bp-max($medium){
+
+	.product-info, .product-gallery{
+
+		margin-left: 0;
+		margin-right: 0;
+		width: 100%;
+		
+	}
+
+
+}
+
 
 

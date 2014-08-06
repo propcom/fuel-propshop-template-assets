@@ -201,7 +201,7 @@
 
 @include bp-max($large){
 
-	.category-filters, .category-content{
+	.category-filters{
 
 		float: none;
 		width: 100%;
@@ -263,7 +263,12 @@
 	}
 
 	.category-content{
+
+		margin-left: 0;
+		margin-right: 0;
+		width: 100%;
 		padding-top: 60px;
+		float: none;
 	}
 
 }
@@ -273,9 +278,9 @@
 
 	.product-cat-block{
 
-		padding-left: 1%;
-		padding-right: 1%;
-		width: 50%;
+		margin-left: 1%;
+		margin-right: 1%;
+		width: 48%;
 
 	}
 
@@ -301,9 +306,7 @@
 
 	.product-cat-block{
 
-		padding-left: 2.5%;
-		padding-right: 2.5%;
-		width: 100%;
+		width: 98%;
 
 	}
 
