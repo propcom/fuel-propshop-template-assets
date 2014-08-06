@@ -1,38 +1,41 @@
-;$(function(){
+document.getElementById('js-ps-category-page') && (function($){
     var filter_request;
 
     function on_filter_change() {
         // Build filter string
-        var $this = $(this);
-        var $form = $this.closest('form');
+        var $this = $(this), reqData = $('#search-filter-filters, #search-filter-sort, #search-filter-per-page').serialize();
 
         // Abort the active request
-        if (filter_request) {
-            filter_request.abort();
-        }
+        filter_request && filter_request.abort();
+    
+        filter_request = $.ajax({
+            url: '/search/index',
+            type: 'GET',
+            data: reqData,
+            success: function(data) {
 
-        filter_request = $.get('/search/index', $form.serialize(), function(response) {
-            $('#js-category-page').replaceWith(response);
-            filter_request = null;
-            var state = $.param($form.serializeArray());
-            if (state.length > 0) {
-                state = '?' + state;
+                $('#js-ps-category-page').replaceWith(data);
+                filter_request = null;
+                var state = reqData;
+                if (state.length > 0) {
+                    state = '?' + state;
+                }
+                history.pushState(state, "", "/search/index"+state);
+
+                wrapSelects();
+
+                    
             }
-            history.pushState(state, "", "/search/index"+state);
-            setupFilters();
-            setupSort();
         });
     }
 
-    function setupFilters() {
-        $('.js-search-filter').on('click', function(e) {
+    (function() {
+        $(document).on('click', '.js-search-filter', function(e) {
             e.preventDefault();
             var $this = $(this);
 
             // Abort the active request
-            if (filter_request) {
-                filter_request.abort();
-            }
+            filter_request && filter_request.abort();
 
             if ($this.is('a')) {
                 var $input = $this.prev();
@@ -48,20 +51,22 @@
             $this.trigger('filter-change');
 
             return false;
-        })
-        .on('filter-change', on_filter_change);
-    }
-
-    function setupSort() {
-        $('.js-search-sort').on('change', function(e){
-           $(this).trigger('filter-change');
         }).on('filter-change', on_filter_change);
-    }
+    
 
-	$('.js-search-per-page').on('change', function() {
-		this.form.submit();
-	});
 
-    setupFilters();
-    setupSort();
-});
+        $(document).on('change','.js-search-sort', function(e){
+            e.preventDefault();
+            on_filter_change();
+        
+        });
+
+
+    	$(document).on('change', '.js-search-per-page', function(e) {
+            e.preventDefault();
+    		 on_filter_change();
+    	});
+
+    })();
+
+})(jQuery);
