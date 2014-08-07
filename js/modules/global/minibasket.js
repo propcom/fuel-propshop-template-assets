@@ -1,4 +1,4 @@
-document.getElementById('js-ps-minibasket') && (function($){ // IIFE is only ran if minibasket Element exists in the DOM  
+document.getElementById('js-ps-minibasket') && (function($){ // IIFE is only ran if minibasket Element exists in the DOM - http://gregfranko.com/blog/i-love-my-iife/
 
 	/**
 	 * Invoking strict mode

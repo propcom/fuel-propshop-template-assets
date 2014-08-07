@@ -3,8 +3,13 @@
 
 document.getElementById('js-prop-add-to-basket-form') && (function($){
 
+		"use strict";
 
-		var loadVariant = function(variant){
+
+		var loadVariant = function(variant, beforeStart, callback){
+
+			if(typeof beforeStart === 'function')
+				beforeStart(document.getElementById('js-ps-product-info-container'));
 
 			/**
 			 * Using jQuery.get() to request the new variant asynchronously
@@ -38,21 +43,28 @@ document.getElementById('js-prop-add-to-basket-form') && (function($){
 				 */
 				wrapSelects();
 
+				if(typeof callback === 'function')
+					callback(document.getElementById('js-ps-product-info-container'));
+
 			});
 
 		}
 
 		var prod_form = $('#js-prop-add-to-basket-form');
 
-		ProductForms.register(prod_form);
+		ProductForms.register(prod_form, function(){
 
-		$('#js-prop-add-to-basket-form .variant-select').on('set_option', function (e, data) {
+			$(document).on('set_option', '#js-prop-add-to-basket-form .variant-select', function (e, data) {
 
-			var variant_id = data.product_form.selected_variant.val();
+				var variant_id = data.product_form.selected_variant.val();
 
-			loadVariant(variant_id)
+				loadVariant(variant_id, before, after)
+
+			});
 
 		});
+
+		
 
 		/**
 		 * Click event handler for product Colours
@@ -74,8 +86,21 @@ document.getElementById('js-prop-add-to-basket-form') && (function($){
 			var self = $(this);
 
 
-			loadVariant(self.attr('data-variant'));
+			loadVariant(self.attr('data-variant'), before, after);
 
 		});
+
+		var before = function(elem){
+			elem.style.opacity = '0.7';
+			elem.style.pointerEvents = 'none';
+
+
+		};
+
+		var after = function(elem){
+			elem.style.opacity = '1';
+			elem.style.pointerEvents = 'auto';
+
+		}
 
 })(jQuery);

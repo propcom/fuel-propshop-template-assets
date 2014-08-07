@@ -42,9 +42,12 @@
  * which will need to somehow be updated if new products appear on the page.
  */
 ;(function($) {
-    function ProductForm(form, options) {
-        var self = this;
 
+    "use strict";
+
+    function ProductForm(form, options) {
+        
+        var self = this;
         this.options = $.extend({}, ProductForm.defaults, options);
         this.form = form;
         this.product_id = form.data('productId');
@@ -71,20 +74,33 @@
             self.change_variant();
         });
 
-        // Grab variant data with Ajax
-        $.get('/product/rest_variants/variant_options/'+this.product_id+'.json').done(function(data) {
+/**
+             * When we init the ProductForm object we instantiate the variants property via ajax, the built in promise in the $.ajax method takes care of firing the code when the response is returned 
+             */
+        $.ajax({
+                url: '/product/rest_variants/variant_options/'+self.product_id+'.json',
+                type: 'GET',
+                cache: false,
+                global: false,
+                success: function(data) {
 
-            self.variants = data;
-            self.init(); 
+                    self.variants = data;
+                    self.init();    
+                }
+            });
 
-        });
+        
+
+        
 
     }
 
     ProductForm.prototype = {
         constructor: ProductForm,
+
         init: function() {
-            var self = this;
+
+           var self = this;
 
             // Set up the submit handler
             self.form.on('submit', $.proxy(self.options.onSubmit, self));
@@ -105,6 +121,10 @@
             });
 
             $.extend(true, self.variant_meta, this.variants._variant_meta);
+            
+            
+            
+            
         },
 
         /*
@@ -172,6 +192,8 @@
                 $.each(prev_fields, function (key, f) {
                     var f_val = $(f).val();
                     var f_name = $(f).attr('name');
+
+                    console.log(self.variants);
                     var variants = self.variants[f_name].options[f_val].variant_ids;
 
                     // Init intersect on the first iteration
@@ -250,39 +272,42 @@
             var index = this.fields.index(field);
 
             // field not in this.fields
-            if (index == -1) {
+            if (index == -1)
                 return;
-            }
+
 
             // field at the end of this.fields
-            if (index >= this.fields.length - 1) {
+            if (index >= this.fields.length - 1)
                 return;
-            }
+            
 
             return this.fields[index + 1];
+        },
+        unfilled_fields: function() {
+            return this.fields.filter(function() {
+                return !$.trim($(this).val());
+            });
         }
 
     };
 
     ProductForm.defaults = {
         'onSubmit': function(e) {
+            //e.preventDefault();
+
             var unfilled = this.unfilled_fields();
+
+            console.log(typeof unfilled.get(0));
             if (unfilled.length)
             {
                 e.preventDefault();
-
-                var fields = [];
-
-                unfilled.each(function(i,o) {
-                    fields.push($(this).attr('title'))
-                });
-                fields = fields.join(", ");
+                var field = unfilled.get(0).pop();
 
                 this.form.find('.alert').remove();
 
                 this.form.prepend($('<div />')
                     .addClass('alert alert-error')
-                    .text('Please select the following fields to add this product to your basket: '+fields)
+                    .text('Please select a ' + field + ' to add this product to your basket')
                     .append($('<a />').addClass('close').attr('data-dismiss', 'alert').text('×')));
             }
         }
@@ -300,6 +325,8 @@
                 });
             }
             else {
+
+                console.log('same inst');
                 productForms.push(form)
             }
         }
