@@ -36,3 +36,83 @@
 	}
 
 }
+
+
+
+.checkout-breadcrumbs{
+
+	padding: 20px 0;
+
+	&__breadcrumb{
+		background: lightGrey;
+		text-align: center;
+		text-transform: uppercase;
+		vertical-align: middle;
+
+		@include font-size(16, 40);
+
+		&.is-active{
+			background: grey;
+		}
+	}
+}
+
+
+$checkout-form-header-height: 100;
+$checkout-form-margin-bottom: 5;
+.checkout-form{
+
+
+	&__header{
+		background: lightGrey;
+		height: #{$checkout-form-header-height}px;
+		margin-bottom: #{$checkout-form-margin-bottom}px;
+
+		&__copy{
+
+
+			&__heading{
+
+				text-transform: uppercase;
+				font-weight: $bold;
+				color: $primaryColor;
+
+				@include font-size(20, $checkout-form-header-height);
+
+			}
+
+			&__anchor{
+
+				color: lightBlue;
+				text-decoration: none;
+			}
+
+		}
+	}
+
+
+	&__form{
+		
+		background: lightGrey;
+		margin-bottom: #{$checkout-form-margin-bottom}px;
+		overflow: hidden;
+
+		@include transition(618ms $easeOut all);
+		@include opacity(0);
+
+		&.is-open{
+			@include opacity(1);
+		}
+
+
+		&__copy{
+
+			padding: 40px 0;
+
+
+			form{
+				width: 50%;
+			}
+		}
+	}
+}
