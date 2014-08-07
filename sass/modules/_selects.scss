@@ -24,6 +24,9 @@
 		height: 100%;
 		width: 100%;
 		padding: 1% 10px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
 
 		&:after{
 			content: "";

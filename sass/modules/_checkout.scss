@@ -77,7 +77,16 @@ $checkout-form-margin-bottom: 5;
 				font-weight: $bold;
 				color: $primaryColor;
 
-				@include font-size(20, $checkout-form-header-height);
+				@include font-size(18, $checkout-form-header-height);
+
+				&__box{
+					text-transform: none;
+					font-weight: $reg;
+					float: right;
+
+					@include font-size(12, $checkout-form-header-height);
+
+				}
 
 			}
 

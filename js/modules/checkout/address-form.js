@@ -211,6 +211,11 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 	AddressForms.register($billing_form, 'billing_');
 	AddressForms.register($delivery_form, 'delivery_');
 
+	/**
+	 * Setting the default behaviour
+	 */
+
+	 $delivery_form.data('address-form').couple($billing_form.data('address-form'));
 
 	/**
 	 * Adding the onchange event listener to the address same as checkbox
@@ -222,7 +227,9 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 	$('#js-ps-copy-address').on('change', function (e){
 		var $this = $(this), from = $this.data('from'), on = !!$this.is(':checked'), updateClass = function(elem, callback){
 
-			elem.hasClass('is-hidden') ? elem.removeClass('is-hidden') : elem.addClass('is-hidden');
+			elem.hasClass('is-open') ? elem.removeClass('is-open') : elem.css('height', function(){
+				 return elem.children('div').get(0).clientHeight + 'px';
+			}).addClass('is-open');
 
 			typeof callback === 'function' && calback();
 
@@ -231,17 +238,17 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 
 		if (from === 'billing') {
 			if (on)
-				updateClass($('#js-ps-hidden-address'), $delivery_form.data('address-form').couple($billing_form.data('address-form')));
+				updateClass($('#js-ps-delivery-form'), $delivery_form.data('address-form').couple($billing_form.data('address-form')));
 			else
-				updateClass($('#js-ps-hidden-address'), $delivery_form.data('address-form').decouple());
+				updateClass($('#js-ps-delivery-form'), $delivery_form.data('address-form').decouple());
 		} else {
 			if (on)
-				updateClass($('#js-ps-hidden-address'),$billing_form.data('address-form').couple($delivery_form.data('address-form')));
+				updateClass($('#js-ps-billing-form'),$billing_form.data('address-form').couple($delivery_form.data('address-form')));
 			else
-				updateClass($('#js-ps-hidden-address'), $billing_form.data('address-form').decouple());
+				updateClass($('#js-ps-billing-form'), $billing_form.data('address-form').decouple());
 		}
 
 		
-	}).trigger('change');
+	});
 
 })(jQuery);
