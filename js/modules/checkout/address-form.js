@@ -37,6 +37,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 				'data': {
 					id: $(this).val()
 				},
+				cache: false,
 				'dataType': 'json',
 				'success': function(data){
 					$selected.data('address', data);
@@ -56,6 +57,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 			$.ajax('/customer/rest/address_states.json', {
 				'type': 'get',
 				'async': true,
+				cache: false,
 				'data': {
 					country_code: country
 				},

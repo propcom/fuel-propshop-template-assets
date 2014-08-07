@@ -127,6 +127,7 @@
 			type: method,
 			dataType: 'JSON',
 			data: reqData,
+			cache: false,
 			success: function(data) {
                 if(callback != null)
                 {

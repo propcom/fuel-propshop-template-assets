@@ -12,6 +12,7 @@ document.getElementById('js-ps-category-page') && (function($){
             url: '/search/index',
             type: 'GET',
             data: reqData,
+            cache: false,
             success: function(data) {
 
                 $('#js-ps-category-page').replaceWith(data);

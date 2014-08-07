@@ -798,6 +798,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 					id: $(this).val()
 				},
 				'dataType': 'json',
+                cache: false,
 				'success': function(data){
 					$selected.data('address', data);
 					self.set_values(data);
@@ -816,6 +817,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 			$.ajax('/customer/rest/address_states.json', {
 				'type': 'get',
 				'async': true,
+                cache: false,
 				'data': {
 					country_code: country
 				},
@@ -980,6 +982,8 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 	}).trigger('change');
 
 })(jQuery);
+
+
 $(document).ready(function () {
     if ( $('#shipping_chk').is(':checked')) {
         $('#js-shipping-form').hide();
