@@ -177,8 +177,6 @@
 	
 	$(document).ajaxComplete(function(){
 		setupBasket();
-
-		console.log('refreshed');
 	});
 	
 

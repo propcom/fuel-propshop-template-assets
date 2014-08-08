@@ -192,8 +192,6 @@
                 $.each(prev_fields, function (key, f) {
                     var f_val = $(f).val();
                     var f_name = $(f).attr('name');
-
-                    console.log(self.variants);
                     var variants = self.variants[f_name].options[f_val].variant_ids;
 
                     // Init intersect on the first iteration
@@ -296,8 +294,6 @@
             //e.preventDefault();
 
             var unfilled = this.unfilled_fields();
-
-            console.log(typeof unfilled.get(0));
             if (unfilled.length)
             {
                 e.preventDefault();
@@ -325,8 +321,6 @@
                 });
             }
             else {
-
-                console.log('same inst');
                 productForms.push(form)
             }
         }
