@@ -1,52 +1,11 @@
 //variables   
 
 $checkout-container-bg: lightGrey;
-
-
-.order-summary{
-
-	&__list{
-
-		
-		margin: 0;
-		padding: 0;
-		list-style: none;
-
-
-		&__img{
-
-			@extend %fl;
-			@extend %t-align--center;
-			@include col--alpha(5);
-
-		}
-
-		&__qty{
-			@extend %fl;
-			@extend %t-align--center;
-			@include col--alpha(3);
-
-
-		}
-
-		&__price{
-			
-			text-align: right;
-			@extend %fl;
-			@include col--alpha(4);
-
-
-
-		}
-	}
-
-}
-
-
+$checkout-container-padding-h: 20;
 
 .checkout-breadcrumbs{
 
-	padding: 20px 0;
+	padding: #{$checkout-container-padding-h}px 0;
 
 	&__breadcrumb{
 		background: $checkout-container-bg;
@@ -54,7 +13,7 @@ $checkout-container-bg: lightGrey;
 		text-transform: uppercase;
 		vertical-align: middle;
 
-		@include font-size(16, 40);
+		@include font-size($base-font-size, 40);
 
 		&.is-active{
 			background: grey;
@@ -82,7 +41,9 @@ $checkout-form-margin-bottom: 5;
 				font-weight: $bold;
 				color: $primaryColor;
 
-				@include font-size(18, $checkout-form-header-height);
+				padding: #{($checkout-form-header-height - $base-font-size + 4) / 2}px 0;
+
+				@include font-size($base-font-size + 2, $base-font-size + 4);
 
 				&__box{
 					text-transform: none;
@@ -93,6 +54,12 @@ $checkout-form-margin-bottom: 5;
 
 				}
 
+			}
+
+			&__sagepay{
+				@include font-size($base-font-size - 4, $base-font-size - 4);
+				font-weight: $reg;
+				text-transform: none;
 			}
 
 			&__anchor{
@@ -122,11 +89,15 @@ $checkout-form-margin-bottom: 5;
 		&__copy{
 
 			padding: 40px 0;
+			
+			&.is-half{
 
-
-			form{
-				width: 50%;
+				form{
+					width: 50%;
+				}
 			}
+
+			
 		}
 	}
 }
@@ -134,7 +105,7 @@ $checkout-form-margin-bottom: 5;
 .checkout-review-grid{
 
 
-	padding: 40px 20px 20px;
+	padding: 40px #{$checkout-container-padding-h}px 20px;
 	background: $checkout-container-bg;
 	width: 100%;
 
@@ -315,7 +286,7 @@ $checkout-form-margin-bottom: 5;
 	&__addresses{
 
 		background: $checkout-container-bg;
-		padding: 30px 20px 20px;
+		padding: 30px #{$checkout-container-padding-h}px 20px;
 
 
 		&__address{
@@ -323,8 +294,8 @@ $checkout-form-margin-bottom: 5;
 			float: left;
 
 			h3{
-					@include font-size(13, 16);
-					text-transform: uppercase;
+				@include font-size(13, 16);
+				text-transform: uppercase;
 			}
 
 			p{
@@ -339,31 +310,31 @@ $checkout-form-margin-bottom: 5;
 
 	&__shipping{
 
-			background: darken($checkout-container-bg, 25%);
-			padding: 30px 20px 20px;
+		background: darken($checkout-container-bg, 25%);
+		padding: 30px #{$checkout-container-padding-h}px 20px;
 
-			h3{
-					@include font-size(13, 16);
-					text-transform: uppercase;
+		h3{
+			@include font-size(13, 16);
+			text-transform: uppercase;
+		}
+	}
+
+	&__totals{
+		padding: 50px 20px 20px;
+		background: $checkout-container-bg;
+
+		&__total{
+			vertical-align: top;
+			@include font-size(16, 16);
+			padding-bottom: 24px;
+			margin: 0;
+
+			&.total{
+				border-top: 4px solid darken($checkout-container-bg, 20%);
+				padding-top: 20px;
 			}
 		}
-
-		&__totals{
-			padding: 50px 20px 20px;
-			background: $checkout-container-bg;
-
-			&__total{
-				vertical-align: top;
-				@include font-size(16, 16);
-				padding-bottom: 24px;
-				margin: 0;
-
-				&.total{
-					border-top: 4px solid darken($checkout-container-bg, 20%);
-					padding-top: 20px;
-				}
-			}
-		}
+	}
 
 }
 
@@ -416,13 +387,187 @@ $checkout-form-margin-bottom: 5;
 
 }
 
-.checkout-review-submit{
+.checkout-review-default{
 	background: $checkout-container-bg;
-	margin-top: 20px;
-	padding: 30px 0;
+	margin: 20px 0;
+	padding: #{$checkout-container-padding-h}px;
 
-	&__btn{
+	&__submit{
 		width: 100px;
 	}
 
+}
+
+
+.payment{
+
+	&__form{
+
+
+		&__elem{
+
+			label{
+				text-transform: uppercase;
+				@include font-size($base-font-size - 2, $base-line-height);
+				font-weight: $bold;
+			}
+
+		}
+
+		&__copy{
+			text-transform: uppercase;
+			@include font-size($base-font-size - 2, $base-line-height);
+			font-weight: $bold;
+
+			span.help{
+				display: block;
+				font-weight: $reg;
+				text-transform: none;
+				@include opacity(0.5);
+				@include font-size($base-font-size - 2, $base-line-height - 8);
+			}
+		}
+	}
+}
+
+@include bp-max($large){
+	.payment{
+		@include col(7);
+
+		&__form{
+
+
+			&__elem{
+
+				&.col5{
+					@include col(8);
+				}
+
+				&.col4{
+					@include col(6);
+				}
+			}
+		}
+	}
+}
+
+@include bp-max(650){
+	.payment{
+		@include col(6);
+
+		&__form{
+
+
+			&__elem{
+
+				&.col5{
+					@include col(10);
+				}
+
+				&.col4{
+					@include col(8);
+				}
+			}
+		}
+	}
+}
+
+@include bp-max($medium){
+	.payment{
+		width: 100%;
+	}
+}
+
+
+.checkout-summary{
+
+	&__copy{
+
+		background: $checkout-container-bg;
+
+		padding:0 #{$checkout-container-padding-h}px 20px;
+
+		&__list{
+
+			padding: 0;
+
+
+
+
+			margin: 0;
+			list-style: none;
+
+			&__item{
+
+				&.is-first{
+					border: none;
+
+					p{
+						text-transform: uppercase;
+						font-weight: $bold;
+						margin: 0;
+					}
+				}
+
+				border-top: 4px solid darken($checkout-container-bg, 20%);
+				padding: 20px 0 20px;
+
+
+				&__img{
+
+					@extend %fl;
+					@extend %t-align--center;
+					@include col(4);
+					margin-left: 0;
+
+				}
+
+				&__qty{
+					@extend %fl;
+					@extend %t-align--center;
+					@include col(4);
+
+
+				}
+
+				&__price{
+
+					text-align: right;
+					@extend %fl;
+					@include col(4);
+
+
+
+				}
+			}
+
+		}
+
+		&__subtotal{
+			border-top: 4px solid darken($checkout-container-bg, 20%);	
+		}
+
+		&__total{
+			border-top: 4px solid darken($checkout-container-bg, 20%);
+		}
+
+	}
+}
+
+@include bp-max($large){
+	.checkout-summary{
+		@include col(5);
+	}
+}
+
+@include bp-max(650){
+	.checkout-summary{
+		@include col(6);
+	}
+}
+
+@include bp-max($medium){
+	.checkout-summary{
+		width: 100%;
+	}
 }

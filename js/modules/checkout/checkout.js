@@ -13,6 +13,20 @@
 // });
 
 
+
+(function(){
+
+    "use strict";
+
+    var imgr = new Imager({
+        selector: '.js-ps-img', 
+        className:'scale-with-grid',    
+        availableWidths: [ 960, 800, 768,600, 480, 360, 320, 0], 
+        lazyload: true
+    });
+
+}());
+
 document.getElementById('propshop-checkout')&& (function($){
 
     var signupForm = $('#js-ps-checkout-signup-form'), loginForm = $('#js-ps-checkout-login-form');
@@ -52,3 +66,5 @@ document.getElementById('propshop-checkout')&& (function($){
 
 
 }(jQuery));
+
+

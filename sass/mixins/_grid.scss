@@ -85,6 +85,10 @@ $__col-with--full : percentage(1/12);
 @mixin col($__columns){
 	margin-left: $__margin;
 	width: ($__col-width * $__columns) + ($__margin * ($__columns - 1));
+
+	&.col--alpha {
+		margin-left: 0;
+	}
 }
 
 @mixin col--full($__columns){

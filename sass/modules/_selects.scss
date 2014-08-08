@@ -1,6 +1,8 @@
+$selects-height: 40;
+
 .styled-select{
 
-	height: 2em;
+	height: #{$selects-height}px;
 	position: relative;
 	border: 1px solid #a8a8a8;
 	background: white;
@@ -23,10 +25,13 @@
 		display: block;
 		height: 100%;
 		width: 100%;
-		padding: 1% 10px;
+		padding: 0 10px;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		overflow: hidden;
+		vertical-align: middle;
+
+		@include font-size($base-font-size, $selects-height);
 
 		&:after{
 			content: "";
