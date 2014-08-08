@@ -109,7 +109,6 @@
 											type: 'GET',
 											cache: false,
 											success: function(data) {
-												console.log(data);
 								                $('#propshop-basket-section').replaceWith(data);
 											}
 										}).done(function(){
