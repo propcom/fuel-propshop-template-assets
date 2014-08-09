@@ -1,28 +1,32 @@
-var defSlider = defSlider || {};
+var Slider = Slider || {};
 
-defSlider = (function($) {
+Slider = (function($) {
+
+  "use strict";
 
 
 
 function Slider(selector, options) {
     if (!selector) {
-      throw new Error('selector missing, eg: new defSlider(".selector")');
+      throw new Error('selector missing, eg: new Slider(".selector")');
     }
 
+    this.selector = selector;
+    this.selectorClass = selector.substring(1, selector.length);
+
     this.options = {
-      sBtnPreviousId: 'js-slider__btn--previous',
-      sBtnNextId: 'js-slider__btn--next',
-      sItemClass: 'js-slider__item',
-      sCurrentItemClass: 'js-slider__item--current',
-      sShowPreviousClass: 'js-slider__item--show-previous',
-      sShowNextClass: 'js-slider__item--show-next',
-      sHidePreviousClass: 'js-slider__item--hide-previous',
-      sHideNextClass: 'js-slider__item--hide-next',
+      sBtnPreviousClass: this.selectorClass+'-btn-prev',
+      sBtnNextClass: this.selectorClass+'-btn-next',
+      sItemClass: this.selectorClass+'-list-item',
+      sCurrentItemClass: this.selectorClass+'-list-item-current',
+      sShowPreviousClass: this.selectorClass+'-list-item-show-prev',
+      sShowNextClass: this.selectorClass+'-list-item-show-next',
+      sHidePreviousClass: this.selectorClass+'-list-item-hide-prev',
+      sHideNextClass: this.selectorClass+'-list-item-hide-next',
       sCarousel: true,
       sInterval: 5000
     };
 
-    this.selector = selector;
     this.$selector = document.querySelectorAll(this.selector)[0];
 
     if(this.$selector === undefined){return};
@@ -145,8 +149,8 @@ function Slider(selector, options) {
     this.allItemsArray = document.querySelectorAll(this.selector + ' .' + this.options.sItemClass);
     this.allItemsArrayLength = this.allItemsArray.length;
     this.currentItemIndex = findInArray(this.allItemsArray, document.querySelector(this.selector + ' .' + this.options.sCurrentItemClass));
-    this.buttonPrevious = document.getElementById(this.options.sBtnPreviousId);
-    this.buttonNext = document.getElementById(this.options.sBtnNextId);
+    this.buttonPrevious = this.$selector.querySelector('.'+this.options.sBtnPreviousClass);
+    this.buttonNext = this.$selector.querySelector('.'+this.options.sBtnNextClass);
 
     this.bindEvents();
     this.createCustomEvent();
@@ -160,10 +164,10 @@ function Slider(selector, options) {
   // Reset all settings by removing classes and attributes added by goTo() & updatePagination()
   SliderProto.removeAllHelperSettings = function () {
     removeClass(this.allItemsArray[this.currentItemIndex], this.options.sCurrentItemClass);
-    removeClass($$(this.options.sHidePreviousClass)[0], this.options.sHidePreviousClass);
-    removeClass($$(this.options.sHideNextClass)[0], this.options.sHideNextClass);
-    removeClass($$(this.options.sShowPreviousClass)[0], this.options.sShowPreviousClass);
-    removeClass($$(this.options.sShowNextClass)[0], this.options.sShowNextClass);
+    removeClass($$('.'+this.options.sHidePreviousClass)[0], this.options.sHidePreviousClass);
+    removeClass($$('.'+this.options.sHideNextClass)[0], this.options.sHideNextClass);
+    removeClass($$('.'+this.options.sShowPreviousClass)[0], this.options.sShowPreviousClass);
+    removeClass($$('.'+this.options.sShowNextClass)[0], this.options.sShowNextClass);
   };
 
   // Method to add classes to the right elements depending on the index passed
@@ -200,12 +204,12 @@ function Slider(selector, options) {
 
   SliderProto.startCycle = function(){
 
-     var _this = this;
+     var self = this;
 
      this.isCycling = true;
      this.interval = requestInterval(function(){
 
-        _this.onNextButtonClicked();
+        self.onNextButtonClicked();
       
      }, this.options.sInterval);
 
@@ -226,7 +230,9 @@ function Slider(selector, options) {
 
 
   // Callback for when previous button is clicked
-  SliderProto.onPreviousButtonClicked = function () {
+  SliderProto.onPreviousButtonClicked = function (isclick) {
+
+    isclick && this.stopCycle();
 
     if(this.currentItemIndex === 0 && this.options.sCarousel === true ){
       this.goTo((this.allItemsArrayLength + 1) - 1, '<');
@@ -237,8 +243,10 @@ function Slider(selector, options) {
   };
 
   // Callback for when next button is clicked
-  SliderProto.onNextButtonClicked = function () {
-    this.stopCycle()
+  SliderProto.onNextButtonClicked = function (isclick) {
+
+    isclick && this.stopCycle();
+    
      //alert('fired');
     if(this.currentItemIndex + 1 === this.allItemsArrayLength && this.options.sCarousel === true) {
       this.goTo(1, '>');
@@ -249,9 +257,9 @@ function Slider(selector, options) {
 
   // Attach click handlers
   SliderProto.bindEvents = function () {
-    var _this = this;
-    addEvListener(this.buttonPrevious,'click', function () { _this.onPreviousButtonClicked(); });
-    addEvListener(this.buttonNext,'click', function () { _this.onNextButtonClicked(); });
+    var self = this;
+    addEvListener(this.buttonPrevious,'click', function () { self.onPreviousButtonClicked(true); });
+    addEvListener(this.buttonNext,'click', function () { self.onNextButtonClicked(true); });
   };
 
   // Method so it is nicer for the user to use custom events
@@ -307,8 +315,9 @@ function Slider(selector, options) {
    */
 
   function $$(element) {
+
     if (!element) { return; }
-    return document.querySelectorAll('.'+element);
+    return document.querySelectorAll(element);
   }
 
   function addClass(element, className) {
@@ -329,6 +338,7 @@ function Slider(selector, options) {
   }
 
   function addEvListener(el, eventName, handler) {
+
     if (el.addEventListener) {
       el.addEventListener(eventName, handler, false);
     } else {

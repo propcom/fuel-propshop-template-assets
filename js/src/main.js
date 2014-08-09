@@ -5,6 +5,10 @@
 								lazyload: true,
 								onImagesReplaced: function(){
 
+									// console.log(window);
+
+								 //     window.getSizes && window.getSizes();
+
 									/**
 									 * Checks the DOM for zoom wrapper element via and id, if the element exists instanciates elevateZoom
 									 * 
@@ -23,6 +27,9 @@
 								            zoomWindowFadeIn: 681,
 								            zoomWindowFadeOut: 681,
 								            onZoomedImageLoaded: function(){
+
+
+
 								            	
 								            }
 										});
@@ -32,12 +39,10 @@
 								}
 							});
 
-							var slider = new defSlider('.js-slider', {
+							var slider = new Slider('.js-ps-slider', {
 								imgr: imgr,
 								modernizr : window.Modernizr
 							});
-
-							//var variant_data = <?= json_encode(\Product\Api::get_variant_options_cache()) ?>;
 
 
 

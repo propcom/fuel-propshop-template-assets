@@ -48,7 +48,8 @@ $__col-with--full : percentage(1/12);
 	.container{
 		position: relative;
 		max-width: #{$_max-width}px;
-		margin: 0 auto;
+		margin-left:auto;
+		margin-right:auto;
 
 		@extend %cleared;
 
