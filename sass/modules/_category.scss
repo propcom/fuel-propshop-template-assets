@@ -257,9 +257,8 @@ $category-grid-initial-left-margin: 25.5208333333%;
 	&:hover{
 
 
-		.category-grid__product__images__image--overlay
+		.category-grid__product__images__image--overlay{
 			visibility: visible;
-
 			@include opacity(1);
 			
 		}
