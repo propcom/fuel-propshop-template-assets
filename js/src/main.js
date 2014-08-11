@@ -5,9 +5,9 @@
 								lazyload: true,
 								onImagesReplaced: function(){
 
-									// console.log(window);
+									window.GetSizes && window.GetSizes(this, document.body.clientWidth); 
 
-								 //     window.getSizes && window.getSizes();
+
 
 									/**
 									 * Checks the DOM for zoom wrapper element via and id, if the element exists instanciates elevateZoom
@@ -126,3 +126,47 @@
 
 
 							})(jQuery);
+
+
+
+
+
+document.getElementById('propshop-customer')&& (function($){
+
+    var signupForm = $('#js-ps-account-signup-form'), loginForm = $('#js-ps-account-login-form');
+
+    loginForm.css('height', function(){
+         return loginForm.children('div').get(0).clientHeight + 'px';
+    });
+
+    $(document).on('click', '#js-ps-account-signup-btn', function(e){
+
+        e.preventDefault();
+
+        if(!signupForm.hasClass('is-open')){
+
+            signupForm.css('height', function(){
+                return signupForm.children('div').get(0).clientHeight + 'px';
+            }).addClass('is-open');
+
+            loginForm.css('height', '0px').removeClass('is-open');
+        }
+    });
+
+
+    $(document).on('click', '#js-ps-account-login-btn', function(e){
+
+        e.preventDefault();
+
+        if(!loginForm.hasClass('is-open')){
+
+            loginForm.css('height', function(){
+                return loginForm.children('div').get(0).clientHeight + 'px';
+            }).addClass('is-open');
+
+            signupForm.css('height', '0px').removeClass('is-open');
+        }
+    });
+
+
+}(jQuery));
