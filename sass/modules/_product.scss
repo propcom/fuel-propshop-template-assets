@@ -49,6 +49,23 @@
 
 }
 
+.product-gallery{
+
+	&__zoom{
+
+		padding-bottom: 100%;
+		position: relative;
+
+		&__img{
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+	}
+
+}
+
 .product-complement{
 
 	&__title{
