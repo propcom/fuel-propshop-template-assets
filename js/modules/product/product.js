@@ -92,14 +92,14 @@ document.getElementById('js-prop-add-to-basket-form') && (function($){
 
 		var before = function(elem){
 			elem.style.opacity = '0.7';
-			elem.style.pointerEvents = 'none';
+			elem.style.pointerEvents && elem.style.pointerEvents = 'none';
 
 
 		};
 
 		var after = function(elem){
 			elem.style.opacity = '1';
-			elem.style.pointerEvents = 'auto';
+			elem.style.pointerEvents && elem.style.pointerEvents = 'auto';
 
 		}
 
