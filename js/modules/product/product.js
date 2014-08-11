@@ -91,7 +91,9 @@ document.getElementById('js-prop-add-to-basket-form') && (function($){
 		});
 
 		var before = function(elem){
-			elem.style.opacity = '0.7';
+			if(elem.style.opacity)
+				elem.style.opacity = '0.7';
+
 			if(elem.style.pointerEvents)
 				elem.style.pointerEvents = 'none';
 
@@ -99,7 +101,9 @@ document.getElementById('js-prop-add-to-basket-form') && (function($){
 		};
 
 		var after = function(elem){
+			if(elem.style.opacity)
 			elem.style.opacity = '1';
+		
 			if(elem.style.pointerEvents)
 				elem.style.pointerEvents = 'auto';
 
