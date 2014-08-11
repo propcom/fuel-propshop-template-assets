@@ -31,7 +31,10 @@ document.getElementById('js-prop-add-to-basket-form') && (function($){
 				 *
 				 * https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history
 				 */
-				history.pushState({variant: variant }, "", '/product/view/'+variant );
+				if(history.pushState)
+				{
+					history.pushState({variant: variant }, "", '/product/view/'+variant );
+				}
 
 				/**
 				 * Registering the form included in the response
@@ -103,7 +106,7 @@ document.getElementById('js-prop-add-to-basket-form') && (function($){
 		var after = function(elem){
 			if(elem.style.opacity)
 			elem.style.opacity = '1';
-		
+
 			if(elem.style.pointerEvents)
 				elem.style.pointerEvents = 'auto';
 
