@@ -7,6 +7,7 @@ $category-grid-initial-left-margin: 25.5208333333%;
 
 	position: relative;
 	padding-bottom: percentage(250/960);
+	overflow: hidden;
 
 
 	&__copy{
