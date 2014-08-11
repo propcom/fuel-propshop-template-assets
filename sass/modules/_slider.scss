@@ -43,7 +43,7 @@
     @include opacity(.4);
     @include transform( translateY(-50%) );
 
-    z-index: 1000;
+    z-index: 1;
 
 
 
@@ -93,7 +93,7 @@ $slider-js-class: js-ps-slider;
      &-current{
 
       display: block;
-      z-index: 100000;
+      z-index: 10;
 
     }
 

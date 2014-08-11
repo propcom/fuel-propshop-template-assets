@@ -54,6 +54,7 @@ $cms-menu-line-height : 28;
 					top: #{$cms-menu-line-height}px;
 					left: 0;
 					width: 100%;
+					z-index: 1000;
 
 					@include hardwareAccelerate;
 					@include opacity(0);
