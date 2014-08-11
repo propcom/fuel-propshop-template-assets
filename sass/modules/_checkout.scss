@@ -80,12 +80,14 @@ $checkout-form-margin-bottom: 5;
 		background: $checkout-container-bg;
 		margin-bottom: #{$checkout-form-margin-bottom}px;
 		overflow: hidden;
+		height: 0;
 
 		@include transition(618ms $easeOut all);
 		@include opacity(0);
 
 		&.is-open{
 			@include opacity(1);
+			height: auto;
 		}
 
 

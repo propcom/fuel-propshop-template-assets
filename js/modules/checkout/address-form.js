@@ -227,7 +227,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 	$('#js-ps-copy-address').on('change', function (e){
 		var $this = $(this), from = $this.data('from'), on = !!$this.is(':checked'), updateClass = function(elem, callback){
 
-			elem.hasClass('is-open') ? elem.removeClass('is-open') : elem.css('height', function(){
+			elem.hasClass('is-open') ? elem.removeClass('is-open').css('height', 0) : elem.css('height', function(){
 				 return elem.children('div').get(0).clientHeight + 'px';
 			}).addClass('is-open');
 
