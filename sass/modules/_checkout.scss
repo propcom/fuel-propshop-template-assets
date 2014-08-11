@@ -50,7 +50,7 @@ $checkout-form-margin-bottom: 5;
 					font-weight: $reg;
 					float: right;
 
-					@include font-size($base-font-size - 4 , $checkout-form-header-height);
+					@include font-size($base-font-size - 4 , $base-font-size + 4);
 
 				}
 
