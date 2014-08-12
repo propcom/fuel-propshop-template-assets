@@ -16,11 +16,144 @@ $account-nav-item-height: 60;
 
 		@include font-size(15, $account-nav-item-height);
 
-		&:hover{
+		&:hover, &.active{
 			background: grey;
 		}
 	}
 }
+
+@include bp-max($large){
+	.account-nav{
+
+		width: 100%;
+
+		&__link{
+
+			float: left;
+
+			&:nth-child(1){
+
+				@include col--alpha(3);
+
+			}
+			
+			@include col(3);
+			
+
+		}
+		
+	}
+}
+
+@include bp-max($large){
+	.account-nav{
+
+		&__link{
+
+			&:nth-child(odd){
+
+				@include col--alpha(6);
+
+			}
+
+			&:nth-child(even){
+
+				@include col(6);
+
+			}
+			
+		
+			
+
+		}
+		
+	}
+}
+
+
+.account-content{
+
+}
+
+
+@include bp-max($large){
+	.account-content{
+		width: 100%;
+	}
+}
+
+
+
+.address-book{
+
+	&__addresses{
+
+		margin-bottom: 20px;
+
+
+		&__header{
+
+		}
+
+		&__address{
+
+			@include font-size($base-font-size - 2, $base-line-height);
+		}
+
+	}
+
+}
+
+@include bp-max($medium){
+
+	.address-book{
+
+		&__addresses{
+
+
+			&__address{
+
+				.col3{
+					@include col(4);
+				}
+
+				.col9{
+					@include col(8);
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
+@include bp-max(520){
+
+	.address-book{
+
+		&__addresses{
+
+
+			&__address{
+
+				.col3{
+					@include col(5);
+				}
+
+				.col9{
+					@include col(7);
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
 
 
 .other-addresses{
@@ -31,19 +164,133 @@ $account-nav-item-height: 60;
 
 	&__list{
 		
-		display: table;
+		margin-bottom: 40px;
 
 		&__row{
 			
-			display: table-row;
-
+			
+			margin-bottom: 20px;
 
 			&__div{
 
-				display: table-cell;
+
+				&__address{
+
+					@include col--alpha(9);
+
+				}
+
+
+				&__actions{
+					@include col(3);
+
+					a{
+						display: block;
+					}	
+
+				}
+
+				
 
 			}
 
 		}
 	}
 }
+
+
+@include bp-max($medium){
+	.other-addresses{
+
+
+		&__list{
+			
+			
+
+			&__row{
+				
+				
+
+				&__div{
+
+
+					&__address{
+
+						@include col--alpha(8);
+
+					}
+
+
+					&__actions{
+						@include col(4);
+
+					}
+
+					
+
+				}
+
+			}
+		}
+	}
+}
+
+
+@include bp-max(460){
+	.other-addresses{
+
+		&__header{
+			margin-bottom: 20px;
+		}
+
+
+		&__list{
+
+
+
+			&__row{
+
+				&.hide-mb{
+					display: none;
+				}
+
+				border-top: 1px solid darken(lightGrey, 50%);
+				padding-top: 10px;
+
+
+
+				&__div{
+
+
+					&__address{
+
+						@include col--alpha(12);
+						float: none;
+
+					}
+
+
+					&__actions{
+						@include col--alpha(12);
+						float: none;
+						margin-top: 10px;
+
+						a{
+							display: inline;
+							padding: 5px 5px 5px 0;
+						}
+
+
+					}
+
+
+
+				}
+
+			}
+		}
+	}
+}
+
+
+

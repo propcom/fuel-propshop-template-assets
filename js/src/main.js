@@ -5,7 +5,7 @@
 								lazyload: true,
 								onImagesReplaced: function(){
 
-									window.GetSizes && window.GetSizes(this, document.body.clientWidth); 
+									window.GetSizes && 'addEventListener' in window && window.GetSizes(this, document.body.clientWidth); 
 
 
 
@@ -25,13 +25,7 @@
 											responsive: true,
 											preloading: 0,
 								            zoomWindowFadeIn: 681,
-								            zoomWindowFadeOut: 681,
-								            onZoomedImageLoaded: function(){
-
-
-
-								            	
-								            }
+								            zoomWindowFadeOut: 681
 										});
 
 									})();
