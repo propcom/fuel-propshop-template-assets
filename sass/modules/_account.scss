@@ -62,7 +62,7 @@ $account-nav-item-height: 60;
 
 			}
 			
-		
+
 			
 
 		}
@@ -244,7 +244,7 @@ $account-nav-item-height: 60;
 	.other-addresses{
 
 		&__header{
-			margin-bottom: 20px;
+			margin-bottom: 30px;
 		}
 
 
@@ -311,7 +311,6 @@ $account-nav-item-height: 60;
 
 		&--header{
 			@include font-size($base-font-size + 2, $base-line-height );
-			margin-bottom: 20px;
 			border: none;
 		}
 
@@ -320,6 +319,10 @@ $account-nav-item-height: 60;
 
 			float: left;
 			text-align: center;
+
+			.item-list &{
+				@include font-size($base-font-size - 1, $base-line-height - 2 );
+			}
 
 			&--id{
 				@include col--alpha(3);
@@ -344,6 +347,28 @@ $account-nav-item-height: 60;
 
 			}
 
+			&--title{
+				text-align: left;
+				@include col(3);
+			}
+
+			&--qty{
+				@include col(1);
+			}
+
+			&--price{
+				@include col(2);
+			}
+
+			&--total{
+				text-align: right;
+				@include col(2);
+			}
+			&--sts{
+				text-align: left;
+				@include col(4);
+			}
+
 			.show-mb{
 				display: none;
 			}
@@ -356,47 +381,71 @@ $account-nav-item-height: 60;
 
 	.account-list{
 
-	&__row{
+		&__row{
 
 
 
-		&--header{
+			&--header{
 				display: none;
 			}
 
 
-		&__div{
+			&__div{
 
 
 
 
-			&--id{
-				@include col--alpha(6);
+				&--id{
+					@include col--alpha(6);
+				}
+				&--date{
+					@include col(6);
+				}
+				&--cost{
+					@include col--alpha(6);
+
+				}
+				&--status{
+					@include col(6);
+
+				}
+				&--actions{
+					margin-top: #{$base-font-size}px;
+					@include col--alpha(12);
+
+				}
+
+				&--title{
+				text-align: left;
+				@include col--alpha(7);
 			}
-			&--date{
-				@include col(6);
-			}
-			&--cost{
-				@include col--alpha(6);
 
+			&--qty{
+				text-align: left;
+				@include col(5);
 			}
-			&--status{
-				@include col(6);
 
+			&--price{
+				text-align: left;
+				@include col--alpha(7);
 			}
-			&--actions{
-				margin-top: #{$base-font-size}px;
+
+			&--total{
+				text-align: left;
+				@include col(5);
+			}
+			&--sts{
+				text-align: center;
 				@include col--alpha(12);
-
 			}
 
-			.show-mb{
-				display: inline;
-			}
+				.show-mb{
+					display: inline;
+				}
 
+			}
 		}
 	}
-}
 
 }
 
@@ -404,22 +453,29 @@ $account-nav-item-height: 60;
 
 	.account-list{
 
-	&__row{
+		&__row{
 
 
-		&__div{
+			&__div{
 
 
-			@include col--alpha(12);
+				@include col--alpha(12);
 
-			.show-mb{
-				display: inline;
+				.show-mb{
+					display: inline;
+				}
+
 			}
-
 		}
 	}
+
 }
 
+
+@include bp-max($x-small){
+	.order-address{
+		@include col--alpha(12);
+	}
 }
 
 
