@@ -5,7 +5,7 @@
 								lazyload: true,
 								onImagesReplaced: function(){
 
-									window.GetSizes && 'addEventListener' in window && window.GetSizes(this, document.body.clientWidth); 
+									//window.GetSizes && 'addEventListener' in window && window.GetSizes(this, document.body.clientWidth); 
 
 
 

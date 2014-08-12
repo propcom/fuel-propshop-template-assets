@@ -17,7 +17,7 @@ $button-color: orange;
 	text-transform: lowercase;
 	width: 100%;
 
-	@include font-size(20, 20);
+	@include font-size($base-font-size + 4, $base-font-size + 4);
 
 	&:hover{
 		background: darken($button-color, 15%);
