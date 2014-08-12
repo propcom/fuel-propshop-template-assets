@@ -297,4 +297,130 @@ $account-nav-item-height: 60;
 }
 
 
+.account-list{
+
+
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	&__row{
+
+		display: block;
+		border-top: 1px solid darken(lightGrey, 50%);
+		padding: #{$base-font-size}px 0;
+
+		&--header{
+			@include font-size($base-font-size + 2, $base-line-height );
+			margin-bottom: 20px;
+			border: none;
+		}
+
+
+		&__div{
+
+			float: left;
+			text-align: center;
+
+			&--id{
+				@include col--alpha(3);
+			}
+			&--date{
+				@include col(3);
+			}
+			&--cost{
+				@include col(2);
+
+			}
+			&--status{
+				@include col(2);
+
+			}
+			&--actions{
+				@include col(2);
+
+				a{
+					margin: 0;
+				}
+
+			}
+
+			.show-mb{
+				display: none;
+			}
+
+		}
+	}
+}
+
+@include bp-max(550){
+
+	.account-list{
+
+	&__row{
+
+
+
+		&--header{
+				display: none;
+			}
+
+
+		&__div{
+
+
+
+
+			&--id{
+				@include col--alpha(6);
+			}
+			&--date{
+				@include col(6);
+			}
+			&--cost{
+				@include col--alpha(6);
+
+			}
+			&--status{
+				@include col(6);
+
+			}
+			&--actions{
+				margin-top: #{$base-font-size}px;
+				@include col--alpha(12);
+
+			}
+
+			.show-mb{
+				display: inline;
+			}
+
+		}
+	}
+}
+
+}
+
+@include bp-max(380){
+
+	.account-list{
+
+	&__row{
+
+
+		&__div{
+
+
+			@include col--alpha(12);
+
+			.show-mb{
+				display: inline;
+			}
+
+		}
+	}
+}
+
+}
+
+
 
