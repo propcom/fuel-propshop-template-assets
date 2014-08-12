@@ -178,6 +178,10 @@ $account-nav-item-height: 60;
 
 					@include col--alpha(9);
 
+					p{
+						margin: 0;
+					}
+
 				}
 
 

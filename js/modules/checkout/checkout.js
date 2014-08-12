@@ -29,10 +29,10 @@
 
 document.getElementById('propshop-checkout')&& (function($){
 
-    var signupForm = $('#js-ps-checkout-signup-form'), loginForm = $('#js-ps-checkout-login-form');
+    var signupForm = $('#js-ps-checkout-signup-form'), loginForm = $('#js-ps-checkout-login-form'), activeForm = $('is-open');
 
-    loginForm.css('height', function(){
-         return loginForm.children('div').get(0).clientHeight + 'px';
+    activeForm.css('height', function(){
+         return activeForm.children('div').get(0).clientHeight + 'px';
     });
 
     $(document).on('click', '#js-ps-checkout-signup-btn', function(e){
