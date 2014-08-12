@@ -349,11 +349,11 @@ $account-nav-item-height: 60;
 
 			&--title{
 				text-align: left;
-				@include col(3);
+				@include col--alpha(5);
 			}
 
 			&--qty{
-				@include col(1);
+				@include col(2);
 			}
 
 			&--price{
@@ -362,7 +362,7 @@ $account-nav-item-height: 60;
 
 			&--total{
 				text-align: right;
-				@include col(2);
+				@include col(3);
 			}
 			&--sts{
 				text-align: left;
@@ -416,7 +416,6 @@ $account-nav-item-height: 60;
 				}
 
 				&--title{
-				text-align: left;
 				@include col--alpha(7);
 			}
 
@@ -475,6 +474,17 @@ $account-nav-item-height: 60;
 @include bp-max(380){
 	.order-address{
 		@include col--alpha(12);
+	}
+}
+
+
+.order-summary{
+	margin-bottom: #{$base-line-height * 2}px;
+	&__row{
+		display: block;
+		margin-bottom: 10px;
+		@include font-size($base-font-size + 2);
+		font-weight: bold;
 	}
 }
 
