@@ -125,7 +125,16 @@
 
 
 
+
 document.getElementById('propshop-customer')&& (function($){
+
+	var nativeSelectEv = function(elem){
+
+		var event = document.createEvent('HTMLEvents');
+		event.initEvent('change', true, false);
+		elem.dispatchEvent(event);
+
+	};
 
     var signupForm = $('#js-ps-account-signup-form'), loginForm = $('#js-ps-account-login-form'),  activeForm = $('.is-open');
 
@@ -162,6 +171,49 @@ document.getElementById('propshop-customer')&& (function($){
             signupForm.css('height', '0px').removeClass('is-open');
         }
     });
+
+
+    $(document).on('change','select[name="country_code"]',function(e){
+
+    	console.log('changed');
+
+    	$this = $(this);
+
+        $.ajax('/customer/rest/address_states.json', {
+				'type': 'get',
+				'async': true,
+				cache: false,
+				'data': {country_code: $this.val()},
+				'dataType': 'json',
+				'success': function (data) {
+
+
+					var state_select = $('.js-state-code'); 
+
+					state_select.empty();
+
+					$.each(data, function (code, name) {
+						var $opt = $('<option/>');
+
+						$opt.attr('value', code);
+						$opt.html(name);
+
+						state_select.append($opt);
+					});
+
+					if(state_select){
+
+						document.createEvent ? nativeSelectEv(state_select.get(0)) : state_select.get(0).fireEvent('onchange');
+
+
+					}
+
+					
+
+					
+				}
+			});
+    });			
 
 
 }(jQuery));
