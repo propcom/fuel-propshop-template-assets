@@ -102,7 +102,8 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 			if (values.country_code) {
 				var state_code = values.state_code;
 
-				self.$form.find('.js-ps-country-code').val(values.country_code).trigger('change');
+				self.$form.find('.js-ps-country-code').val(values.country_code);
+				document.createEvent ? nativeSelectEv(self.$form.find('.js-ps-country-code').val(values.country_code).get(0)) : self.$form.find('.js-ps-country-code').val(values.country_code).get(0).fireEvent('onchange');
 
 				self.update_states(values.country_code, function ($state_select) {
 
@@ -146,10 +147,10 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 
 			this._couple = other_form;
 
-			this._couple.$form.find(':input').on('change.address-form', this._on_couple_change());
+			this._couple.$form.find(':input').on('change.address-form', this._on_couple_change(other_form));
 			this.set_values(other_form.get_values());
 		},
-		_on_couple_change: function () {
+		_on_couple_change: function (other_form) {
 
 			var self = this;
 
@@ -163,6 +164,10 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 				values[name] = val;
 				self.set_values(values);
 			};
+
+			// other_form.$form.find('select').each(function(){
+			// 	$(this).trigger('change')
+			// });
 
 			return this._couple_handler;
 		},

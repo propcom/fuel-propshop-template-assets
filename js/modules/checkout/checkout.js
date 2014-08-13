@@ -76,10 +76,6 @@ document.getElementById('sage-payment-form') && (function($){
 
         var matches = $.parseJSON(type.attr('data-matches'));
 
-        console.log(matches);
-
-         console.log(result);
-
         if(result.length_valid && result.luhn_valid){
 
             type.val(matches[result.card_type.name]);
