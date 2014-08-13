@@ -11,7 +11,7 @@
 
 		if(inputs[ii].getAttribute('data-validation')){
 
-			hadBlur(inputs[ii], function(e){
+			hadEvs(inputs[ii], function(e){
 
 				var target = e.target || e, aRules = JSON.parse(target.getAttribute('data-validation')), isValid = false;
 
@@ -136,14 +136,14 @@ function showWarning(element, rule){
 
 	var parent = element.parentNode;
 
-	if(parent.querySelector('.form__validation')){
-			parent.querySelector('.form__validation').innerText = oRules[rule]['message'];
+	if(parent.querySelector('.help-inline')){
+			parent.querySelector('.help-inline').innerText = oRules[rule]['message'];
 			return false
 		}
 
 		var newElement = document.createElement('span');
 
-		newElement.classList ? newElement.classList.add('form__validation') : newElement.className += 'form__validation';
+		newElement.classList ? newElement.classList.add('help-inline') : newElement.className += 'help-inline';
 
 	  	newElement.innerText = oRules[rule]['message'];
 
@@ -161,7 +161,7 @@ function hideWarning(element){
 
 	var parent = element.parentNode;
 
-	parent.querySelector('.form__validation') && parent.removeChild(parent.querySelector('.form__validation'));
+	parent.querySelector('.help-inline') && parent.removeChild(parent.querySelector('.help-inline'));
 
 }
 
@@ -177,15 +177,15 @@ function hideWarning(element){
  * @param  {Function} handler
  * @return {undefined}
  */
-function hadBlur(element, handler){
+function hadEvs(element, handler){
 
 	if(element.addEventListener){
 
-		element.addEventListener('blur', handler);
+		element.addEventListener('keyup', handler);
 
 	} else{
 
-		element.attachEvent('onfocusout', function(){
+		element.attachEvent('onkeyup', function(){
 
 			handler(element);
 

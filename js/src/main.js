@@ -175,8 +175,6 @@ document.getElementById('propshop-customer')&& (function($){
 
     $(document).on('change','select[name="country_code"]',function(e){
 
-    	console.log('changed');
-
     	$this = $(this);
 
         $.ajax('/customer/rest/address_states.json', {
