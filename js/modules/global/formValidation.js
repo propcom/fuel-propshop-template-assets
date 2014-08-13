@@ -13,7 +13,13 @@
 
 			hadEvs(inputs[ii], function(e){
 
-				var target = e.target || e, aRules = JSON.parse(target.getAttribute('data-validation')), isValid = false;
+
+				var target = e.target || e, aRules = JSON.parse(target.getAttribute('data-validation')), isValid = false, reg = /^\s*$/;
+
+				if(!target.getAttribute('required') && reg.test(target.value) ){  
+					hideWarning(target);
+					return;
+				}	
 
 				for (var iii = 0, lll = aRules.length; iii < lll; iii++){
 
