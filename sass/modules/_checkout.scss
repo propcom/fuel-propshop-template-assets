@@ -344,11 +344,19 @@ $checkout-form-margin-bottom: 5;
 		padding: 50px 20px 20px;
 		background: $checkout-container-bg;
 
+
+
 		&__total{
 			vertical-align: top;
 			@include font-size(16, 16);
 			padding-bottom: 24px;
 			margin: 0;
+
+			@include transition(618ms $easeOut opacity);
+
+			&.error{
+				color: $error;
+			}
 
 			&.total{
 				border-top: 4px solid darken($checkout-container-bg, 20%);

@@ -96,6 +96,64 @@ document.getElementById('sage-payment-form') && (function($){
 
     }, { accept: $.parseJSON(type.attr('data-valid')) });
 
-}(jQuery))
+}(jQuery));
+
+
+document.getElementById('js-ps-checkout-review-shipping') && (function($){
+
+    $(document).on('click', '.estimate-shipping', function(e){
+
+        var $this = $(this);
+
+        $.ajax({
+            url: '/checkout/rest/shipping_quote.json',
+            type: 'GET',
+            data: { id : $this.val()},
+            success: function(data) {
+
+                $('#js-ps-checkout-review-shipping-quote').removeClass('op0').find('span').text(data.amount);
+                $('#js-ps-checkout-review-total').find('span').text(data.total);
+               
+            }
+        }).fail(function(data){
+                $('#js-ps-checkout-review-shipping-quote').removeClass('op0').addClass('error').find('span').text('Not available');
+        });
+
+    });
+
+}(jQuery));
+
+
+
+// (function($){
+//     $('select[name="country"]').live('change',function(e){
+//         e.preventDefault();
+//         $.getJSON('/shipping/rest/states.json', {'country_id' : $(this).val()}, function(data){
+//             var html;
+//             // there was no error, but
+//             // we dont have any states
+//             if($.isEmptyObject(data) || data.error) {
+//                 html = '<input name="state" type="text" class="input-medium" value="" />';
+//             }
+//             else {
+//                 html = '<select name="state" class="input-medium">';
+//                 $.each(data, function(key, val){
+//                     html += '<option value="'+key+'">'+val+'</option>';
+//                 });
+//                 html += '</select>';
+//             }
+//             $('select[name="state"], input[name="state"]').replaceWith($(html));
+//         });
+//     });
+
+//     $('.estimate-shipping').live('click', function(e) {
+//         e.preventDefault();
+//         var formData = $('form#estimate-shipping').serialize();
+//         console.log(formData);
+//         $.post('/shipping/estimate', formData, function(data){
+//             $('.shipping-estimator-wrap').html(data);
+//         });
+//     });
+// })(jQuery);
 
 
