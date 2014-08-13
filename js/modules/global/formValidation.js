@@ -143,15 +143,7 @@ function showWarning(element, rule){
 
 		var newElement = document.createElement('span');
 
-		if(newElement.classList){
-
-	      newElement.classList.add('form__validation');
-
-	    } else{
-
-	      newElement.className += 'form__validation';
-
-	  	}
+		newElement.classList ? newElement.classList.add('form__validation') : newElement.className += 'form__validation';
 
 	  	newElement.innerText = oRules[rule]['message'];
 
@@ -169,11 +161,7 @@ function hideWarning(element){
 
 	var parent = element.parentNode;
 
-	if(parent.querySelector('.form__validation')){
-
-		parent.removeChild(parent.querySelector('.form__validation'));
-
-	}
+	parent.querySelector('.form__validation') && parent.removeChild(parent.querySelector('.form__validation'));
 
 }
 

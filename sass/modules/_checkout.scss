@@ -82,7 +82,7 @@ $checkout-form-margin-bottom: 5;
 		overflow: hidden;
 		height: 0;
 
-		@include transition(618ms $easeOut all);
+		@include adv-transition(618ms, $easeOut, 0, height, opacity);
 		@include opacity(0);
 
 		&.is-open{

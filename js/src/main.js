@@ -127,11 +127,12 @@
 
 document.getElementById('propshop-customer')&& (function($){
 
-    var signupForm = $('#js-ps-account-signup-form'), loginForm = $('#js-ps-account-login-form');
+    var signupForm = $('#js-ps-account-signup-form'), loginForm = $('#js-ps-account-login-form'),  activeForm = $('.is-open');
 
-    loginForm.css('height', function(){
-         return loginForm.children('div').get(0).clientHeight + 'px';
+    activeForm.css('height', function(){
+         return activeForm.children('div').get(0).clientHeight + 'px';
     });
+
 
     $(document).on('click', '#js-ps-account-signup-btn', function(e){
 

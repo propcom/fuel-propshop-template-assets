@@ -29,7 +29,7 @@
 
 document.getElementById('propshop-checkout')&& (function($){
 
-    var signupForm = $('#js-ps-checkout-signup-form'), loginForm = $('#js-ps-checkout-login-form'), activeForm = $('is-open');
+    var signupForm = $('#js-ps-checkout-signup-form'), loginForm = $('#js-ps-checkout-login-form'), activeForm = $('.is-open');
 
     activeForm.css('height', function(){
          return activeForm.children('div').get(0).clientHeight + 'px';

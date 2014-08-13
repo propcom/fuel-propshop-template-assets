@@ -77,7 +77,50 @@
 }
 
 //	usage: @include transition(.6s $easeInOut all);
+//  
+//  
+//  
 
+
+@mixin adv-transition ($duration, $easing, $delay, $prop1, $prop2:false, $prop3:false, $prop4:false) {
+  
+  -webkit-transition-duration: $duration;
+  -moz-transition-duration: $duration;
+  -ms-transition-duration: $duration;
+  -o-transition-duration: $duration;
+  transition-duration: $duration;
+
+  -webkit-transition-timing-function: $easing;
+  -moz-transition-timing-function: $easing;
+  -ms-transition-timing-function: $easing;
+  -o-transition-timing-function: $easing;
+  transition-timing-function: $easing;
+
+  -webkit-transition-delay: $delay;
+  -moz-transition-delay: $delay;
+  -ms-transition-delay: $delay;
+  -o-transition-delay: $delay;
+  transition-delay: $delay;
+
+  $props: $prop1;
+  @if($prop2){
+    $props: $prop1, $prop2;
+  }
+  @if($prop3){
+    $props: $prop1, $prop2, $prop3;
+  }
+  @if($prop4){
+    $props: $prop1, $prop2, $prop3, $prop4;
+  }
+
+
+
+  -webkit-transition-property: $props;
+  -moz-transition-property: $props;
+  -ms-transition-property: $props;
+  -o-transition-property: $props;
+  transition-property: $props;
+}
 
 
 
