@@ -4,7 +4,7 @@
 
 	width: 100%;
 	padding: 10px;
-	@include font-size(16, 16);
+	@include font-size($base-font-size, $base-font-size);
 	vertical-align: bottom;
 
 	&--text{}
@@ -22,6 +22,14 @@
 
 		@include font-size(20, 20);
 
+	}
+
+	&__card-image{
+		position: absolute;
+		width: 60px;
+		top: 1px;
+		right: 1px;
+		height: 100%;
 	}
 
 }

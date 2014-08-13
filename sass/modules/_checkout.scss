@@ -115,6 +115,14 @@ $checkout-form-margin-bottom: 5;
 	}
 }
 
+@include bp-max($small){
+	.checkout-form, .account-form{
+		&__header{
+			height: auto;
+		}
+	}
+}
+
 .checkout-review-grid{
 
 
@@ -491,6 +499,68 @@ $checkout-form-margin-bottom: 5;
 	}
 }
 
+
+.payment-methods{
+	&__copy{
+
+	}
+
+	&__imgs{
+
+		&__img{
+
+			float: right;
+		padding-left: 10px;
+		width: 25%;
+		}
+
+	}
+}
+
+@include bp-max($large){
+
+	.payment-methods{
+	&__copy{
+		@include col--alpha(12);
+		text-align: center;
+	}
+
+	&__imgs{
+
+		margin-top: 20px;
+
+		@include col--alpha(12);
+
+		&__img{
+
+			float: right;
+		padding-left: 10px;
+		width: 25%;
+		}
+
+	}
+}
+
+}
+
+@include bp-max($x-small){
+
+	.payment-methods{
+
+
+	&__imgs{
+
+
+		&__img{
+
+		width: 50%;
+		margin-bottom: 20px;
+		}
+
+	}
+}
+
+}
 
 .checkout-summary{
 
