@@ -101,14 +101,12 @@ document.getElementById('sage-payment-form') && (function($){
 
 document.getElementById('js-ps-checkout-review-shipping') && (function($){
 
-    $(document).on('click', '.estimate-shipping', function(e){
-
-        var $this = $(this);
+function getQuote(input){
 
         $.ajax({
             url: '/checkout/rest/shipping_quote.json',
             type: 'GET',
-            data: { id : $this.val()},
+            data: { id : input.val()},
             success: function(data) {
 
                 $('#js-ps-checkout-review-shipping-quote').removeClass('op0').find('span').text(data.amount);
@@ -119,6 +117,18 @@ document.getElementById('js-ps-checkout-review-shipping') && (function($){
                 $('#js-ps-checkout-review-shipping-quote').removeClass('op0').addClass('error').find('span').text('Not available');
         });
 
+    }
+
+        if($('.estimate-shipping').length === 1){
+
+            getQuote($('.estimate-shipping'));
+
+            return null;
+            
+        }
+
+    $(document).on('click', '.estimate-shipping', function(){
+        getQuote($(this));
     });
 
 }(jQuery));
