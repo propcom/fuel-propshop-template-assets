@@ -68,6 +68,20 @@
 
 .product-info{
 
+	position: relative;
+
+	&__share{
+		position: absolute;
+		top: 0;
+		right: 0;
+
+		div{
+			overflow: hidden;
+			width: 0;
+			height: 0;
+		}
+	}
+
 }
 
 .product-gallery{

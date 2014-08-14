@@ -10,6 +10,11 @@ $alert-height: 60;
 
 .alert{
 
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000000;
+
 
 	&--success{
 
