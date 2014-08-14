@@ -14,7 +14,7 @@
 
 
 
-(function(){
+;(function(){
 
     "use strict";
 
@@ -28,6 +28,8 @@
 }());
 
 document.getElementById('propshop-checkout')&& (function($){
+
+    'use strict';
 
     var signupForm = $('#js-ps-checkout-signup-form'), loginForm = $('#js-ps-checkout-login-form'), activeForm = $('.is-open');
 
@@ -70,6 +72,8 @@ document.getElementById('propshop-checkout')&& (function($){
 
 document.getElementById('sage-payment-form') && (function($){
 
+    'use strict';
+
     var number = $('#payment_details--card_number'), type = $('#payment_details--card_type'), template = type.attr('data-template');
 
    number.validateCreditCard(function(result){
@@ -96,6 +100,8 @@ document.getElementById('sage-payment-form') && (function($){
 
 
 document.getElementById('js-ps-checkout-review-shipping') && (function($){
+
+    'use strict';
 
 function getQuote(input){
 
