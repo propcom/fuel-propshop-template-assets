@@ -181,9 +181,6 @@ document.getElementById('js-ps-share-email') && (function($){
 			document.createEvent ? element.get(0).dispatchEvent(evt) : element.get(0).fireEvent('onkeyup');
 		};
 
-
-		console.log(req);
-
 		req.each(function(){
 
 			var input = $(this);
