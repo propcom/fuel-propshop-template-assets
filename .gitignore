@@ -5,5 +5,7 @@ css/main.css.map
 
 js/main.js
 js/product.js
+js/checkout.js
 js/main.min.js
 js/product.min.js
+js/checkout.min.js
