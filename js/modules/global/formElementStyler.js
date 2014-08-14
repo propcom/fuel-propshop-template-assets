@@ -41,8 +41,6 @@ var wrapSelects = function(){ // Variable cached function in order to retain sco
 			
 			var option;
 
-			alert(el);
-
 			el.options[el.selectedIndex] ? option = el.options[el.selectedIndex].innerHTML: option = '';
 
 			var parent = el.parentNode;
