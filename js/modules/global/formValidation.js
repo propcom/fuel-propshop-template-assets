@@ -83,6 +83,10 @@
 			'rule': /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i,
 			'message': 'Please type in a valid email address.'
 		},
+		'valid_email':{
+			'rule': /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i,
+			'message': 'Please type in a valid email address.'
+		},
 		'real_phone':{
 			'rule': /^(?:(\()|(\[)|)(?:(?:00|\+|)[0-9]{1,3})(?:(\))|(\])|)[0-9 \-,\.\(\)\[\]]+(?:(?:e(?:xt?)?\.?|#|x?\.?|\\|\/|\+)[ ]*([0-9]+))?$/i,
 			'message': 'Please double check the format of the phone number provided'
@@ -188,10 +192,17 @@ function hadEvs(element, handler){
 	if(element.addEventListener){
 
 		element.addEventListener('keyup', handler);
+		element.addEventListener('focusout', handler);
 
 	} else{
 
 		element.attachEvent('onkeyup', function(){
+
+			handler(element);
+
+		});
+
+		element.attachEvent('onfocusout', function(){
 
 			handler(element);
 
