@@ -21,7 +21,8 @@ document.getElementById('js-ps-category-page') && (function($){
                 if (state.length > 0) {
                     state = '?' + state;
                 }
-                history.pushState(state, "", "/search/index"+state);
+
+                if(history.pushState){ history.pushState(state, "", "/search/index"+state)};
 
                 wrapSelects();
 

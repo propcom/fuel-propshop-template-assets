@@ -210,7 +210,7 @@
         gif.setAttribute('data-src', element.getAttribute('data-src'));
         gif.setAttribute('alt', element.getAttribute('data-alt') || this.gif.alt);
 
-        element.parentNode.replaceChild(gif, element);
+        element.parentNode && element.parentNode.replaceChild(gif, element);
 
         return gif;
     };
