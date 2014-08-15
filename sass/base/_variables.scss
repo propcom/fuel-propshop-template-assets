@@ -84,13 +84,21 @@ $bold: 600;
 $exBold: 800;
 
 
+//TEMPLATE COLOURS
+
+$templatePrimary:  rgb(56, 56, 56);
+$templateSecondary: rgb(182, 183, 186);
+$templateTertiary: rgb(175, 176, 179);
+$templateQuarternary: rgb(239, 239, 239);
+
+
 
 //	COLOR VARIABLES
 
 $primaryColor: #000000; // black
 $secondaryColor: #ffffff; // white 
 $tertiaryColor: #323232; // grey
-$quarternaryColor: #e5e5e5; // light-grey
+$quarternaryColor: $templateQuarternary; // light-grey
 $quinaryColor: #7d7d7d; // super light grey
 $senaryColor: #f7f6ed;// pale yellow
 $septenaryColor: #4c4c4c; // mid grey
@@ -102,6 +110,8 @@ $octonaryColor: #5b0000; // dark red
 
 $white: #ffffff;
 $black: #000000;
+
+
 
 
 

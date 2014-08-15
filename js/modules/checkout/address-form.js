@@ -220,7 +220,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 	 * Setting the default behaviour
 	 */
 
-	 $delivery_form.data('address-form').couple($billing_form.data('address-form'));
+	 $('#js-ps-copy-address').is(':checked') && $delivery_form.data('address-form').couple($billing_form.data('address-form'));
 
 	/**
 	 * Adding the onchange event listener to the address same as checkbox

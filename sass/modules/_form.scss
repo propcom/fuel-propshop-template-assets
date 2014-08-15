@@ -11,6 +11,11 @@
 
 	&--password{}
 
+	&--checkbox{
+
+		float: left
+	}
+
 
 
 	&--submit{
@@ -42,6 +47,21 @@
 	position: relative;
 }
 
+
+.control-group--label{
+
+	.input--checkbox{
+		width: auto;
+		height: #{$base-font-size}px;
+		width: #{$base-font-size}px;
+		margin-top: #{ ($base-line-height - $base-font-size) / 2}px;
+		margin-right: 10px;
+	} 
+
+	span{
+		float: left;
+	}
+}
 
 
 
