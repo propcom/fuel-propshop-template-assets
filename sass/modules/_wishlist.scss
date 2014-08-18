@@ -1,0 +1,153 @@
+.wishlist{
+
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	&__item{
+		margin-bottom: #{$base-line-height / 2}px;
+		margin-top: #{$base-line-height / 2}px;
+		float: left;
+
+		&__img{}
+		&__title{
+
+		}
+		&__price{
+			margin-bottom: 0;
+			margin-top: 0;
+			text-transform: uppercase;
+		}
+		&__remove{
+			text-align: right;
+			text-decoration: none;
+			color: $primaryColor;
+			text-transform: uppercase;
+			font-weight: $bold;
+			
+		}
+		&__add{}
+	}
+
+}
+
+
+@include bp-max($large){
+	.wishlist-list{
+
+	&__row{
+
+	
+		&__div{
+			
+			margin-top: 4%;
+
+			&--img{
+				@include col--alpha(2);
+				margin: 0;
+			}
+			&--title{
+				@include col(5);
+			
+			}
+			&--price{
+				@include col(3);
+			}
+			&--bag{
+				@include col(4);
+				position: absolute;
+				bottom: 0;
+				right: 0;
+			}
+			&--remove{
+				@include col(2);
+				text-align: right;
+			}
+
+		}
+	}
+
+}
+}
+
+@include bp-max($medium){
+
+	.wishlist-list{
+
+	&__row{
+
+	
+		&__div{
+			
+			margin-top: 2%;
+
+		}
+	}
+
+}
+
+}
+
+@include bp-max($small){
+	.wishlist-list{
+
+	&__row{
+
+	
+		&__div{
+			
+			margin-top: 0;
+			&--price{
+				text-align: left;
+			}
+
+			&--bag{
+				@include col(5);
+				position: absolute;
+				bottom: 0;
+				right: 0;
+			}
+
+		}
+	}
+
+}
+}
+
+
+@include bp-max($x-small){
+	.wishlist-list{
+
+	&__row{
+		
+		margin-bottom: #{$base-line-height * 2}px;
+	
+		&__div{
+			
+
+			&--img{
+				@include col--alpha(4);
+			}
+			&--title{
+				@include col(8);
+				text-align: left;
+			
+			}
+			&--price{
+				@include col(4);
+			}
+			&--bag{
+				@include col--alpha(12);
+				bottom: -#{$base-line-height + 4}px;
+
+			}
+			&--remove{
+				@include col(4);
+				text-align: right;
+			}
+
+		}
+	}
+
+}
+}
