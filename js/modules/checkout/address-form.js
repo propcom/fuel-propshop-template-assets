@@ -33,7 +33,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 			}
 
 			$.ajax('/customer/rest/address.json', {
-				'type': 'get',
+				'type': 'GET',
 				'data': {
 					id: $(this).val()
 				},
@@ -56,7 +56,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 
 			$.ajax('/customer/rest/address_states.json', {
 				'type': 'get',
-				'async': true,
+				'async': false,
 				cache: false,
 				'data': {
 					country_code: country
@@ -64,32 +64,24 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 				'dataType': 'json',
 				'success': function (data) {
 
-
 					self.state_select = self.$form.find('.js-ps-state-code'); 
 
 					self.state_select.empty();
 
+					var options =  document.createDocumentFragment(); 
+
 					$.each(data, function (code, name) {
-						var $opt = $('<option/>');
-
-						$opt.attr('value', code);
-						$opt.html(name);
-
-						self.state_select.append($opt);
+						var opt = document.createElement('option');
+						opt.value = code;
+						opt.text = name;
+						options.appendChild(opt);
 					});
 
-					if(self.state_select){
+					self.state_select.append($(options));
 
-						document.createEvent ? nativeSelectEv(self.state_select.get(0)) : self.state_select.get(0).fireEvent('onchange');
-
-						typeof callback === 'function' && callback(self.state_select);
-
-
+					if(self.state_select && typeof callback === 'function'){
+				        callback(self.state_select);
 					}
-
-					
-
-					
 				}
 			});
 		},
@@ -103,18 +95,12 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 				var state_code = values.state_code;
 
 				self.$form.find('.js-ps-country-code').val(values.country_code);
+
 				document.createEvent ? nativeSelectEv(self.$form.find('.js-ps-country-code').val(values.country_code).get(0)) : self.$form.find('.js-ps-country-code').val(values.country_code).get(0).fireEvent('onchange');
-
-				self.update_states(values.country_code, function ($state_select) {
-
-					if (state_code) {
-
-						$state_select.val(state_code);
-						document.createEvent ? nativeSelectEv($state_select.get(0)) : $state_select.get(0).fireEvent('onchange');
-
-					}
-
-				});
+	                   
+	            document.createEvent ? nativeSelectEv(self.$form.find('.js-ps-state-code').val(state_code).get(0)) : self.$form.find('.js-ps-state-code').val(state_code).get(0).fireEvent('onchange');
+	                    
+	           
 			} else if (values.state_code) {
 
 				document.createEvent ? nativeSelectEv(self.$form.find('.js-ps-state-code').val(values.state_code).get(0)) : self.$form.find('.js-ps-state-code').val(values.state_code).get(0).fireEvent('onchange');
@@ -127,7 +113,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 			$.each(values, function (field, val) {
 				var input = self.$form.find('[name="' + self.prefix + field + '"]')
 				input.val(val);
-				input.trigger('change.address-form');
+				//input.trigger('change.address-form');
 			});
 		},
 		get_values: function () {
@@ -164,10 +150,6 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 				values[name] = val;
 				self.set_values(values);
 			};
-
-			// other_form.$form.find('select').each(function(){
-			// 	$(this).trigger('change')
-			// });
 
 			return this._couple_handler;
 		},
@@ -230,6 +212,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 	 * @return {undefined}
 	 */
 	$('#js-ps-copy-address').on('change', function (e){
+
 		var $this = $(this), from = $this.data('from'), on = !!$this.is(':checked'), updateClass = function(elem, callback){
 
 			elem.hasClass('is-open') ? elem.removeClass('is-open').css('height', 0) : elem.css('height', function(){
@@ -239,6 +222,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 			typeof callback === 'function' && calback();
 
 		};
+
 
 
 		if (from === 'billing') {

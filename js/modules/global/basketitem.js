@@ -92,7 +92,7 @@
         	box.style.position = 'absolute';
         	box.style.top = '50%';
         	box.style.left = '50%';
-        	box.style.backgroundColor = '#000000iter';
+        	box.style.backgroundColor = '#000000';
         	box.style.opacity = 0.7;
         	box.style.width = '300px';
         	box.style.height = '50px';

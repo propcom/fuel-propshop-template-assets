@@ -1,5 +1,12 @@
 ;document.getElementById('js-ps-filters') && (function($){ // Basic short circuit checking for the presence of serach ad category filters in phe page - If true triggers IIFE adding the event listeners and handle logic
 	
+	"use strict";
+
+	$('.js-ps-filter-content.is-open').css('height', function(){
+		return ($(this).children().length * $(this).children()['0'].clientHeight) +'px';
+	});
+
+
 	/**
 	 * Body's delegated event targeting the filters trigger
 	 * 
@@ -8,7 +15,9 @@
 	 */
 	$(document).on('click', '.js-ps-filter-trigger', function(evt){
 
-		evt.preventDefault();
+
+
+
 
 		/**
 		 * Caching trigger sibling where handler logic is to be applied
@@ -26,6 +35,20 @@
 		sibling.hasClass('is-open') ? sibling.css({'height': 0}).removeClass('is-open') : sibling.css('height', function(){
 			return ($(this).children().length * $(this).children()['0'].clientHeight) +'px';
 		}).addClass('is-open');
+
+		sibling.on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function(){
+
+			console.log('trans');
+
+			console.log($('#search-filter-filters').height());
+			$('#js-ps-category-page').css('min-height', function(){
+		        return ( $('#js-ps-filters').height() + $('#search-filter-filters').height() )+'px';
+		    });
+		})
+
+
+		
+
 
 	});
 
