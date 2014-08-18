@@ -231,12 +231,12 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 
 
 		if (from === 'billing') {
-			if (on)
+			if (on === true)
 				updateClass($('#js-ps-delivery-form'), $delivery_form.data('address-form').couple($billing_form.data('address-form')));
 			else
 				updateClass($('#js-ps-delivery-form'), $delivery_form.data('address-form').decouple());
 		} else {
-			if (on)
+			if (on === true)
 				updateClass($('#js-ps-billing-form'),$billing_form.data('address-form').couple($delivery_form.data('address-form')));
 			else
 				updateClass($('#js-ps-billing-form'), $billing_form.data('address-form').decouple());

@@ -170,10 +170,16 @@ document.getElementById('js-ps-share-email') && (function($){
 
 	});
 
+	var sent = false;
+
 
 	$(document).on('click', '#js-ps-share-email-container input[type="submit"]', function(e){
 
 		e.preventDefault();
+
+		
+
+		
 
 		var form = $('#js-ps-share-email-container form'), formData = form.serialize(), req = form.find('input[required="required"]'), valid = true, check = function(element){
 			var evt = document.createEvent('KeyboardEvent');
@@ -194,22 +200,32 @@ document.getElementById('js-ps-share-email') && (function($){
 
 		});
 
+		if (sent === true)
+			return;
+	
 
 		if(valid === false || form.find('.help-inline').length > 0){ return; }
+	
+		$('#js-ps-share-email-container').removeClass('is-open');
+		$('#js-ps-share-email-container form').get(0).reset(); 
 
 
 		$.ajax({
 			url: '',
 			data: formData,
 			type: 'POST',
+			async: true,
 			cache: false,
 			success: function(data) {
 				$('.alert') && $('.alert').remove();
 				var alert = ($($.parseHTML(data)).filter('.alert'));
-				alert.hasClass('alert--success') && $(document.body).prepend(alert), $('#js-ps-share-email-container form').get(0).reset(), $('#js-ps-share-email-container').removeClass('is-open');
+				alert.hasClass('alert--success') && $(document.body).prepend(alert);
 				alert.hasClass('alert--error') && $(document.body).prepend(alert);
+				sent = false;
 			}
 		});
+
+		sent = true;
 
 		
 

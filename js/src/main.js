@@ -88,15 +88,6 @@
 							});
 
 
-							
-
-							$(function () {
-								$(':input[data-behaviour="auto-submit"]').change(function (e) {
-									$(this).parents('form').trigger('submit');
-								});
-							});
-
-
 
 
 

@@ -117,16 +117,23 @@
 
 .minibasket{
 
+	
 	position: absolute;
-	left: 0;
+	right: 0;
+	width: 120%;
 	bottom: 0;
+	margin-bottom: #{$header-def-nav-height}px;
+	padding-top: 20px;
 	z-index: 10000;
 
+	@include opacity(0);
 	@include hardwareAccelerate;
-	@include transition(600ms $easeOut all);
+	@include transition(682ms $easeOut all);
 
-	&.is-hovered{
-		bottom: 40px;
+	.is-hovered &{
+		 background: darken($quarternaryColor, 20%);
+		margin-bottom: 0;
+		@include opacity(1);
 		@include transform(translateY(100%));
 	}
 
@@ -139,6 +146,8 @@
 
 
 		&__item{
+
+			margin-bottom: 10px;
 
 
 			&__img{
@@ -163,7 +172,9 @@
 
 
 	&__total{
-		margin-top: 20px;
+		margin-top: 10px;
+		padding-top: 10px;
+		border-top: 4px solid darken($quarternaryColor, 50%);
 	}
 }
 

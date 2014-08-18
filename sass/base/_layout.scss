@@ -21,13 +21,18 @@
 
 $header-def-nav-height: 40;
 
+
 .l-header{
 
     .cleared{
 
         div{
-            background: lightGrey;
+            background: $quarternaryColor;
             min-height: #{$header-def-nav-height}px;
+
+            &.is-hovered{
+                 background: darken($quarternaryColor, 20%);
+            }
 
             a{
                 display: block;
@@ -35,7 +40,7 @@ $header-def-nav-height: 40;
                 @include font-size(16, $header-def-nav-height);
 
                 &:hover{
-                    background: grey;
+                    background: darken($quarternaryColor, 20%);
                 }
             }
         }
