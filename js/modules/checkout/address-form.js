@@ -23,6 +23,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 
 		this.$form.find('.js-ps-country-code').on('change', function () {
 			self.update_states($(this).val());
+
 		});
 
 		this.$form.find('.js-ps-address-select').on('change', function () {
@@ -79,11 +80,11 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 
 					self.state_select.append($(options));
 
-					if(self.state_select && typeof callback === 'function'){
-				        callback(self.state_select);
-					}
+					
 				}
-			});
+			}).done(function(){
+					document.createEvent ? nativeSelectEv(self.$form.find('.js-ps-state-code').get(0)) : self.$form.find('.js-ps-state-code').get(0).fireEvent('onchange');
+				});
 		},
 		set_values: function (values) {
 			var self = this;

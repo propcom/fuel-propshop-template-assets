@@ -38,9 +38,6 @@
 
 		sibling.on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function(){
 
-			console.log('trans');
-
-			console.log($('#search-filter-filters').height());
 			$('#js-ps-category-page').css('min-height', function(){
 		        return ( $('#js-ps-filters').height() + $('#search-filter-filters').height() )+'px';
 		    });
