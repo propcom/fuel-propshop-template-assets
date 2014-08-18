@@ -114,7 +114,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 			$.each(values, function (field, val) {
 				var input = self.$form.find('[name="' + self.prefix + field + '"]')
 				input.val(val);
-				//input.trigger('change.address-form');
+				input.trigger('change.address-form');
 			});
 		},
 		get_values: function () {
@@ -129,6 +129,8 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 			return values;
 		},
 		couple: function (other_form) {
+
+			console.log('is coupled');
 			if (this._couple)
 				return;
 
@@ -138,6 +140,8 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 			this.set_values(other_form.get_values());
 		},
 		_on_couple_change: function (other_form) {
+
+			console.log('couple changed');
 
 			var self = this;
 
