@@ -120,21 +120,25 @@
 	
 	position: absolute;
 	right: 0;
-	width: 120%;
+	width: 100%;
 	bottom: 0;
 	margin-bottom: #{$header-def-nav-height}px;
 	padding-top: 20px;
 	z-index: 10000;
 
-	@include opacity(0);
 	@include hardwareAccelerate;
 	@include transition(682ms $easeOut all);
 
 	.is-hovered &{
-		 background: darken($quarternaryColor, 20%);
-		margin-bottom: 0;
-		@include opacity(1);
+		background: darken($quarternaryColor, 20%);
 		@include transform(translateY(100%));
+
+		.ie8 &{
+
+			top: #{$header-def-nav-height}px;
+			bottom: auto;
+
+		}
 	}
 
 
