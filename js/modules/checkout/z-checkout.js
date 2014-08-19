@@ -1,19 +1,3 @@
-// $(document).ready(function () {
-//     if ( $('#shipping_chk').is(':checked')) {
-//         $('#js-shipping-form').hide();
-//     }
-
-//     $('#shipping_chk').on('click', function () {
-//         if ( ! $(this).is(':checked')) {
-//             $('#js-shipping-form').show();
-//         } else {
-//             $('#js-shipping-form').hide();
-//         }
-//     });
-// });
-
-
-
 ;(function(){
 
     "use strict";
@@ -32,9 +16,8 @@ document.getElementById('propshop-checkout')&& (function($){
     'use strict';
 
     var signupForm = $('#js-ps-checkout-signup-form'), loginForm = $('#js-ps-checkout-login-form'), activeForm = $('.is-open');
-
     activeForm.css('height', function(){
-         return activeForm.children('div').get(0).clientHeight + 'px';
+         return (activeForm.children('div').get(0).clientHeight + parseInt(activeForm.css('padding-top')) + parseInt(activeForm.css('padding-bottom')) ) + 'px';
     });
 
     $(document).on('click', '#js-ps-checkout-signup-btn', function(e){
@@ -134,38 +117,5 @@ function getQuote(input){
     });
 
 }(jQuery));
-
-
-
-// (function($){
-//     $('select[name="country"]').live('change',function(e){
-//         e.preventDefault();
-//         $.getJSON('/shipping/rest/states.json', {'country_id' : $(this).val()}, function(data){
-//             var html;
-//             // there was no error, but
-//             // we dont have any states
-//             if($.isEmptyObject(data) || data.error) {
-//                 html = '<input name="state" type="text" class="input-medium" value="" />';
-//             }
-//             else {
-//                 html = '<select name="state" class="input-medium">';
-//                 $.each(data, function(key, val){
-//                     html += '<option value="'+key+'">'+val+'</option>';
-//                 });
-//                 html += '</select>';
-//             }
-//             $('select[name="state"], input[name="state"]').replaceWith($(html));
-//         });
-//     });
-
-//     $('.estimate-shipping').live('click', function(e) {
-//         e.preventDefault();
-//         var formData = $('form#estimate-shipping').serialize();
-//         console.log(formData);
-//         $.post('/shipping/estimate', formData, function(data){
-//             $('.shipping-estimator-wrap').html(data);
-//         });
-//     });
-// })(jQuery);
 
 

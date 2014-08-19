@@ -130,7 +130,7 @@ document.getElementById('propshop-customer')&& (function($){
     var signupForm = $('#js-ps-account-signup-form'), loginForm = $('#js-ps-account-login-form'),  activeForm = $('.is-open');
 
     activeForm.css('height', function(){
-         return activeForm.children('div').get(0).clientHeight + 'px';
+          return (activeForm.children('div').get(0).clientHeight + parseInt(activeForm.css('padding-top')) + parseInt(activeForm.css('padding-bottom')) ) + 'px';
     });
 
 

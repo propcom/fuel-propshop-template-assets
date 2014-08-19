@@ -130,7 +130,6 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 		},
 		couple: function (other_form) {
 
-			console.log('is coupled');
 			if (this._couple)
 				return;
 
@@ -140,8 +139,6 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 			this.set_values(other_form.get_values());
 		},
 		_on_couple_change: function (other_form) {
-
-			console.log('couple changed');
 
 			var self = this;
 
@@ -221,7 +218,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 		var $this = $(this), from = $this.data('from'), on = !!$this.is(':checked'), updateClass = function(elem, callback){
 
 			elem.hasClass('is-open') ? elem.removeClass('is-open').css('height', 0) : elem.css('height', function(){
-				 return elem.children('div').get(0).clientHeight + 'px';
+				 return (elem.children('div').get(0).clientHeight + parseInt(elem.css('padding-top')) + parseInt(elem.css('padding-bottom')) ) + 'px';
 			}).addClass('is-open');
 
 			typeof callback === 'function' && calback();

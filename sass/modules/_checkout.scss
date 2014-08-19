@@ -1,12 +1,6 @@
-//variables   
-$checkout-container-padding-h: 20;
-$checkout-form-header-height: 100;
-$checkout-form-margin-bottom: 5;
-
-
 .checkout-nav{
 
-	padding: #{$checkout-container-padding-h}px 0;
+	padding: #{$standard-container-padding-h}px 0;
 
 
 	&__item{
@@ -40,123 +34,10 @@ $checkout-form-margin-bottom: 5;
 }
 
 
-.checkout-form, .account-form{
-
-
-	&__header{
-
-		background: $quarternaryColor;
-		height: #{$checkout-form-header-height}px;
-		margin-bottom: #{$checkout-form-margin-bottom}px;
-
-
-		&__copy{
-
-
-			&__heading{
-
-				color: $primaryColor;
-				font-weight: $bold;
-				padding: #{($checkout-form-header-height - $base-font-size + 4) / 2}px 0;
-				text-transform: uppercase;
-
-				@include font-size($base-font-size + 2, $base-font-size + 4);
-
-
-				&__box{
-
-					float: right;
-					font-weight: $reg;
-					text-transform: none;
-
-					@include font-size($base-font-size - 4 , $base-font-size + 4);
-				}
-			}
-
-			
-			&__anchor{
-
-				color: lightBlue;
-				text-decoration: none;
-			}
-		}
-	}
-
-
-	&__smalltext{
-
-		font-weight: $bold;
-		margin: 0;
-		text-transform: none;
-		
-		@include font-size($base-font-size - 4, $base-font-size - 4);
-	}
-
-
-	&__form{
-		
-		background: $quarternaryColor;
-		height: 0;
-		margin-bottom: #{$checkout-form-margin-bottom}px;
-		overflow: hidden;
-
-		@include adv-transition(618ms, $easeOut, 0, height, opacity);
-		@include opacity(0);
-
-
-		&.is-open{
-
-			height: auto;
-
-			@include opacity(1);
-		}
-
-
-		&__copy{
-
-			padding: 40px 0;
-
-
-			&__h{
-
-				color: $primaryColor;
-				font-weight: $bold;
-				margin-bottom: 20px;
-				text-transform: uppercase;
-			}
-			
-
-			&.is-half{
-
-
-				form{
-
-					width: 50%;
-				}
-			}
-		}
-	}
-}
-
-
-@include bp-max($small){
-
-
-	.checkout-form, .account-form{
-
-
-		&__header{
-
-			height: auto;
-		}
-	}
-}
-
-
 .checkout-review-grid{
 
 	background: $quarternaryColor;
-	padding: 40px #{$checkout-container-padding-h}px 20px;
+	padding: 40px #{$standard-container-padding-h}px 20px;
 	width: 100%;
 
 
@@ -354,7 +235,7 @@ $checkout-form-margin-bottom: 5;
 	&__addresses{
 
 		background: $quarternaryColor;
-		padding: 30px #{$checkout-container-padding-h}px 20px;
+		padding: 30px #{$standard-container-padding-h}px 20px;
 
 
 		&__address{
@@ -383,7 +264,7 @@ $checkout-form-margin-bottom: 5;
 	&__shipping{
 
 		background: darken($quarternaryColor, 25%);
-		padding: 30px #{$checkout-container-padding-h}px 20px;
+		padding: 30px #{$standard-container-padding-h}px 20px;
 
 
 		h3{
@@ -479,7 +360,7 @@ $checkout-form-margin-bottom: 5;
 
 	background: $quarternaryColor;
 	margin: 20px 0;
-	padding: #{$checkout-container-padding-h}px;
+	padding: #{$standard-container-padding-h}px;
 
 
 	&__submit{
@@ -672,7 +553,7 @@ $checkout-form-margin-bottom: 5;
 	&__copy{
 
 		background: $quarternaryColor;
-		padding:0 #{$checkout-container-padding-h}px 20px;
+		padding:0 #{$standard-container-padding-h}px 20px;
 
 
 		&__list{
@@ -707,7 +588,7 @@ $checkout-form-margin-bottom: 5;
 
 					@extend %fl;
 					@extend %t-align--center;
-					@include col(4);
+					@include col--alpha(4);
 
 				}
 
