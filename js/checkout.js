@@ -10,4 +10,31 @@ $(document).ready(function () {
             $('#js-shipping-form').hide();
         }
     });
+
+    $('.js-country-code').change(function(e) {
+        // which country drop down did this come from? delivery or biling?
+        if (e.target.name.indexOf('delivery') != -1)
+            event_from = 'delivery';
+        else 
+            event_from = 'billing';
+
+        // should the same address checkbox be hidden?
+        $.get('/checkout/rest/enable_same_address.json', {country_code: e.target.value, event_from:event_from}, 'json')
+            .success(function(data, textStatus, jqXHR) {
+                if (!data.unchanged) {
+                    if (data.enable) {
+                        $('#shipping_chk').attr("checked", true);
+                        $('#shipping_chk').trigger('click');
+                        $('#shipping_chk').show();
+                        $('label[for="shipping_chk"]').show();
+                    }
+                    else {
+                        $('#shipping_chk').attr("checked", true);
+                        $('#shipping_chk').trigger('click');
+                        $('#shipping_chk').hide();
+                        $('label[for="shipping_chk"]').hide();
+                    }
+                }
+            });
+    });
 });
