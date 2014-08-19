@@ -13,7 +13,7 @@ $(document).ready(function () {
 
     $('.js-country-code').change(function(e) {
         // which country drop down did this come from? delivery or biling?
-        if (e.target.name.indexOf('delivery') != -1)
+        if ($(this).attr('name').indexOf('delivery') != -1)
             event_from = 'delivery';
         else 
             event_from = 'billing';
@@ -23,16 +23,14 @@ $(document).ready(function () {
             .success(function(data, textStatus, jqXHR) {
                 if (!data.unchanged) {
                     if (data.enable) {
-                        $('#shipping_chk').attr("checked", true);
-                        $('#shipping_chk').trigger('click');
-                        $('#shipping_chk').show();
-                        $('label[for="shipping_chk"]').show();
+                        $('.js-copy-address').attr("checked", true);
+                        $('.js-copy-address').trigger('click');
+                        $('.js-shipping-chk').show();
                     }
                     else {
-                        $('#shipping_chk').attr("checked", true);
-                        $('#shipping_chk').trigger('click');
-                        $('#shipping_chk').hide();
-                        $('label[for="shipping_chk"]').hide();
+                        $('.js-copy-address').attr("checked", true);
+                        $('.js-copy-address').trigger('click');
+                        $('.js-shipping-chk').hide();
                     }
                 }
             });
