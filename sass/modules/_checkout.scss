@@ -1,93 +1,114 @@
 //variables   
-
-$checkout-container-bg: lightGrey;
 $checkout-container-padding-h: 20;
+$checkout-form-header-height: 100;
+$checkout-form-margin-bottom: 5;
 
-.checkout-breadcrumbs{
+
+.checkout-nav{
 
 	padding: #{$checkout-container-padding-h}px 0;
 
-	&__breadcrumb{
-		background: $checkout-container-bg;
+
+	&__item{
+
+		background: $quarternaryColor;
+		color: inherit;
 		text-align: center;
+		text-decoration: none;
 		text-transform: uppercase;
 		vertical-align: middle;
 
+
 		@include font-size($base-font-size, 40);
 
+
 		&.is-active{
-			background: grey;
+
+			background: darken($quarternaryColor, 20%);
+		}
+
+
+		&--link{
+
+
+			&:hover{
+
+				background: darken($quarternaryColor, 20%);
+			}
 		}
 	}
 }
 
 
-$checkout-form-header-height: 100;
-$checkout-form-margin-bottom: 5;
 .checkout-form, .account-form{
 
 
 	&__header{
-		background: $checkout-container-bg;
+
+		background: $quarternaryColor;
 		height: #{$checkout-form-header-height}px;
 		margin-bottom: #{$checkout-form-margin-bottom}px;
+
 
 		&__copy{
 
 
 			&__heading{
 
-				text-transform: uppercase;
-				font-weight: $bold;
 				color: $primaryColor;
-
+				font-weight: $bold;
 				padding: #{($checkout-form-header-height - $base-font-size + 4) / 2}px 0;
+				text-transform: uppercase;
 
 				@include font-size($base-font-size + 2, $base-font-size + 4);
 
+
 				&__box{
-					text-transform: none;
-					font-weight: $reg;
+
 					float: right;
+					font-weight: $reg;
+					text-transform: none;
 
 					@include font-size($base-font-size - 4 , $base-font-size + 4);
-
 				}
-
 			}
 
 			
-
 			&__anchor{
 
 				color: lightBlue;
 				text-decoration: none;
 			}
-
 		}
 	}
 
+
 	&__smalltext{
-				@include font-size($base-font-size - 4, $base-font-size - 4);
-				font-weight: $bold;
-				text-transform: none;
-				margin: 0;
-			}
+
+		font-weight: $bold;
+		margin: 0;
+		text-transform: none;
+		
+		@include font-size($base-font-size - 4, $base-font-size - 4);
+	}
 
 
 	&__form{
 		
-		background: $checkout-container-bg;
+		background: $quarternaryColor;
+		height: 0;
 		margin-bottom: #{$checkout-form-margin-bottom}px;
 		overflow: hidden;
-		height: 0;
 
 		@include adv-transition(618ms, $easeOut, 0, height, opacity);
 		@include opacity(0);
 
+
 		&.is-open{
-			@include opacity(1);
+
 			height: auto;
+
+			@include opacity(1);
 		}
 
 
@@ -95,51 +116,59 @@ $checkout-form-margin-bottom: 5;
 
 			padding: 40px 0;
 
-			&__h{
-				text-transform: uppercase;
-				font-weight: $bold;
-				color: $primaryColor;
-				margin-bottom: 20px;
 
+			&__h{
+
+				color: $primaryColor;
+				font-weight: $bold;
+				margin-bottom: 20px;
+				text-transform: uppercase;
 			}
 			
+
 			&.is-half{
 
+
 				form{
+
 					width: 50%;
 				}
 			}
-
-			
 		}
 	}
 }
 
+
 @include bp-max($small){
+
+
 	.checkout-form, .account-form{
+
+
 		&__header{
+
 			height: auto;
 		}
 	}
 }
 
+
 .checkout-review-grid{
 
-
+	background: $quarternaryColor;
 	padding: 40px #{$checkout-container-padding-h}px 20px;
-	background: $checkout-container-bg;
 	width: 100%;
 
 
 	&__row{
 
+		border-top: 4px solid darken($quarternaryColor, 20%);
 		padding: 20px 0;
-		border-top: 4px solid darken($checkout-container-bg, 20%);
+
 
 		&--header{
-			padding: 40px 0 10px;
-			
 
+			padding: 40px 0 10px;
 		}
 
 
@@ -150,36 +179,40 @@ $checkout-form-margin-bottom: 5;
 
 
 			.checkout-review-grid__row--header &{
-				text-transform: uppercase;
+				
 				font-weight: $bold;
-
+				text-transform: uppercase;
 			}
 
+
 			span{
+
 				display: none;
 			}
 
 
 			&.img{
-				width: 15%;
-				padding-right: 10px;
 
+				padding-right: 10px;
+				width: 15%;
 			}
 
 
 			&.item{
-				width: 25%; 
+
 				text-align: left;
-				
+				width: 25%; 
 			}
 
 
 			&.qty{
+
 				width: 20%;
 			}
 
 
 			&.price{
+
 				width: 20%;
 			}
 
@@ -191,11 +224,12 @@ $checkout-form-margin-bottom: 5;
 			}
 		}
 	}
-
 }
 
 
 @include bp-max($small){
+
+
 	.checkout-review-grid{
 
 
@@ -210,47 +244,54 @@ $checkout-form-margin-bottom: 5;
 
 			&__div{
 
+
 				span{
+
 					display: inline;
 				}
 
 
 				&.img{
+
 					width: 35%;
 				}
 
 
 				&.item{
+
 					width: 65%; 
 				}
 
 
 				&.qty{
-					width: 65%;
+
 					text-align: left;
+					width: 65%;
 				}
 
 
 				&.price{
-					width: 65%;
-					text-align: left;
 
+					text-align: left;
+					width: 65%;
 				}
 
 
 				&.subtotal{
-					width: 65%;
-					text-align: left;
-					margin-top: 20px;
 
+					margin-top: 20px;
+					text-align: left;
+					width: 65%;
 				}
 			}
 		}
-
 	}
 }
 
+
 @include bp-max($x-small){
+
+
 	.checkout-review-grid{
 
 		padding-top: 0;
@@ -258,7 +299,9 @@ $checkout-form-margin-bottom: 5;
 
 		&__row{
 
+
 			&:nth-child(2){
+
 				border: none;
 			}
 
@@ -273,123 +316,137 @@ $checkout-form-margin-bottom: 5;
 
 
 				&.item{
+
+					border-bottom : 1px solid darken($quarternaryColor, 10%);
 					width: 100%; 
-					border-bottom : 1px solid darken($checkout-container-bg, 10%);
 				}
 
 
 				&.qty{
+
+					border-bottom : 1px solid darken($quarternaryColor, 10%);
 					width: 50%;
-					border-bottom : 1px solid darken($checkout-container-bg, 10%);
 				}
 
 
 				&.price{
+
+					border-bottom : 1px solid darken($quarternaryColor, 10%);
 					width: 50%;
-					border-bottom : 1px solid darken($checkout-container-bg, 10%);
 
 				}
 
 
 				&.subtotal{
-					width: 100%;
-					margin-top: 10px;
 
+					margin-top: 10px;
+					width: 100%;
 				}
 			}
 		}
-
 	}
 }
 
+
 .checkout-review-bottom{
+
 
 	&__addresses{
 
-		background: $checkout-container-bg;
+		background: $quarternaryColor;
 		padding: 30px #{$checkout-container-padding-h}px 20px;
 
 
 		&__address{
-			width: 50%;
+
 			float: left;
+			width: 50%;
+
 
 			h3{
-				@include font-size(13, 16);
+
 				text-transform: uppercase;
+
+				@include font-size(13, 16);
 			}
+
 
 			p{
+
+				color: lighten($quarternaryColor, 20%);
 				@include font-size(12, 16);
-				color: lighten($checkout-container-bg, 20%);
 			}
-			
 		}
-
-
 	}
+
 
 	&__shipping{
 
-		background: darken($checkout-container-bg, 25%);
+		background: darken($quarternaryColor, 25%);
 		padding: 30px #{$checkout-container-padding-h}px 20px;
 
+
 		h3{
-			@include font-size(13, 16);
+
 			text-transform: uppercase;
+			@include font-size(13, 16);
 		}
 	}
 
+
 	&__totals{
+
+		background: $quarternaryColor;
 		padding: 50px 20px 20px;
-		background: $checkout-container-bg;
 
-
-
+		
 		&__total{
-			vertical-align: top;
-			@include font-size(16, 16);
-			padding-bottom: 24px;
-			margin: 0;
 
+			margin: 0;
+			padding-bottom: 24px;
+			vertical-align: top;
+
+			@include font-size(16, 16);
 			@include transition(618ms $easeOut opacity);
 
+
 			&.error{
+
 				color: $error;
 			}
 
 			&.total{
-				border-top: 4px solid darken($checkout-container-bg, 20%);
+
+				border-top: 4px solid darken($quarternaryColor, 20%);
 				padding-top: 20px;
 			}
 		}
 	}
-
 }
+
 
 @include bp-max($large){
 
+
 	.checkout-review-bottom{
+
 
 		&__addresses{
 
 			width: 100%;
-
-			&__address{
-				
-			}
-
-
 		}
 
 		&__shipping{
 
-			@include col(6);
 			margin-left: 0;
+
+			@include col(6);
 		}
 
 		&__totals{
+
 			margin-top: 20px;
+
 			@include col(6);
 		}
 
@@ -397,7 +454,9 @@ $checkout-form-margin-bottom: 5;
 
 }
 
+
 @include bp-max($small){
+
 
 	.checkout-review-bottom{
 
@@ -408,23 +467,25 @@ $checkout-form-margin-bottom: 5;
 		}
 
 		&__totals{
+
 			margin-left: 0;
 			width: 100%;
 		}
-
 	}
-
 }
 
+
 .checkout-review-default{
-	background: $checkout-container-bg;
+
+	background: $quarternaryColor;
 	margin: 20px 0;
 	padding: #{$checkout-container-padding-h}px;
 
+
 	&__submit{
+
 		width: 100px;
 	}
-
 }
 
 
@@ -435,44 +496,61 @@ $checkout-form-margin-bottom: 5;
 
 		&__elem{
 
-			label{
-				text-transform: uppercase;
-				@include font-size($base-font-size - 2, $base-line-height);
-				font-weight: $bold;
-			}
 
+			label{
+
+				font-weight: $bold;
+				text-transform: uppercase;
+
+				@include font-size($base-font-size - 2, $base-line-height);
+			}
 		}
 
+
 		&__copy{
-			text-transform: uppercase;
-			@include font-size($base-font-size - 2, $base-line-height);
+
 			font-weight: $bold;
+			text-transform: uppercase;
+
+			@include font-size($base-font-size - 2, $base-line-height);
+
 
 			span.help{
+
 				display: block;
 				font-weight: $reg;
 				text-transform: none;
-				@include opacity(0.5);
+
 				@include font-size($base-font-size - 2, $base-line-height - 8);
+				@include opacity(0.5);
 			}
 		}
 	}
 }
 
+
 @include bp-max($large){
+
+
 	.payment{
+
 		@include col(7);
+
 
 		&__form{
 
 
 			&__elem{
 
+
 				&.col5{
+
 					@include col(8);
 				}
 
+
 				&.col4{
+
 					@include col(6);
 				}
 			}
@@ -480,20 +558,29 @@ $checkout-form-margin-bottom: 5;
 	}
 }
 
+
 @include bp-max(650){
+
+
 	.payment{
+
 		@include col(6);
+
 
 		&__form{
 
 
 			&__elem{
 
+
 				&.col5{
+
 					@include col(10);
 				}
 
+
 				&.col4{
+
 					@include col(8);
 				}
 			}
@@ -501,164 +588,188 @@ $checkout-form-margin-bottom: 5;
 	}
 }
 
+
 @include bp-max($medium){
+
+
 	.payment{
+
 		width: 100%;
 	}
 }
 
 
 .payment-methods{
-	&__copy{
 
-	}
 
 	&__imgs{
+
 
 		&__img{
 
 			float: right;
-		padding-left: 10px;
-		width: 25%;
+			padding-left: 10px;
+			width: 25%;
 		}
-
 	}
 }
+
 
 @include bp-max($large){
 
+
 	.payment-methods{
-	&__copy{
-		@include col--alpha(12);
-		text-align: center;
-	}
 
-	&__imgs{
 
-		margin-top: 20px;
+		&__copy{
 
-		@include col--alpha(12);
+			text-align: center;
 
-		&__img{
-
-			float: right;
-		padding-left: 10px;
-		width: 25%;
+			@include col--alpha(12);
 		}
 
+
+		&__imgs{
+
+			margin-top: 20px;
+
+			@include col--alpha(12);
+
+
+			&__img{
+
+				float: right;
+				padding-left: 10px;
+				width: 25%;
+			}
+		}
 	}
 }
 
-}
 
 @include bp-max($x-small){
 
+
 	.payment-methods{
 
 
-	&__imgs{
+		&__imgs{
 
 
-		&__img{
+			&__img{
 
-		width: 50%;
-		margin-bottom: 20px;
+				width: 50%;
+				margin-bottom: 20px;
+			}
 		}
-
 	}
 }
 
-}
 
 .checkout-summary{
 
+
 	&__copy{
 
-		background: $checkout-container-bg;
-
+		background: $quarternaryColor;
 		padding:0 #{$checkout-container-padding-h}px 20px;
+
 
 		&__list{
 
-			padding: 0;
-
-
-
-
-			margin: 0;
 			list-style: none;
+			padding: 0;
+			margin: 0;
+
 
 			&__item{
+				
+				border-top: 4px solid darken($quarternaryColor, 20%);
+				padding: 20px 0 20px;
 
 				&.is-first{
+
 					border: none;
 
+
 					p{
-						text-transform: uppercase;
+
 						font-weight: $bold;
 						margin: 0;
+						text-transform: uppercase;
 					}
 				}
-
-				border-top: 4px solid darken($checkout-container-bg, 20%);
-				padding: 20px 0 20px;
 
 
 				&__img{
 
-					@extend %fl;
-					@extend %t-align--center;
-					@include col(4);
 					margin-left: 0;
 
-				}
-
-				&__qty{
 					@extend %fl;
 					@extend %t-align--center;
 					@include col(4);
 
-
 				}
+
+
+				&__qty{
+
+					@extend %fl;
+					@extend %t-align--center;
+					@include col(4);
+				}
+
 
 				&__price{
 
 					text-align: right;
+
 					@extend %fl;
 					@include col(4);
-
-
-
 				}
 			}
-
 		}
+
 
 		&__subtotal{
-			border-top: 4px solid darken($checkout-container-bg, 20%);	
+
+			border-top: 4px solid darken($quarternaryColor, 20%);	
 		}
+
 
 		&__total{
-			border-top: 4px solid darken($checkout-container-bg, 20%);
-		}
 
+			border-top: 4px solid darken($quarternaryColor, 20%);
+		}
 	}
 }
 
+
 @include bp-max($large){
+
+
 	.checkout-summary{
+
 		@include col(5);
 	}
 }
 
+
 @include bp-max(650){
+
+
 	.checkout-summary{
+
 		@include col(6);
 	}
 }
 
+
 @include bp-max($medium){
+
+
 	.checkout-summary{
+
 		width: 100%;
 	}
 }
@@ -666,32 +777,45 @@ $checkout-form-margin-bottom: 5;
 
 .checkout-confirmation{
 
+
 	&__thanks{
 
+
 		&__heading{
+
 			@include font-size($h3-size, $h3-size);
 		}
 	}
 
 	&__summary{
+
 		margin-top: 20px;
 
+
 		&__heading{
+
 			@include font-size($base-font-size, $base-font-size);
 		}
 
+
 		&__copy{
-			@include font-size($base-font-size, $base-font-size + 10);
+
 			margin: 0 0 20px;
+
+			@include font-size($base-font-size, $base-font-size + 10);
 		}
 	}
 
+
 	&__questions{
+
 		margin-top: 10px;
 	}
 
 }
 
+
 .continue-shopping{
+
 	@include col(4);
 }
