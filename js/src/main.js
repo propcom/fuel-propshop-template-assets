@@ -206,3 +206,28 @@ document.getElementById('propshop-customer')&& (function($){
 
 
 }(jQuery));
+
+
+document.getElementById('js-ps-wishlist-grid') && (function($){
+
+	$(document).on('click', '.js-ps-wishlist-trigger', function(e){
+
+		e.preventDefault();
+
+		var $this = $(this);
+
+		$this.parents('li').find('.js-ps-wishlist-info').addClass('is-active');
+
+	});
+
+	$(document).on('click', '.js-ps-wishlist-close-trigger', function(e){
+
+		e.preventDefault();
+
+		var $this = $(this);
+
+		$this.parents('.js-ps-wishlist-info').removeClass('is-active');
+
+	})
+
+}(jQuery))

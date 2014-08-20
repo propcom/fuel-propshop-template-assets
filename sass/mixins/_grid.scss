@@ -83,13 +83,16 @@ $__col-with--full : percentage(1/12);
 @include grid();
 
 
-@mixin col($__columns){
+@mixin col($__columns, $override: true){
 	margin-left: $__margin;
 	width: ($__col-width * $__columns) + ($__margin * ($__columns - 1));
 
-	&.col--alpha {
-		margin-left: 0;
-	}
+	@if($override){
+		&.col--alpha {
+			margin-left: 0;
+		}
+	} 
+	
 }
 
 @mixin col--full($__columns){
