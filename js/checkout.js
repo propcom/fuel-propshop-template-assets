@@ -4,10 +4,16 @@ $(document).ready(function () {
     }
 
     $('#shipping_chk').on('click', function () {
+        if ($(this).data('to') == undefined)
+            to = 'shipping';
+        else
+            to = $(this).data('to');
+
+        disable_field = '#addresses_' + to;
         if ( ! $(this).is(':checked')) {
-            $('#js-shipping-form').show();
+            $(disable_field).show();
         } else {
-            $('#js-shipping-form').hide();
+            $(disable_field).hide();
         }
     });
 
