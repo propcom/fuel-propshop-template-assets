@@ -11,9 +11,15 @@
 
 	&--password{}
 
+	&--textarea{}
+
 	&--checkbox{
 
 		float: left
+	}
+
+	.error &{
+		border-color: $error;
 	}
 
 
@@ -68,7 +74,7 @@
 // Labels
 
 .required{
-	color: red;
+	color: $error;
 }
 
 .help-inline{
