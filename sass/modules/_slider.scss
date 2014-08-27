@@ -203,7 +203,7 @@ $slider-js-class: js-ps-slider;
 
 }
 
-//@include slider--slide();
+@include slider--slide();
 
 
 @mixin slider--slide-vertical(){
@@ -371,7 +371,7 @@ $slider-js-class: js-ps-slider;
 
 }
 
-@include slider--fold();
+//@include slider--fold();
 
 @mixin slider--scale(){
 
