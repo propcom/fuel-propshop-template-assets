@@ -149,8 +149,8 @@ document.getElementById('js-ps-ajax-wishlist') && (function($) {
 
 		e.preventDefault();
 
-		window.location = '/wishlist/add/' + $('#js-ps-product-variant-id').val();
-
+		window.location = '/wishlist/add/' + $('#js-ps-product-variant-id').val()
+			+ '?referrer=' + encodeURIComponent(window.location.href);
 
 	})
 
