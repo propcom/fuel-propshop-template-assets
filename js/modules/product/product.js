@@ -4,10 +4,10 @@ document.getElementById('js-prop-add-to-basket-form') && (function($) {
 	"use strict";
 
 	var onVariantChange = function(e, data) {
-		loadVariant(data.selected_variant_id, before, after);
+		loadVariant(data.selected_variant_id, data.selected_variant_url, before, after);
 	};
 
-	var loadVariant = function(variant, beforeStart, callback) {
+	var loadVariant = function(variant, variant_url, beforeStart, callback) {
 
 		if (typeof beforeStart === 'function')
 			beforeStart(document.getElementById('js-ps-product-info-container'));
@@ -35,7 +35,7 @@ document.getElementById('js-prop-add-to-basket-form') && (function($) {
 			if (history.pushState) {
 				history.pushState({
 					variant: variant
-				}, "", '/product/view/' + variant);
+				}, "", variant_url);
 			}
 
 			/**
@@ -84,7 +84,7 @@ document.getElementById('js-prop-add-to-basket-form') && (function($) {
 		 */
 		var self = $(this);
 
-		loadVariant(self.attr('data-variant'), before, after);
+		loadVariant(self.attr('data-variant'), self.attr('data-variant-url'), before, after);
 
 	});
 

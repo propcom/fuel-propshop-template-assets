@@ -115,7 +115,6 @@
 			});
 
 			$.extend(true, self.variant_meta, this.variants._variant_meta);
-
 		},
 
 		/*
@@ -140,8 +139,11 @@
 		change_variant: function() {
 			this.selected_variant.val(this.get_selected_variant());
 
+			var id = this.selected_variant.val();
+
 			var data = {
 				selected_variant_id: this.selected_variant.val(),
+				selected_variant_url: this.variant_meta[id].url,
 				product_form: this
 			};
 
