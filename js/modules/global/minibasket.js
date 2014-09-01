@@ -36,6 +36,10 @@ document.getElementById('js-ps-minibasket') && (function($){ // IIFE is only ran
 			/**
 			 * Adds is-hovered class to the minibasket element presenting it 
 			 */
+			if(document.getElementById('propshop-basket')){ 
+				return false; 
+			} 
+
 			$('#js-ps-minibasket').addClass('is-hovered');
 
 			/**
