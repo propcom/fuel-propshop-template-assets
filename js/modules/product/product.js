@@ -3,6 +3,33 @@ document.getElementById('js-prop-add-to-basket-form') && (function($) {
 
 	"use strict";
 
+	var cookies;
+
+	function readCookie(name) {
+		if (cookies){ return cookies[name]; }
+
+		var c = document.cookie.split('; ');
+		var C;
+		cookies = {};
+
+		for(var i = c.length-1; i >= 0; i--){
+			C = c[i].split('=');
+			cookies[C[0]] = C[1];
+		}
+
+		return cookies[name];
+	}
+
+	// AJAX load in the recently viewed products
+	// Do this with AJAX rather than raw PHP else we lose the ability to varnish cache when a product page is hit
+	var recent = readCookie('js-recently_viewed_products');
+
+	if (recent) {
+		$.get('/product/product/view_recent/'+recent+'/', function(data) {
+			$('.js-recent').html(data);
+		});
+	}
+
 	var onVariantChange = function(e, data) {
 		loadVariant(data.selected_variant_id, data.selected_variant_url, before, after);
 	};
@@ -102,7 +129,7 @@ document.getElementById('js-prop-add-to-basket-form') && (function($) {
 
 		if (elem.style.pointerEvents)
 			elem.style.pointerEvents = 'auto';
-	}
+	};
 
 })(jQuery);
 
@@ -138,8 +165,7 @@ document.getElementById('js-ps-ajax-wishlist-logged') && (function($) {
 			addMessage('error', 'There was a problem adding your product to the wishlis, please try again later.');
 		});
 
-	})
-
+	});
 }(jQuery));
 
 
