@@ -96,6 +96,46 @@ $standard-form-margin-bottom: 5;
 }
 
 
+@include bp-max($large){
+
+	.standard{
+
+
+		&__copy{
+
+			.is-half{
+
+
+			form{
+
+				width: 75%;
+			}
+		}
+		}
+	}
+
+}
+
+@include bp-max($medium){
+
+	.standard{
+
+
+		&__copy{
+
+			.is-half{
+
+
+			form{
+
+				width: 100%;
+			}
+		}
+		}
+	}
+
+}
+
 
 @include bp-max($small){
 

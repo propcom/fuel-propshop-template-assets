@@ -56,6 +56,8 @@
 
 .control-group--label{
 
+	padding-top: 10px;
+
 	.input--checkbox{
 		width: auto;
 		height: #{$base-font-size}px;
@@ -79,9 +81,9 @@
 
 .help-inline{
 	color: orange;
-	@extend %h_milli;
+	@include font-size(12, 13);
 	position: absolute;
-	bottom: -20px;
+	top: #{ $selects-height + 4}px;
 	left: 0;
 }
 
