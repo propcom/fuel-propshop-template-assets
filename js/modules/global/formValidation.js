@@ -48,8 +48,22 @@
 	 */
 	var oRules ={	
 		'required':{
-			'rule': /([^\s])/,
-			'message': 'This field is required'
+			rule: /([^\s])/,
+			message: 'This is a required field.'
+		},
+		'required_with':{
+			rule: function(el, options){
+
+				var original = findParentByTag(el, 'form').querySelector('input[name="'+options[0]+'"]'), rule = /([^\s])/;
+
+				if(original.value.length > 0 && el.value === ''){
+					return false;
+				}
+
+				return true
+
+			},
+			message: 'This is a required field.'
 		},	
 		'min_length':{
 			/**
@@ -59,7 +73,7 @@
 			 * @param  {Array} options
 			 * @return {boolean}
 			 */
-			'rule': function(element, options){
+			rule: function(element, options){
 
 
 				if(!element.required && element.value === ''){
@@ -70,26 +84,151 @@
 
 				if(element.value.length < options[0]){
 
-					oRules['min_length']['message'] = 'This field must contain at least '+ options[0] +' characters.'
+					oRules['min_length']['message'] = 'A minimum of '+ options[0] +' characters are required.'
 					return false
 
 				}
 
 				return true
 			},
-			'message': 'Surname must contain at least 2 characters.'
+			message: ''
+		},
+		'max_length':{
+			/**
+			 * Test the length of an element
+			 * 
+			 * @param  {Object} element
+			 * @param  {Array} options
+			 * @return {boolean}
+			 */
+			rule: function(element, options){
+
+
+				if(!element.required && element.value === ''){
+
+					return true;
+
+				}
+
+				if(element.value.length > options[0]){
+
+					oRules['max_length']['message'] = 'The maximum length has been exceeded.'
+					return false
+
+				}
+
+				return true
+			},
+			message: ''
 		},
 		'is_email':{
-			'rule': /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i,
-			'message': 'Please type in a valid email address.'
+			rule: /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i,
+			message: 'Please enter a valid email address.'
 		},
 		'valid_email':{
-			'rule': /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i,
-			'message': 'Please type in a valid email address.'
+			rule: /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i,
+			message: 'Please enter a valid email address.'
+		},
+		'valid_emails':{
+			rule: function(element, options){
+				var separator = ',',
+				    rule = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i,
+				    emails;
+
+				if(options[0]){
+					 separator = options[0];
+				}
+
+				emails = element.value.split(separator);
+
+				for (var i = 0, l = emails.length; i < l; i++){
+
+					if(!rule.test(emails[i])){
+						return false;
+					}
+
+				}
+
+				return true;
+
+			},
+			message: 'Please enter a valid email address.'
+		},
+		'valid_ip':{
+			rule:/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
+			message: ''
+		},
+		'valid_string':{
+			rule: /^[a-zA-Z]+$/,
+			message: 'This field is invalid. Please check the contents and try again.'
+		},
+		'valid_url':{
+			rule: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/,
+			message: 'Please enter a valid website address.'
+		},
+		'exact_lenght':{
+			rule: function(element, options){
+
+				if(element.value.length !== options[0]){
+					oRules['exact_lenght']['message'] = 'This field must contain exactly ' + options[0] +' character.';
+					return false;
+				}
+
+				return true;
+
+			},
+			message: 'Please enter a valid website address.'
 		},
 		'real_phone':{
-			'rule': /^(?:(\()|(\[)|)(?:(?:00|\+|)[0-9]{1,3})(?:(\))|(\])|)[0-9 \-,\.\(\)\[\]]+(?:(?:e(?:xt?)?\.?|#|x?\.?|\\|\/|\+)[ ]*([0-9]+))?$/i,
-			'message': 'Please double check the format of the phone number provided'
+			rule: /^(?:(\()|(\[)|)(?:(?:00|\+|)[0-9]{1,3})(?:(\))|(\])|)[0-9 \-,\.\(\)\[\]]+(?:(?:e(?:xt?)?\.?|#|x?\.?|\\|\/|\+)[ ]*([0-9]+))?$/i,
+			message: 'Please enter a valid telephone number.'
+		},
+		'is_numeric':{
+			rule: /^[0-9]+([\.][0-9]+)?$/,
+			message: 'This field must be a number.'
+		},
+		'numeric_min':{
+			rule: function(element, options){
+
+				var label = document.querySelector('[for='+element.id+']');
+
+				if(element.value < options[0]){
+					oRules['numeric_min']['message'] = 'The minimum number value of '+label.innerText+' is '+ options[0];
+					return false;
+				}
+
+				return true;
+
+			},
+			message: ''
+		},
+		'numeric_max':{
+			rule: function(element, options){
+
+				var label = document.querySelector('[for='+element.id+']');
+
+				if(element.value > options[0]){
+					oRules['numeric_max']['message'] = 'The maximum numeric value of '+label.innerText+' is '+ options[0];
+					return false;
+				}
+
+				return true;
+
+			},
+			message: ''
+		},
+		'numeric_between':{
+			rule: function(element, options){
+
+				if(element.value < options[0] || element.value > options[1] ){
+					oRules['numeric_between']['message'] = 'This must contain a value between '+options[0]+' and '+ options[1];
+					return false;
+				}
+
+				return true;
+
+			},
+			message: ''
 		},
 		'match_field':{
 			/**
@@ -99,23 +238,21 @@
 			 * @param  {Array} options
 			 * @return {Boolean}
 			 */
-			'rule': function(el, options){
+			rule: function(el, options){
 
-				var original = findParentByTag(el, 'form').querySelector('input[name="'+options[0]+'"]');
+				var original = findParentByTag(el, 'form').querySelector('input[name="'+options[0]+'"]'), label = document.querySelector('[for='+el.id+']');
 
 				if(el.value !== original.value){
 
-					oRules['match_field']['message'] = 'This field doesn\'t match your previous '+ options[0]
+					oRules['match_field']['message'] = 'The '+label.innerText+' doesn\'t match '+ options[0];
 					return false 
 				}
 
 				return true
 
 			},
-			'message': 'Please type in a valid email address.'
+			message: ''
 		} 
-
-
 	}
 
 /**
@@ -127,10 +264,12 @@
  * @return {boolean}
  */
 function validate(element, rule, options){
-	var condition = oRules[rule]['rule'];
 
-	if(typeof condition !== 'function')
+	var condition = oRules[rule].rule;
+
+	if(typeof condition !== 'function'){
 		return condition.test(element.value);
+	}
 
 	return condition(element, options)
 }	
@@ -192,7 +331,7 @@ function hadEvs(element, handler){
 	if(element.addEventListener){
 
 		element.addEventListener('keyup', handler);
-		element.addEventListener('focusout', handler);
+		element.addEventListener('focusin', handler);
 
 	} else{
 
@@ -202,7 +341,7 @@ function hadEvs(element, handler){
 
 		});
 
-		element.attachEvent('onfocusout', function(){
+		element.attachEvent('onfocusin', function(){
 
 			handler(element);
 
@@ -230,7 +369,7 @@ var findParentByTag = function(element, tag){
 
 }
 
-})()
+})();
 
 
 
