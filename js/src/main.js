@@ -228,5 +228,5 @@ document.getElementById('js-ps-wishlist-grid') && (function($){
  * @return {void}
  */
 $(document).ajaxComplete(function(){
-	imgr.updateDivs();
+	window.imager.updateDivs();
 });
