@@ -1,121 +1,111 @@
-								var imgr = new Imager({
-								selector: '.js-ps-img',	
-								className:'scale-with-grid',	
-								availableWidths: [ 960, 800, 768,600, 480, 360, 320, 0], 
-								lazyload: true,
-								onImagesReplaced: function(){
 
-									//window.GetSizes && 'addEventListener' in window && window.GetSizes(this, document.body.clientWidth); 
+(typeof window.imager === 'object') && (function(){
+
+	window.imager.onImagesReplaced =  function(){
+
+		//window.GetSizes && 'addEventListener' in window && window.GetSizes(this, document.body.clientWidth); 
 
 
+		/**
+		* Checks the DOM for zoom wrapper element via and id, if the element exists instanciates elevateZoom
+		* 
+		*/
+		document.getElementById('js-ps-zoom-wrapper') && (function(){
 
-									/**
-									 * Checks the DOM for zoom wrapper element via and id, if the element exists instanciates elevateZoom
-									 * 
-									 */
-									document.getElementById('js-ps-zoom-wrapper') && (function(){
+			$.removeData($(".js-ps-zoom").get(0));
 
-										$.removeData($(".js-ps-zoom").get(0));
-										document.querySelector('.zoomContainer') && document.body.removeChild(document.querySelector('.zoomContainer')); 
-																			
-										$(".js-ps-zoom").elevateZoom({ 
-											zoomType	: "inner", 
-											cursor      : "crosshair",
-											easing : true,
-											responsive: true,
-											preloading: 0,
-								            zoomWindowFadeIn: 681,
-								            zoomWindowFadeOut: 681
-										});
+			document.querySelector('.zoomContainer') && document.body.removeChild(document.querySelector('.zoomContainer')); 
 
-									})();
+			$(".js-ps-zoom").elevateZoom({ 
+				zoomType	: "inner", 
+				cursor      : "crosshair",
+				easing : true,
+				responsive: true,
+				preloading: 0,
+				zoomWindowFadeIn: 681,
+				zoomWindowFadeOut: 681
+			});
 
-								}
-							});
+		}());
 
-							var slider = new Slider('.js-ps-slider', {
-								imgr: imgr,
-								modernizr : window.Modernizr
-							});
+	};
+}());
 
 
 
-							document.querySelector('.js-ps-img-hover') && $('body').on('mouseover', '.js-ps-img-hover',{imager: imgr},function(evt){
-									
-									evt.preventDefault();
-									evt.data.imager.checkImagesNeedReplacing(evt.target.parentNode.getElementsByTagName('img'));
+/**
+ * Checks the Dom for the presence of a slider class and initiazes it
+ */							
+document.querySelector('.js-ps-slider') && (function(){
 
-							});
+	new Slider('.js-ps-slider', {
+		imgr: window.imager,
+		modernizr : window.Modernizr
+	});
 
-							document.getElementById('js-ps-zoom-additional') && document.getElementById('js-ps-zoom-wrapper') && $('body').on('click', '#js-ps-zoom-additional a',{imager: imgr}, function(evt){
-								evt.preventDefault(); // prevent events default behaviour
-
-
-								var _this = $(this);
-
-								$('.js-ps-zoom').attr('data-src', _this.attr('data-img'));
-
-								$('.js-ps-zoom').attr('data-zoom-image', _this.attr('data-zoom'));
-
-								evt.data.imager.replaceImagesBasedOnScreenDimensions(document.querySelector('.js-ps-zoom'));
-								evt.data.imager.onImagesReplaced();
+}());
 
 
-							});
+/**
+ * Checks for the presence of images to be loaded on hover and appends the event listener
+ */
+document.querySelector('.js-ps-img-hover') && $('body').on('mouseover', '.js-ps-img-hover',{imager: window.imager},function(evt){
 
-							/**
-							 * Using ajaxComplete to trigger an elements update on imager after an ajax request
-							 * @return {void}
-							 */
-							$(document).ajaxComplete(function(){
-								imgr.updateDivs();
+	evt.preventDefault();
+	evt.data.imager.checkImagesNeedReplacing(evt.target.parentNode.getElementsByTagName('img'));
 
-								// var selects = document.getElementsByTagName('select'), nativeSelectEv = function(elem){
-									
-								// 	var event = document.createEvent('HTMLEvents');
-								// 	event.initEvent('change', true, false);
-								// 	elem.dispatchEvent(event);
+});
 
-								// };
+document.getElementById('js-ps-zoom-additional') && document.getElementById('js-ps-zoom-wrapper') && $('body').on('click', '#js-ps-zoom-additional a',{imager: window.imager}, function(evt){
 
-								// for(i = 0, l = selects.length; i < l; i++){
-									
-								// 	document.createEvent ? nativeSelectEv(selects[i]) : selects[i].fireEvent('onchange');
-
-								// }
+	evt.preventDefault(); // prevent events default behaviour
 
 
-							});
+	var $this = $(this);
+
+	$('.js-ps-zoom').attr('data-src', $this.attr('data-img'));
+
+	$('.js-ps-zoom').attr('data-zoom-image', $this.attr('data-zoom'));
+
+	evt.data.imager.replaceImagesBasedOnScreenDimensions(document.querySelector('.js-ps-zoom'));
+	evt.data.imager.onImagesReplaced();
+
+
+});
 
 
 
 
 
-							document.getElementById('propshop-basket') && (function () {
-									
-									$(document).on('basketChanged', function () {
-										$.ajax({
-											url: '/basket/full',
-											type: 'GET',
-											cache: false,
-											success: function(data) {
-								                $('#propshop-basket-section').replaceWith(data);
-											}
-										}).done(function(){
-											document.getElementById('js-ps-ajax-overlay') && document.body.removeChild(document.getElementById('js-ps-ajax-overlay'));
-										}).fail(function(){
-											alert('we need some validation here');
-										});
-									});
+/**
+ * Checks if in basket page via page id and appends the basket replacement logic to the basketChange event
+ * @return {void}
+ */
+document.getElementById('propshop-basket') && (function(){
+
+	$(document).on('basketChanged',function (){
+		$.ajax({
+			url: '/basket/full',
+			type: 'GET',
+			cache: false,
+			success: function(data) {
+				$('#propshop-basket-section').replaceWith(data);
+			}
+		}).done(function(){
+			document.getElementById('js-ps-ajax-overlay') && document.body.removeChild(document.getElementById('js-ps-ajax-overlay'));
+		}).fail(function(){
+			alert('we need some validation here');
+		});
+	});
+
+})(jQuery);
 
 
 
-							})(jQuery);
 
-
-
-
-
+/**
+ * Checks if in one of the customer account pages
+ */
 
 document.getElementById('propshop-customer')&& (function($){
 
@@ -176,7 +166,6 @@ document.getElementById('propshop-customer')&& (function($){
 				'dataType': 'json',
 				'success': function (data) {
 
-
 					var state_select = $('.js-state-code'); 
 
 					state_select.empty();
@@ -194,19 +183,20 @@ document.getElementById('propshop-customer')&& (function($){
 
 						document.createEvent ? nativeSelectEv(state_select.get(0)) : state_select.get(0).fireEvent('onchange');
 
-
 					}
 
-					
-
-					
 				}
-			});
-    });			
 
+		});
+
+   });
 
 }(jQuery));
 
+
+/**
+ * Checks if on wishlist page and appends the click eventListeners
+ */
 
 document.getElementById('js-ps-wishlist-grid') && (function($){
 
@@ -230,4 +220,13 @@ document.getElementById('js-ps-wishlist-grid') && (function($){
 
 	})
 
-}(jQuery))
+}(jQuery));
+
+
+/**
+ * Using ajaxComplete to trigger an elements update on imager after an ajax request
+ * @return {void}
+ */
+$(document).ajaxComplete(function(){
+	imgr.updateDivs();
+});
