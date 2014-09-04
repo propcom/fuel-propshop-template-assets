@@ -3,29 +3,54 @@ document.getElementById('js-prop-add-to-basket-form') && (function($) {
 
 	"use strict";
 
-	var cookies;
-
+	function createCookie(name,value,days) {
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+		}
+		else var expires = "";
+		document.cookie = name+"="+value+expires+"; path=/";
+	}
+	
 	function readCookie(name) {
-		if (cookies){ return cookies[name]; }
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0;i < ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1,c.length);
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		}
+		return null;
+	}
+	
+	function eraseCookie(name) {
+		createCookie(name,"",-1);
+	}
 
-		var c = document.cookie.split('; ');
-		var C;
-		cookies = {};
+	// Get recently viewed products from the cookie
+	var recent = readCookie('js-recently_viewed_products');
 
-		for(var i = c.length-1; i >= 0; i--){
-			C = c[i].split('=');
-			cookies[C[0]] = C[1];
+	// Add to the recently viewed products cookie
+	var prod_id = $('#js-ps-product-variant-id').val();
+	if (prod_id) {
+		if (!recent) {
+			recent = prod_id;
+		}
+		else {
+			recent = prod_id+"|"+recent;
 		}
 
-		return cookies[name];
+		createCookie('js-recently_viewed_products', recent, 1);
 	}
 
 	// AJAX load in the recently viewed products
 	// Do this with AJAX rather than raw PHP else we lose the ability to varnish cache when a product page is hit
-	var recent = readCookie('js-recently_viewed_products');
-
 	if (recent) {
-		$.get('/product/product/view_recent/'+recent+'/', function(data) {
+		$.get('/product/product/view_recent/', {
+			products: recent
+		},
+		function(data) {
 			$('.js-recent').html(data);
 		});
 	}
