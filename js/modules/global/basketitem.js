@@ -117,6 +117,10 @@
 
         	overlay.appendChild(box);
 
+
+
+        	document.body.style.height = '100%';
+        	document.body.style.overflow = 'hidden';
         	document.body.appendChild(overlay);
 
 

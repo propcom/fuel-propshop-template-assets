@@ -74,9 +74,6 @@ document.getElementById('js-ps-zoom-additional') && document.getElementById('js-
 });
 
 
-
-
-
 /**
  * Checks if in basket page via page id and appends the basket replacement logic to the basketChange event
  * @return {void}
@@ -93,6 +90,7 @@ document.getElementById('propshop-basket') && (function(){
 			}
 		}).done(function(){
 			document.getElementById('js-ps-ajax-overlay') && document.body.removeChild(document.getElementById('js-ps-ajax-overlay'));
+			document.body.style.height = document.body.style.overflow = 'auto';
 		}).fail(function(){
 			alert('we need some validation here');
 		});
