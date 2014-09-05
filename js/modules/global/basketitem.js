@@ -106,7 +106,7 @@
 
 
 
-        	overlay.style.position = 'absolute';
+        	overlay.style.position = 'fixed';
         	overlay.style.top = 0;
         	overlay.style.left = 0;
         	overlay.style.backgroundColor = '#222222';
