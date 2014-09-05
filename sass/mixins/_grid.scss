@@ -1,0 +1,121 @@
+//GRID
+
+//Grid mixin allowing to pass base grid width, number of columns and gap
+
+
+
+
+// Declared variables
+$_max-width: 960; //in px
+$_number-of-columns: 12;
+$_gutter: 20; //in px
+
+// Calculated variables
+$__margin: percentage(($_gutter)/$_max-width);
+
+$__col-width: (100% - ($__margin * ($_number-of-columns - 1))) / $_number-of-columns ;
+
+$__col-with--full : percentage(1/12);
+
+
+
+@mixin grid(){
+
+	@for $__i from 1 to $_number-of-columns+1{
+
+		.col#{$__i},%col#{$__i}{
+			margin-left: $__margin;
+			width: ($__col-width * $__i) + ($__margin * ($__i - 1));
+		}
+
+		.col#{$__i}--full{
+			width: $__col-width * $__i;
+		}
+
+
+		.col--1by#{$__i}{
+			width: percentage(1/$__i);
+		}
+
+	} // usage: .col$__i
+
+
+	.col--alpha{
+		margin-left: 0;
+	}
+
+	// Lets define the container behaviour
+	.container{
+		position: relative;
+		max-width: #{$_max-width}px;
+		margin-left:auto;
+		margin-right:auto;
+
+		@extend %cleared;
+
+		.ie8 &{
+			max-width: 960px;
+		}
+
+	}
+
+	.row {
+		position: relative;
+		width:100%;
+		margin : 0 auto;
+		display: block;
+		//@extend %clearfix;
+
+	}
+
+	@include bp-max($x-small){
+		.col--mob{
+			width: 95.833333333333333333333333333333% !important;
+			margin-left: auto !important;
+			margin-right: auto !important;
+			display: block !important;
+			float: none !important;
+		}
+	}
+
+}
+
+@include grid();
+
+
+@mixin col($__columns, $override: true){
+	margin-left: $__margin;
+	width: ($__col-width * $__columns) + ($__margin * ($__columns - 1));
+
+	@if($override){
+		&.col--alpha {
+			margin-left: 0;
+		}
+	} 
+	
+}
+
+@mixin col--full($__columns){
+	width: $__col-width * $__columns;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+@mixin col--alpha($__columns){
+	width: ($__col-width * $__columns) + ($__margin * ($__columns - 1));
+	margin-left: 0;
+}
+
+@mixin col--omega($__columns){
+	width: $__col-width * $__columns - $__margin;
+	margin-left: $__margin;
+	margin-right: 0;
+}
+
+
+
+
+//    Mixin initialization
+
+
+

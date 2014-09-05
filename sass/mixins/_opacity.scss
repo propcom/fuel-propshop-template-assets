@@ -1,0 +1,12 @@
+//	OPACITY
+
+//	sets opacity property in a cross-browser fashion
+
+@mixin opacity ($value)  {
+  $ms_opacity : $value * 100;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha($ms_opacity)";
+    filter: alpha(opacity=$ms_opacity);
+    opacity: $value;
+}
+
+//	usage: @include opacity(1);

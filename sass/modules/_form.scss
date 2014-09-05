@@ -1,0 +1,121 @@
+// Input styling
+
+.input{
+
+	width: 100%;
+	padding: 10px;
+	@include font-size($base-font-size, $base-font-size);
+	vertical-align: bottom;
+
+	&--text{}
+
+	&--password{}
+
+	&--textarea{}
+
+	&--checkbox{
+
+		float: left
+	}
+
+	.error &{
+		border-color: $error;
+	}
+
+
+
+	&--submit{
+
+        width: auto;
+		
+		@extend %btn;
+		@extend %fr;
+
+		@include font-size(20, 20);
+
+	}
+
+	&__card-image{
+		position: absolute;
+		width: 60px;
+		top: 1px;
+		right: 1px;
+		height: 100%;
+	}
+
+}
+
+
+//Groups
+
+.controls{
+	margin-bottom: 20px;
+	position: relative;
+}
+
+
+.control-group--label{
+
+	padding-top: 10px;
+
+	.input--checkbox{
+		width: auto;
+		height: #{$base-font-size}px;
+		width: #{$base-font-size}px;
+		margin-top: #{ ($base-line-height - $base-font-size) / 2}px;
+		margin-right: 10px;
+	} 
+
+	span{
+		float: left;
+	}
+}
+
+
+
+// Labels
+
+.required{
+	color: $error;
+}
+
+.help-inline{
+	color: orange;
+	@include font-size(12, 13);
+	position: absolute;
+	top: #{ $selects-height + 4}px;
+	left: 0;
+}
+
+
+// Search form
+ 
+.ps-search{
+
+	position: relative;
+
+	&__input{
+
+		padding-right: 25%;
+
+	}
+
+	&__btn{
+
+		position: absolute;
+		top: 0;
+		right: 0;
+		background: lightGrey;
+		border: none;
+		padding: 0;
+		margin: 0;
+		height: 100%;
+		width: 25%;
+
+		&:hover{
+			background: grey;
+		}
+
+
+	}
+}

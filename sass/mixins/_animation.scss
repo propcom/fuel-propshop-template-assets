@@ -1,0 +1,56 @@
+//	ANIMATION
+
+@mixin animation ($name, $origin, $duration, $easing, $delay, $iteration, $direction, $fill-mode) {
+
+  -webkit-animation-name: $name;
+  -webkit-transform-origin: $origin;
+  -webkit-animation-duration: $duration;
+  -webkit-animation-timing-function: $easing;
+  -webkit-animation-delay: $delay; 
+  -webkit-animation-iteration-count: $iteration;   
+  -webkit-animation-direction: $direction;
+  -webkit-animation-fill-mode: $fill-mode;
+
+  -moz-animation-name: $name;
+  -moz-transform-origin: $origin;
+  -moz-animation-duration: $duration;
+  -moz-animation-timing-function: $easing;
+  -moz-animation-delay: $delay; 
+  -moz-animation-iteration-count: $iteration;   
+  -moz-animation-direction: $direction;
+  -moz-animation-fill-mode: $fill-mode;
+
+  -ms-animation-name: $name;
+  -ms-transform-origin: $origin;
+  -ms-animation-duration: $duration;
+  -ms-animation-timing-function: $easing;
+  -ms-animation-delay: $delay; 
+  -ms-animation-iteration-count: $iteration;   
+  -ms-animation-direction: $direction;
+  -moz-animation-fill-mode: $fill-mode;
+
+  animation-name: $name;
+  transform-origin: $origin;
+  animation-duration: $duration;
+  animation-timing-function: $easing;
+  animation-delay: $delay; 
+  animation-iteration-count: $iteration;   
+  animation-direction: $direction;
+  animation-fill-mode: $fill-mode;
+
+}
+
+//	usage: @include animation(center center, flash, 2s, $easeInOut, 0, 2, infinite, alternate);
+//  
+
+@mixin frames($frame-name){
+
+  @-webkit-keyframes $frame-name{@content}
+  @-moz-keyframes $frame-name{@content}
+  @-ms-keyframes $frame-name{@content}
+  @keyframes $frame-name{@content}
+
+}
+
+
+

@@ -1,0 +1,86 @@
+//	BOX-SHADOW
+
+//	Takes up to 5 different params to compose a box shadow
+
+@mixin box-shadow($shadow1, $shadow2:false, $shadow3:false, $shadow4:false, $shadow5:false) {
+ $params: $shadow1;
+  @if $shadow2 
+    { $params: $shadow1, $shadow2; }
+    @if $shadow3 != false
+      { $params: $shadow1, $shadow2, $shadow3; }
+      @if $shadow4 != false
+        { $params: $shadow1, $shadow2, $shadow3, $shadow4; }
+        @if $shadow5 != false
+          { $params: $shadow1, $shadow2, $shadow3, $shadow4, $shadow5; }
+
+  -webkit-box-shadow: $params;
+     -moz-box-shadow: $params;
+          box-shadow: $params;
+}
+
+//	usage: @include box-shadow( 1px, 1px, 1px, 1px, #222222);
+
+
+
+//	BORDER-RADIUS
+
+//	sets the border-radius property, prefixed for common browsers, to the radius value passed
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+//	usage: @include border-radius(5px);
+//	usage: @include border-radius(5px 5px 0 0);
+
+
+@mixin round-elem{
+  @include border-radius(50%);
+}
+
+
+//	BOX-SIZING
+
+//	instantiates the box-sizing property according to the value passed in
+
+@mixin box-sizing ($value) {
+  -webkit-box-sizing: $value;
+     -moz-box-sizing: $value;
+          box-sizing: $value;
+}
+
+//	usage: @include box-sizing(border-box);
+
+
+
+//	INLINE-BLOCK
+
+//	Inline block implementation wit IE required hacks
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+//	@include inline-block
+
+
+
+// BLOCK-ALIGN--CENTER
+
+//	forces element centering by overriding margin and float properties
+
+@mixin block-align--center {
+    margin-left: auto!important;
+    margin-right: auto!important;
+    display: block!important;
+    float: none!important;
+}
+
+//	usage: @include block-align--center

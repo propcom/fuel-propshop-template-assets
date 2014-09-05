@@ -1,0 +1,28 @@
+//    Breakpoints
+
+$x-small: 360;
+$small: 480;
+$medium: 600;
+$large: 800;
+$x-large: 960;
+$xx-large: 1200;
+$xxx-large: 1600;
+
+
+//    Mixins
+
+@mixin bp-max($max){
+  @media screen and (max-width: #{$max}px){
+    @content
+  }
+}
+@mixin bp-min($min){
+  @media screen and (min-width: #{$min}px){
+    @content
+  }
+}
+@mixin bp-and($min, $max){
+  @media screen and (min-width: #{$min+1}px) and (max-width: #{$max}px){
+    @content
+  }
+}

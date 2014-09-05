@@ -1,0 +1,494 @@
+
+$account-nav-item-height: 60;
+
+
+.account-nav{
+	&__link{
+
+		background: lightGrey;
+		display: block;
+		font-variant: small-caps;
+		height: #{$account-nav-item-height}px;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		margin-bottom: 10px;
+
+		@include font-size(15, $account-nav-item-height);
+
+		&:hover, &.active{
+			background: grey;
+		}
+	}
+}
+
+@include bp-max($large){
+	.account-nav{
+
+		width: 100%;
+
+		&__link{
+
+			float: left;
+
+			&:nth-child(1){
+
+				@include col--alpha(3);
+
+			}
+			
+			@include col(3);
+			
+
+		}
+		
+	}
+}
+
+@include bp-max($large){
+	.account-nav{
+
+		&__link{
+
+			&:nth-child(odd){
+
+				@include col--alpha(6);
+
+			}
+
+			&:nth-child(even){
+
+				@include col(6);
+
+			}
+			
+
+			
+
+		}
+		
+	}
+}
+
+
+.account-content{
+
+}
+
+
+@include bp-max($large){
+	.account-content{
+		width: 100%;
+	}
+}
+
+
+
+.address-book{
+
+	&__addresses{
+
+		margin-bottom: 20px;
+
+
+		&__header{
+
+		}
+
+		&__address{
+
+			@include font-size($base-font-size - 2, $base-line-height);
+		}
+
+	}
+
+}
+
+@include bp-max($medium){
+
+	.address-book{
+
+		&__addresses{
+
+
+			&__address{
+
+				.col3{
+					@include col(4);
+				}
+
+				.col9{
+					@include col(8);
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
+@include bp-max(520){
+
+	.address-book{
+
+		&__addresses{
+
+
+			&__address{
+
+				.col3{
+					@include col(5);
+				}
+
+				.col9{
+					@include col(7);
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
+
+
+.other-addresses{
+	&__header{
+
+	}
+
+
+	&__list{
+		
+		margin-bottom: 40px;
+
+		&__row{
+			
+			
+			margin-bottom: 20px;
+
+			&__div{
+
+
+				&__address{
+
+					@include col--alpha(9);
+
+					p{
+						margin: 0;
+					}
+
+				}
+
+
+				&__actions{
+					@include col(3);
+
+					a{
+						display: block;
+					}	
+
+				}
+
+				
+
+			}
+
+		}
+	}
+}
+
+
+@include bp-max($medium){
+	.other-addresses{
+
+
+		&__list{
+			
+			
+
+			&__row{
+				
+				
+
+				&__div{
+
+
+					&__address{
+
+						@include col--alpha(8);
+
+					}
+
+
+					&__actions{
+						@include col(4);
+
+					}
+
+					
+
+				}
+
+			}
+		}
+	}
+}
+
+
+@include bp-max(460){
+	.other-addresses{
+
+		&__header{
+			margin-bottom: 30px;
+		}
+
+
+		&__list{
+
+
+
+			&__row{
+
+				&.hide-mb{
+					display: none;
+				}
+
+				border-top: 1px solid darken(lightGrey, 50%);
+				padding-top: 10px;
+
+
+
+				&__div{
+
+
+					&__address{
+
+						@include col--alpha(12);
+						float: none;
+
+					}
+
+
+					&__actions{
+						@include col--alpha(12);
+						float: none;
+						margin-top: 10px;
+
+						a{
+							display: inline;
+							padding: 5px 5px 5px 0;
+						}
+
+
+					}
+
+
+
+				}
+
+			}
+		}
+	}
+}
+
+
+.account-list{
+
+
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	&__row{
+
+		display: block;
+		border-top: 1px solid darken(lightGrey, 50%);
+		padding: #{$base-font-size}px 0;
+
+		&--header{
+			@include font-size($base-font-size + 2, $base-line-height );
+			border: none;
+		}
+
+
+		&__div{
+
+			float: left;
+			text-align: center;
+
+			.item-list &{
+				@include font-size($base-font-size - 1, $base-line-height - 2 );
+			}
+
+			&--id{
+				@include col--alpha(3);
+			}
+			&--date{
+				@include col(3);
+			}
+			&--cost{
+				@include col(2);
+
+			}
+			&--status{
+				@include col(2);
+
+			}
+			&--actions{
+				@include col(2);
+
+				a{
+					margin: 0;
+				}
+
+			}
+
+			&--title{
+				text-align: left;
+				@include col--alpha(5);
+			}
+
+			&--qty{
+				@include col(2);
+			}
+
+			&--price{
+				@include col(2);
+			}
+
+			&--total{
+				text-align: right;
+				@include col(3);
+			}
+			&--sts{
+				text-align: left;
+				@include col(4);
+			}
+
+			.show-mb{
+				display: none;
+			}
+
+		}
+	}
+}
+
+@include bp-max(550){
+
+	.account-list{
+
+		&__row{
+
+
+
+			&--header{
+				display: none;
+			}
+
+
+			&__div{
+
+
+
+
+				&--id{
+					@include col--alpha(6);
+				}
+				&--date{
+					@include col(6);
+				}
+				&--cost{
+					@include col--alpha(6);
+
+				}
+				&--status{
+					@include col(6);
+
+				}
+				&--actions{
+					margin-top: #{$base-font-size}px;
+					@include col--alpha(12);
+
+				}
+
+				&--title{
+				@include col--alpha(7);
+			}
+
+			&--qty{
+				text-align: left;
+				@include col(5);
+			}
+
+			&--price{
+				text-align: left;
+				@include col--alpha(7);
+			}
+
+			&--total{
+				text-align: left;
+				@include col(5);
+			}
+			&--sts{
+				text-align: center;
+				@include col--alpha(12);
+			}
+
+				.show-mb{
+					display: inline;
+				}
+
+			}
+		}
+	}
+
+}
+
+@include bp-max(380){
+
+	.account-list{
+
+		&__row{
+
+
+			&__div{
+
+
+				@include col--alpha(12);
+
+				.show-mb{
+					display: inline;
+				}
+
+			}
+		}
+	}
+
+}
+
+
+@include bp-max(380){
+	.order-address{
+		@include col--alpha(12);
+	}
+}
+
+
+.order-summary{
+	margin-bottom: #{$base-line-height * 2}px;
+	&__row{
+		display: block;
+		margin-bottom: 10px;
+		@include font-size($base-font-size + 2);
+		font-weight: bold;
+	}
+}
+
+
+
+
+

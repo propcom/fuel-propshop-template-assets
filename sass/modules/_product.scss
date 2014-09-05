@@ -1,0 +1,165 @@
+.product{
+
+	&__options{
+
+		&__option{
+
+			&__label{
+
+				display: block;
+
+			}
+
+
+			$colour-selector-size: 32;
+			$colour-selector-size-increase: 4;
+			&__color{
+				position: relative;
+				float: left;
+				width: #{$colour-selector-size}px;
+				height: #{$colour-selector-size}px;
+				margin-right: 10px;
+				@include hide-text;
+				@include round-elem;
+				font-size: 0;
+				padding: 4px;
+				overflow: visible; 
+
+				&.is-active{
+
+					&:after{
+						content: "";
+						display: block;
+						position: absolute;
+						top: -#{$colour-selector-size-increase / 2}px;
+						left: -#{$colour-selector-size-increase / 2}px;
+						width: #{$colour-selector-size + $colour-selector-size-increase}px;
+						height: #{$colour-selector-size + $colour-selector-size-increase}px;
+						background: transparent;
+						@include round-elem;
+						border: 1px solid black;
+						z-index: 10;
+
+					}
+
+					
+				}
+
+			}
+
+		}
+
+	}
+
+	&__quantity{
+
+		.not-saleable &{
+			@extend %is-hidden;
+		}
+
+	}
+
+	&__submit-btn{
+		.not-saleable &{
+			@extend %is-hidden;
+		}
+	}
+}
+
+
+.product-info{
+
+	position: relative;
+
+
+
+}
+
+
+.social-share-btns{
+	position: absolute;
+	top: 0;
+	right: 0;
+
+
+}
+
+.social-share-form{
+	position: absolute;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	padding-top: 20px;
+	width: 100%;
+	min-height: 100%;
+	z-index: -1;
+	background: $secondaryColor;
+	@include opacity(0);
+
+	&.is-open{
+		z-index: 1000;
+		@include transition(618ms $easeOut opacity);
+		@include opacity(1);
+	}
+
+	&__close{
+		position: absolute;
+		top: 0;
+		right: 0;
+		text-decoration: none;
+		color: $primaryColor;
+	}
+	
+}	
+
+.product-gallery{
+
+	&__zoom{
+
+		padding-bottom: 100%;
+		position: relative;
+
+		&__img{
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+	}
+
+}
+
+.product-complement{
+
+	&__title{
+
+	}
+
+	&__item{
+		float: left;
+		width: 23.4%;
+		margin-right: 2.1%;
+
+		&--end{
+			margin-right: 0;
+		}
+	}
+
+
+}
+
+@include bp-max($medium){
+
+	.product-info, .product-gallery{
+
+		margin-left: 0;
+		margin-right: 0;
+		width: 100%;
+		
+	}
+
+
+}
+
+
+

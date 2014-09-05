@@ -1,0 +1,27 @@
+$button-color: orange;
+
+.btn, %btn{
+	
+	background: $button-color;
+	border: none;
+	border-bottom: 3px solid darken($button-color, 15%);
+	color: white;
+	display: block;
+	font-variant: small-caps;
+	font-style: normal;
+	font-weight: normal;
+	margin-top: 10px;
+	padding: 1% 10px;
+	text-align: center;
+	text-decoration: none;
+	text-transform: lowercase;
+	width: 100%;
+
+	@include font-size($base-font-size + 4, $base-font-size + 4);
+
+	&:hover{
+		background: darken($button-color, 15%);
+	}
+
+	
+}

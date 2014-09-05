@@ -1,0 +1,52 @@
+.styled-select{
+
+	height: #{$selects-height}px;
+	position: relative;
+	border: 1px solid #a8a8a8;
+	background: white;
+
+	&__select{
+		position: relative;
+		z-index: 100;
+		display: block;
+		width: 100%;
+		min-height: 100%;
+		@include opacity(0);
+
+
+	}
+
+	&__span{
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		height: 100%;
+		width: 100%;
+		padding: 0 10px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		vertical-align: middle;
+
+		@include font-size($base-font-size, $selects-height);
+
+		&:after{
+			content: "";
+			position: absolute;
+			display: block;
+			height: 0;
+			width: 0;
+			top: 50%;
+			margin-top: -5px;
+			right: 10px;
+			border-right: 6px solid transparent;
+			border-left: 6px solid transparent;
+			border-top: 10px solid #a8a8a8;
+			@include border-radius(2px);
+		}
+
+	}
+
+	
+}

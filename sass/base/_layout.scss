@@ -1,0 +1,48 @@
+@if $global-border-box == true{
+//Let’s make the box model all nice, shall we...?
+
+	html{
+		 @include box-sizing(border-box);
+
+		 *{
+        &,
+        &:before,
+        &:after{
+            @include box-sizing(inherit);
+        }
+    }
+	}
+
+    
+    
+}
+
+
+
+$header-def-nav-height: 40;
+
+
+.l-header{
+
+    .cleared{
+
+        div{
+            background: $quarternaryColor;
+            min-height: #{$header-def-nav-height}px;
+
+            &.is-hovered{
+                 background: darken($quarternaryColor, 20%);
+            }
+
+            a{
+                display: block;
+                text-align: center;
+                @include font-size(16, $header-def-nav-height);
+
+                &:hover{
+                    background: darken($quarternaryColor, 20%);
+                }
+            }
+        }
+    }
+}

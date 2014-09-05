@@ -1,0 +1,104 @@
+// variable implementation - will make it easier to style 
+
+
+$cms-menu-font-size : 16;
+$cms-menu-line-height : 28;
+
+.cms{
+
+	&--header-menu{
+		height: #{$cms-menu-line-height}px;
+		position: relative;
+
+
+		&__menu{
+
+			list-style: none;
+			margin: 0;
+			overflow: hidden;
+			padding: 0;
+			position: absolute;
+				left: 0;
+				top: 0;
+			text-align: center;
+			width: 100%;
+			height: 100%;
+			z-index: 100;
+
+			@include hardwareAccelerate;
+			@include transition(321ms $easeInOut height);
+
+			&.is-open{
+
+				background: white;
+				@include box-shadow( 0 2px 1px 1px #222222);
+
+			}
+
+
+			&__item{
+
+				position: relative;
+
+				&__anchor{
+					display: block;
+					background: LightGrey;
+					@include font-size($cms-menu-font-size, $cms-menu-line-height);
+				}
+
+				&__submenu{
+					list-style: inherit;
+					margin: 0;
+					padding: 0;
+					position: absolute;
+					top: #{$cms-menu-line-height}px;
+					left: 0;
+					width: 100%;
+					z-index: 1000;
+
+					@include hardwareAccelerate;
+					@include opacity(0);
+					@include transition(321ms $easeInOut opacity);
+
+					&.is-open{
+						@include opacity(1);
+					}
+					
+
+					.cms-menu__item__anchor{
+						@include font-size($cms-menu-font-size - 2, $cms-menu-line-height);
+					}
+				}
+			}
+		}
+	}
+
+	&--footer-menu{
+
+		padding: 20px 0 0;
+		margin: 20px 0 0;
+		border-top: 2px solid lightGrey;
+
+		&__menu{
+			list-style: none;
+			padding: 0;
+			margin: 0;
+
+			&__item{
+
+				text-align: center;
+
+				
+				&__anchor{
+					color: grey;
+					text-decoration: none;
+					font-style: small-caps;
+					text-transform: uppercase;
+				}
+
+			}
+		}
+
+	}
+}
+

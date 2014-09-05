@@ -1,0 +1,477 @@
+.slider-headings{
+
+  &__title{
+    text-align: center;
+  }
+
+  &__subtitle{
+    text-align: center;
+  }
+
+}
+
+
+.slider{
+
+	&__list{
+
+
+	}
+
+	&__item{
+
+
+		&__caption{
+			@extend %absolute-center;
+			background: white;
+		}
+	}
+
+  &__btn{
+
+     $btn-colour: grey;
+     $btn-size: 40px;
+
+    position: absolute;
+      top: 50%;
+    width: 0;
+    height: 0;
+    border-top: $btn-size solid transparent;
+    border-bottom: $btn-size solid transparent;
+
+    @include hide-text;
+    @include opacity(.4);
+    @include transform( translateY(-50%) );
+
+    z-index: 1;
+
+
+
+    &--previous{
+       left: 10px; 
+       border-right: $btn-size solid $btn-colour;
+
+    }
+
+    &--next{
+        right: 10px;
+       border-left: $btn-size solid $btn-colour;
+    
+    }
+  }
+}
+
+// JS dependencies
+// 
+// 
+
+$slider-js-class: js-ps-slider;
+
+.#{$slider-js-class}{
+
+    position: relative;
+
+    padding-bottom: percentage(500/1240);
+
+    &-list{
+    overflow: hidden;
+    position: absolute;
+      left: 0;
+      top: 0;
+    width: 100%;  
+    padding-bottom: percentage(500/1240);
+     @include hardwareAccelerate;
+
+      &-item{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+     @include hardwareAccelerate;
+
+     &-current{
+
+      display: block;
+      z-index: 10;
+
+    }
+
+    &-link{
+      display: block;
+
+
+    }
+
+  }
+
+}
+}
+
+@mixin slider--slide(){
+
+      $speed: 382;
+
+     .transition-slide{
+
+   .#{$slider-js-class}{
+
+      &-list{
+
+      &-item{
+
+        &-current{
+
+            @include animation(fadeIn, center center, #{$speed}ms, cubic-bezier(0.455, 0.03, 0.515, 0.955), 0, 1, normal, both);
+
+        }
+
+        &-hide{
+
+          &-prev{
+
+            @include animation(slideToLeft, center center, #{$speed}ms, linear, 10ms, 1, normal, both);
+            display: block;
+
+          } 
+
+          &-next{
+        
+            display: block;
+            @include animation(slideToRight, center center, #{$speed}ms, linear, 10ms, 1, normal, both);
+            
+          }
+        }
+
+        &-show{
+
+
+          &-prev{
+
+            @include animation(slideFromLeft, center center, #{$speed}ms, linear, 10ms, 1, normal, both);
+
+          }
+
+          &-next{
+
+            @include animation(slideFromRight, center center, #{$speed}ms, linear, 10ms, 1, normal, both);
+
+          }
+        }
+      }
+    }
+
+    }
+
+    
+  }
+
+
+    @include frames(slideFromLeft){
+      0%{
+        @include transform(translateX(-100%));
+      }
+    } 
+
+    @include frames(slideToLeft){
+      99%{
+          @include opacity(1);
+      }
+
+      100%{
+          @include opacity(0);
+        @include transform(translateX(-100%));
+      }
+    }
+
+    @include frames(slideFromRight){
+      0%{
+        @include transform(translateX(100%));
+      }
+    }
+
+    @include frames(slideToRight){
+      99%{
+          @include opacity(1);
+      }
+
+      100%{
+          @include opacity(0);
+        @include transform(translateX(100%));
+      }
+    }
+
+}
+
+@include slider--slide();
+
+
+@mixin slider--slide-vertical(){
+
+      $v-speed: 382;
+
+     .transition-slide-vertical{
+
+   .#{$slider-js-class}{
+
+      &-list{
+
+      &-item{
+
+        &-current{
+
+            @include animation(fadeIn, center center, #{$v-speed}ms, cubic-bezier(0.455, 0.03, 0.515, 0.955), 0, 1, normal, both);
+
+        }
+
+        &-hide{
+
+          &-prev{
+
+            @include animation(slideToTop, center center, #{$v-speed}ms, linear, 10ms, 1, normal, both);
+            display: block;
+
+          } 
+
+          &-next{
+        
+            display: block;
+            @include animation(slideToBottom, center center, #{$v-speed}ms, linear, 10ms, 1, normal, both);
+            
+          }
+        }
+
+        &-show{
+
+
+          &-prev{
+
+            @include animation(slideFromTop, center center, #{$v-speed}ms, linear, 10ms, 1, normal, both);
+
+          }
+
+          &-next{
+
+            @include animation(slideFromBottom, center center, #{$v-speed}ms, linear, 10ms, 1, normal, both);
+
+          }
+        }
+      }
+    }
+
+    }
+
+    
+  }
+
+
+    @include frames(slideFromTop){
+      0%{
+        @include transform(translateY(-100%));
+      }
+    } 
+
+    @include frames(slideToTop){
+      99%{
+          @include opacity(1);
+      }
+
+      100%{
+          @include opacity(0);
+        @include transform(translateY(-100%));
+      }
+    }
+
+    @include frames(slideFromBottom){
+      0%{
+        @include transform(translateY(100%));
+      }
+    }
+
+    @include frames(slideToBottom){
+      99%{
+          @include opacity(1);
+      }
+
+      100%{
+          @include opacity(0);
+        @include transform(translateY(100%));
+      }
+    }
+
+}
+
+//@include slider--slide-vertical();
+
+
+
+@mixin slider--fold(){
+
+      $speed: 382;
+
+     .transition-fold{
+
+   .#{$slider-js-class}{
+
+      &-list{
+
+      &-item{
+
+        &-hide{
+          &-prev, &-next{
+            display: block;
+          }
+        }
+
+        &-show{
+
+
+          &-prev{
+            display: block;
+            @include animation(foldFromLeft, bottom center, #{$speed}ms, linear, 0, 1, normal, both);
+
+          }
+
+          &-next{
+            display: block;
+            @include animation(foldFromRight, top center, #{$speed}ms, linear, 0, 1, normal, both);
+
+          }
+        }
+      }
+    }
+
+    }
+
+    
+  }
+
+
+    @include frames(foldFromLeft){
+      0%{
+        @include opacity(0.4);
+        @include transform(rotateX(-90deg));
+      }
+      90%{
+        @include opacity(1);
+      }
+    } 
+
+
+    @include frames(foldFromRight){
+      0%{
+         @include opacity(0.4);
+        @include transform(rotateX(90deg));
+      }
+
+      90%{
+        @include opacity(1);
+      }
+    }
+
+}
+
+//@include slider--fold();
+
+@mixin slider--scale(){
+
+  .transition-scale{
+
+   .#{$slider-js-class}{
+
+      &-list{
+
+      &-item{
+
+        &-current{
+            @include opacity(0);
+           @include animation(fadeIn, center center, 618ms, cubic-bezier(0.455, 0.03, 0.515, 0.955), 0, 1, normal, both);
+
+        }
+
+        &-hide{
+
+          &-prev, &-next{
+
+            display: block;
+
+            @include animation(scaleOut, center center, 618ms, cubic-bezier(0.455, 0.03, 0.515, 0.955), 0, 1, normal, both);
+            
+          }
+        }
+      }
+    }
+
+    }
+
+    
+  }
+
+
+    @include frames(scaleOut){
+    100%{
+      @include opacity(0);
+      @include transform(scale(1.6));
+    }
+  }
+
+  @include frames(fadeIn){
+    0%{
+      @include opacity(0);
+    }
+    100%{
+      @include opacity(1);
+    }
+  }
+
+}
+
+//@include slider--scale();
+
+
+
+@mixin slider--fade(){
+
+   .transition-fade{
+
+   .#{$slider-js-class}{
+
+      &-list{
+
+      &-item{
+
+        &-current{
+
+            @include animation(fadeIn, center center, 618ms, cubic-bezier(0.455, 0.03, 0.515, 0.955), 0, 1, normal, both);
+
+        }
+
+        &-hide{
+
+          &-prev, &-next{
+
+            display: block;
+            z-index: 10000;
+            
+          }
+        }
+      }
+    }
+
+    }
+
+    
+  }
+
+  @include frames(fadeIn){
+    0%{
+      @include opacity(0);
+    }
+    100%{
+      @include opacity(1);
+    }
+  }
+
+}
+//@include slider--fade();
+

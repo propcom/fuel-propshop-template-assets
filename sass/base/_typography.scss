@@ -1,0 +1,153 @@
+//TYPOGRAPHY
+
+body{
+  font-family:$primaryFont;
+  @include font-size($base-font-size);
+  color:$primaryColor;
+  -webkit-font-smoothing: antialiased;
+}
+
+small,
+.small {
+    @include font-size($milli-size);
+}
+
+ 
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+
+b,
+strong {
+  font-weight: $bold;
+}
+ 
+
+dfn {
+  font-style: italic;
+}
+
+
+//
+ // Address styling not present in IE 8/9.
+ 
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+
+//
+ // Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ 
+
+sub,
+sup {
+  @include font-size(12, 0);
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+
+
+
+//    Headings
+
+%headings {
+  color:$primaryColor;
+  font-family: $secondaryFont;
+  font-weight:500;
+}
+
+
+
+// Standard Headings
+
+.h_alpha,
+%h_alpha {
+  @extend %headings;
+  @include font-size($h1-size);
+}
+
+.h_beta,
+%h_beta {
+  @extend %headings;
+  @include font-size($h2-size, $h2-size);
+}
+
+.h_gamma,
+%h_gamma {
+  @extend %headings;
+  @include font-size($h3-size);
+}
+
+.h_delta,
+%h_delta {
+  @extend %headings;
+  @include font-size($h4-size);
+}
+
+.h_epsilon,
+%h_epsilon {
+  @extend %headings;
+  @include font-size($h5-size);
+}
+
+.h_zeta,
+%h_zeta{
+  @extend %headings;
+  @include font-size($h6-size);
+}
+
+
+// Mega Headlines
+.h_giga,
+%h_giga {
+    @extend %headings;
+    @include font-size($giga-size);
+}
+.h_mega,
+%h_mega {
+    @extend %headings;
+    @include font-size($mega-size);
+}
+.h_kilo,
+%h_kilo {
+    @extend %headings;
+    @include font-size($kilo-size);
+}
+
+
+// Micro Headlines
+
+.h_milli,
+%h_milli {
+   @extend %headings;
+    @include font-size($milli-size);
+}
+.h_micro,
+%h_micro {
+    @extend %headings;
+    @include font-size($micro-size);
+}
+
+
+//TYPEKIT GOOD PRACTICE
+
+.wf-loading {
+    @include opacity(0);
+  }
+  .wf-active h1 {
+    @include opacity(1);
+  }
+

@@ -1,0 +1,59 @@
+//	All mixins related to typography are placed in this file
+
+
+
+//	FONT-SIZE
+//	Takes a mandatory integer value representing the size of the font in pixels and return it's rem counterpart as well as a pixel fallback
+//	Takes a second optional integer value representing the line-height of the font and return it's rem counterpart as well as a pixel fallback
+
+@mixin font-size($sizeValue: 16, $line: $sizeValue * 1.75){
+  font-size: ($sizeValue * 1) + px;
+  line-height: ($line * 1) + px;
+  font-size: ($sizeValue / 10) + rem;
+  line-height: ($line / 10) + rem;
+}
+
+//	usage: @include font-size(13, 13);
+
+
+
+//	WORD-BREAK
+
+//	Avoids the creation of long words by setting the word-break property to break-all
+
+@mixin word-break {
+  -ms-word-break: break-all;
+  word-break: break-all;
+
+  // Non standard for webkit
+  word-break: break-word;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  // -webkit-hyphens: auto;
+  // -moz-hyphens: auto;
+  // hyphens: auto;
+
+  // -webkit-hyphenate-before: 2;
+  // -webkit-hyphenate-after: 3;
+  // hyphenate-lines: 3;
+}
+
+//	@include word-break;
+
+
+//	HIDE-TEXT
+//	Indents the text in a block in order to hide it
+
+@mixin hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+}
+
+//	usage: @include hide-text
+
+
+

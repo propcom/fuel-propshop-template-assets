@@ -1,0 +1,79 @@
+// VARIABLES
+
+$error: #ff0000; // error red colour
+$success: #00ff00; // success green colour
+$info: #0000ff; // info blue colour
+$notice: #ffff00; // alert yellow colour
+$alert-close-size: 20;
+$alert-height: 60;
+
+
+.alert{
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000000;
+
+
+	&--success{
+
+		background: $success;
+	}
+
+
+	&--info{
+
+		background: $info;
+	}
+
+
+	&--error{
+
+		background: $error;
+	}
+
+
+	&--notice{
+
+		background: $notice;
+	}
+
+
+	&__container{
+
+
+		&__copy{
+
+			margin: 0;
+			text-align: center;
+			vertical-align: middle;
+
+			@include font-size(16, $alert-height);
+
+		}
+
+		&__close{
+
+			color: black;
+			display: block;
+			height: #{$alert-close-size}px;
+			position: absolute;
+				top: 0;
+				right: 10px;
+			text-align: center;
+			text-decoration: none;
+			vertical-align: middle;
+			width: #{$alert-close-size}px;
+
+			@include font-size($alert-close-size, $alert-close-size);
+			@include opacity(0.6);
+
+
+			&:hover{
+
+				@include opacity(1);
+			}
+		}
+	}
+}
