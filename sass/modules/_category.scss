@@ -435,4 +435,10 @@ $category-grid-initial-left-margin: 25.5208333333%;
 			@include transform(rotate(180deg));
 		}
 	}
+
+	input[type="checkbox"]{
+		position: absolute;
+		left: 0;
+		top: 6px;
+	}
 }
