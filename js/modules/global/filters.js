@@ -2,9 +2,9 @@
 	
 	"use strict";
 
-	$('.js-ps-filter-content.is-open').css('height', function(){
-		return ($(this).children().length * $(this).children()['0'].clientHeight) +'px';
-	});
+	// $('.js-ps-filter-content.is-open').css('height', function(){
+	// 	return ($(this).children().length * $(this).children()['0'].clientHeight) +'px';
+	// });
 
 
 	/**
@@ -13,9 +13,9 @@
 	 * @param  {event} evt Filter trigger click event listener
 	 * @return {void}
 	 */
-	$(document).on('click', '.js-ps-filter-trigger', function(evt){
+	$(document).on('click touchend', '.js-ps-filter-trigger', function(evt){
 
-
+		evt.preventDefault();
 
 
 
@@ -24,7 +24,7 @@
 		 *
 		 * @type {JQuery} Event target sibling
 		 */
-		var sibling = $(evt.target).siblings('.js-ps-filter-content');
+		var sibling = $(this).parents('.filter-collection').find('.js-ps-filter-content');
 
 
 		/**
@@ -32,20 +32,7 @@
 		 *  
 		 * @return {void}
 		 */
-		sibling.hasClass('is-open') ? sibling.css({'height': 0}).removeClass('is-open') : sibling.css('height', function(){
-			return ($(this).children().length * $(this).children()['0'].clientHeight) +'px';
-		}).addClass('is-open');
-
-		sibling.on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function(){
-
-			$('#js-ps-category-page').css('min-height', function(){
-		        return ( $('#js-ps-filters').height() + $('#search-filter-filters').height() )+'px';
-		    });
-		})
-
-
-		
-
+		sibling.hasClass('is-open') ? sibling.slideUp(382).removeClass('is-open') : sibling.slideDown(382).addClass('is-open');
 
 	});
 
@@ -55,7 +42,7 @@
 	  * @param  {event} evt Form trigger click event listener
 	  * @return {[type]}     [description]
 	  */
-	$(document).on('click','.js-filter-form-trigger', function(evt){
+	$(document).on('click touchend','.js-filter-form-trigger', function(evt){
 								
 		evt.preventDefault();
 
@@ -64,25 +51,36 @@
 		 * 
 		 * @type {JQuery}
 		 */
-		var btn = $(this), 
+		var btn = $(this);
 
-		/**
-		 * Caching filter's header height; 
-		 * 
-		 * @type {number}
-		 */
-		headerHeight = document.getElementById('js-ps-filters-header').clientHeight;
 
 
 		/**
 		 * Handler logic: if open remove height and close, if closed add height and open  
 		 * @return {void}
 		 */
-		btn.parent().hasClass('is-open')? btn.parent().css('height', function(){
-			return headerHeight+'px';
-		}).removeClass('is-open') : btn.parent().css('height', function(){
-			return (btn.parent().children('form').height() + headerHeight)+'px'; 
-		}).addClass('is-open');
+		btn.parent().find('#search-filter-filters').hasClass('is-open')? btn.parent().find('#search-filter-filters').slideUp(382).removeClass('is-open') : btn.parent().find('#search-filter-filters').slideDown(382).addClass('is-open');
+	});
+
+
+	$(document).on('click touchend', '.js-ps-filter-dropdown', function(evt){
+
+		evt.preventDefault();
+
+		var $this = $(this), list = $this.parent('dd').find('dl');
+
+		list.hasClass('is-open') ? (function(){
+
+			$this.removeClass('is-active');
+			list.slideUp(382).removeClass('is-open');
+
+		}()) : (function(){
+
+			$this.addClass('is-active');
+			list.slideDown(382).addClass('is-open')
+
+		}());
+
 	});
 	
 })(jQuery);
