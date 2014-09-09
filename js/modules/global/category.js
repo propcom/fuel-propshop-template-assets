@@ -31,10 +31,6 @@ document.getElementById('js-ps-category-page') && (function($){
 
                 if(history.pushState){ history.pushState(state, "", "/search/index"+state)};
 
-                $('.js-ps-filter-content.is-open').css('height', function(){
-                    return ($(this).children().length * $(this).children()['0'].clientHeight) +'px';
-                });
-
                 $('#js-ps-category-page').css('min-height', function(){
                     return ( $('#js-ps-filters').get(0).clientHeight + $('#search-filter-filters').get(0).clientHeight )+'px';
                 });
