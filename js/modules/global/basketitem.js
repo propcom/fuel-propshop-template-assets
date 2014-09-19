@@ -1,5 +1,14 @@
 ;(function($){
 
+	var addMessage = function(type, message) {
+
+		$('.alert') && $('.alert').remove();
+
+		$(document.body)
+		.prepend('<div class="row alert alert--' + type + '" id="js-ps-alert"><div class="container alert__container"><a class="alert__container__close" id="js-ps-alert-close" href="#" data-dismiss="alert">&times;</a><p class="alert__container__copy">' + message + '</p></div></div>');
+
+	};
+
 	var BasketItem = function( element, options) {
 		this.options = $.extend({}, $.fn.basketItem.defaults, options)
 		this.$element = $(element)
@@ -148,7 +157,7 @@
 			&& document.body.removeChild(document.getElementById('js-ps-ajax-overlay'));
 			var response = jQuery.parseJSON(jqXHR.responseText);
 			if ('undefined' != typeof response.message) {
-				console.error(response.message);
+				addMessage('error', response.message);
 			}
 		});
 	}
