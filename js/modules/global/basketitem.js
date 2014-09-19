@@ -1,5 +1,5 @@
 ;(function($){
-	
+
 	var BasketItem = function( element, options) {
 		this.options = $.extend({}, $.fn.basketItem.defaults, options)
 		this.$element = $(element)
@@ -43,28 +43,28 @@
 	BasketItem.prototype = {
 
 		constructor: BasketItem,
-		
+
 		add: function(e) {
 			e && e.preventDefault()
 			if (this.options.productId) {
 				makeRequest({'id' : this.options.productId}, this.options.addUrl, this.options.method)
 			}
 		},
-		
+
 		remove: function(e) {
 			e && e.preventDefault()
 			if (this.options.productId) {
 				makeRequest({'id' : this.options.productId}, this.options.removeUrl, this.options.method)
 			}
 		},
-		
+
 		increment: function(e) {
 			e && e.preventDefault()
 			if (this.options.productId) {
 				makeRequest({'id' : this.options.productId }, this.options.incrementUrl, this.options.method)
 			}
 		},
-		
+
 		decrement: function(e) {
 			e && e.preventDefault()
 			if (this.options.productId) {
@@ -72,8 +72,8 @@
 			}
 		}
 	}
-	
-	
+
+
 	function makeRequest(reqData, requestUrl, method, callback) {
 		var that = this;
         method = method || 'POST';
@@ -85,7 +85,7 @@
         	var overlay = document.createElement('div'), box = document.createElement('p');
 
         	overlay.id = 'js-ps-ajax-overlay';
- 
+
 
 
         	box.innerText = 'Updating Basket...';
@@ -125,7 +125,7 @@
 
 
         })();
-		
+
 		$.ajax({
 			url: requestUrl,
 			type: method,
@@ -142,22 +142,30 @@
                     $.event.trigger('basketChanged', data);
                 }
 			}
+		})
+		.fail(function(jqXHR, textStatus, errorThrown) {
+			document.getElementById('js-ps-ajax-overlay')
+			&& document.body.removeChild(document.getElementById('js-ps-ajax-overlay'));
+			var response = jQuery.parseJSON(jqXHR.responseText);
+			if ('undefined' != typeof response.message) {
+				console.error(response.message);
+			}
 		});
 	}
-	
+
 	$.fn.basketItem = function(option) {
-		
+
 		return this.each(function() {
 			var $this = $(this),
 			data = $this.data('basketitem')
 			options = $.extend({}, $.fn.basketItem.defaults, $this.data(), typeof option == 'object' && option)
-			
+
 			if(!data) $this.data('basketitem', (data = new BasketItem(this, options)))
-			
+
 			if(typeof option == 'string') data[option]()
 		})
 	}
-	
+
 	$.fn.basketItem.defaults = {
 		method : 'POST',
 		addUrl : '/basket/rest/add.json',
@@ -166,22 +174,22 @@
 		decrementUrl : '/basket/rest/decr.json',
 		productId : ''
 	};
-	
-		
+
+
 	var setupBasket = function() {
 		$('[data-basket="item"]').each(function(){
 			var $this = $(this),
 			productId = $this.attr('data-product-id'),
-			option = $.extend({'productId' : productId}, $this.data())				
+			option = $.extend({'productId' : productId}, $this.data())
 			$this.basketItem(option)
 		});
 	}
-	
+
 	setupBasket();
-	
+
 	$(document).ajaxComplete(function(){
 		setupBasket();
 	});
-	
+
 
 })(jQuery)
