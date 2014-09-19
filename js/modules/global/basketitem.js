@@ -1,14 +1,5 @@
 ;(function($){
 
-	var addMessage = function(type, message) {
-
-		$('.alert') && $('.alert').remove();
-
-		$(document.body)
-		.prepend('<div class="row alert alert--' + type + '" id="js-ps-alert"><div class="container alert__container"><a class="alert__container__close" id="js-ps-alert-close" href="#" data-dismiss="alert">&times;</a><p class="alert__container__copy">' + message + '</p></div></div>');
-
-	};
-
 	var BasketItem = function( element, options) {
 		this.options = $.extend({}, $.fn.basketItem.defaults, options)
 		this.$element = $(element)
@@ -84,81 +75,49 @@
 
 
 	function makeRequest(reqData, requestUrl, method, callback) {
-		var that = this;
-        method = method || 'POST';
-
-
-        document.getElementById('propshop-basket') && (function () {
-
-
-        	var overlay = document.createElement('div'), box = document.createElement('p');
-
-        	overlay.id = 'js-ps-ajax-overlay';
-
-
-
-        	box.innerText = 'Updating Basket...';
-        	box.style.position = 'absolute';
-        	box.style.top = '50%';
-        	box.style.left = '50%';
-        	box.style.backgroundColor = '#000000';
-        	box.style.opacity = 0.7;
-        	box.style.width = '300px';
-        	box.style.height = '50px';
-        	box.style.marginLeft = '-150px';
-        	box.style.marginright = '-25px';
-        	box.style.borderRadius = '5px';
-        	box.style.border = '1px solid white';
-        	box.style.textAlign = 'center';
-        	box.style.lineHeight = '50px';
-        	box.style.color = 'white';
-
-
-
-        	overlay.style.position = 'fixed';
-        	overlay.style.top = 0;
-        	overlay.style.left = 0;
-        	overlay.style.backgroundColor = '#222222';
-        	overlay.style.opacity = 0.5;
-        	overlay.style.width = '100%';
-        	overlay.style.height = '100%';
-        	overlay.style.zIndex = '1000000';
-
-        	overlay.appendChild(box);
-
-
-
-        	document.body.style.height = '100%';
-        	document.body.style.overflow = 'hidden';
-        	document.body.appendChild(overlay);
-
-
-        })();
 
 		$.ajax({
 			url: requestUrl,
-			type: method,
+			type: method || 'POST',
 			dataType: 'JSON',
 			data: reqData,
 			cache: false,
-			success: function(data) {
-                if(callback != null)
-                {
-                    callback(data);
-                }
-                else
-                {
-                    $.event.trigger('basketChanged', data);
-                }
+			beforeSend: function(){
+
+				window.ajaxOverlay.add('Updating your basket...');
+
 			}
-		})
-		.fail(function(jqXHR, textStatus, errorThrown) {
-			document.getElementById('js-ps-ajax-overlay')
-			&& document.body.removeChild(document.getElementById('js-ps-ajax-overlay'));
-			var response = jQuery.parseJSON(jqXHR.responseText);
-			if ('undefined' != typeof response.message) {
-				addMessage('error', response.message);
+		}).done(function(data, status, response, callback){
+
+			typeof callback === 'function' ? callback(data) : $.event.trigger('basketChanged', data);
+			
+		}).fail(function(response) {
+			
+			if (typeof response.responseJSON !== 'undefined') {
+				window.addMessage('error', response.responseJSON.message);
 			}
+
+		}).then(function(){
+
+			if(!document.getElementById('propshop-basket-section')){
+				return true;
+			}
+
+			return $.ajax({
+						url: '/basket/full',
+						type: 'GET',
+						cache: false
+					}).done(function(data){
+						$('#propshop-basket-section').replaceWith(data);
+						window.addMessage('success', 'Your basket has been updated');
+					}).fail(function(){
+						document.location.reload(true);
+					})
+
+		}).always(function(){
+
+			window.ajaxOverlay.remove();
+
 		});
 	}
 

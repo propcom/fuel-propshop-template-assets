@@ -165,15 +165,6 @@ document.getElementById('js-ps-ajax-wishlist-logged') && (function($) {
 
 		e.preventDefault();
 
-		addMessage = function(type, message) {
-
-			$('.alert') && $('.alert').remove();
-
-			$(document.body)
-				.prepend('<div class="row alert alert--' + type + '" id="js-ps-alert"><div class="container alert__container"><a class="alert__container__close" id="js-ps-alert-close" href="#" data-dismiss="alert">&times;</a><p class="alert__container__copy">' + message + '</p></div></div>');
-
-		};
-
 		$.ajax({
 			url: '/wishlist/rest/add.json',
 			data: {
@@ -182,12 +173,12 @@ document.getElementById('js-ps-ajax-wishlist-logged') && (function($) {
 			type: 'GET',
 			cache: false,
 			success: function(data) {
-				!data.success && addMessage('error', 'There was a problem adding your product to the wishlis, please try again later.');
-				data.success === 0 && addMessage('error', data.msg);
-				data.success === 1 && addMessage('success', data.msg);
+				!data.success && window.addMessage('error', 'There was a problem adding your product to the wishlis, please try again later.');
+				data.success === 0 && window.addMessage('error', data.msg);
+				data.success === 1 && window.addMessage('success', data.msg);
 			}
 		}).fail(function(data) {
-			addMessage('error', 'There was a problem adding your product to the wishlis, please try again later.');
+			window.addMessage('error', 'There was a problem adding your product to the wishlis, please try again later.');
 		});
 
 	});
