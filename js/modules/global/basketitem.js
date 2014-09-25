@@ -90,9 +90,9 @@
 		}).done(function(data, status, response, callback){
 
 			typeof callback === 'function' ? callback(data) : $.event.trigger('basketChanged', data);
-			
+
 		}).fail(function(response) {
-			
+
 			if (typeof response.responseJSON !== 'undefined') {
 				window.addMessage('error', response.responseJSON.message);
 			}

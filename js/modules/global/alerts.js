@@ -57,13 +57,20 @@
 		});
 	});
 
+
+
 	window.addMessage = function(type, message) {
 
-		$('.alert') && $('.alert').remove();
+		$('#js-ps-alert') && $('#js-ps-alert').remove();
 
-		$(document.body)
-		.prepend('<div class="row alert alert--' + type + '" id="js-ps-alert"><div class="container alert__container"><a class="alert__container__close" id="js-ps-alert-close" href="#" data-dismiss="alert">&times;</a><p class="alert__container__copy">' + message + '</p></div></div>');
+		var msg = $('#js-ps-alert-template').clone();
+		msg.attr('id', 'js-ps-alert')
+		.addClass('alert--' + type);
+		msg.find('.js-ps-alert-close').attr('id', 'js-ps-alert-close');
+		msg.find('.js-ps-alert-copy').html(message);
+		msg.removeClass('visuallyhidden');
 
+		$(document.body).prepend(msg);
 	};
 
 
