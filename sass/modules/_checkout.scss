@@ -482,15 +482,46 @@
 
 .payment-methods{
 
+	div{
+		@extend %cleared;
+	}
+}
 
-	&__imgs{
 
+.payment-method{
+	@include transition(318ms opacity $easeOut);
+	@include opacity(0.15);
 
-		&__img{
+}
 
-			float: right;
-			padding-left: 10px;
-			width: 25%;
+.is-card{
+	&.visa{
+		.payment-method--visa{
+			@include opacity(1);
+		}
+	}
+}
+
+.is-card{
+	&.mastercard{
+		.payment-method--mastercard{
+			@include opacity(1);
+		}
+	}
+}
+
+.is-card{
+	&.maestro{
+		.payment-method--maestro{
+			@include opacity(1);
+		}
+	}
+}
+
+.is-card{
+	&.americanexpress{
+		.payment-method--americanexpress{
+			@include opacity(1);
 		}
 	}
 }

@@ -57,24 +57,31 @@ document.getElementById('sage-payment-form') && (function($){
 
     'use strict';
 
-    var number = $('#payment_details--card_number'), type = $('#payment_details--card_type'), template = type.attr('data-template');
+    var number = $('#payment_details--card_number'), 
+        type = $('#payment_details--card_type'), 
+        $highlighter = $('#js-ps-card-highlighter'),
+        $submit = $('#payment_details--submit');
 
    number.validateCreditCard(function(result){
 
         var matches = $.parseJSON(type.attr('data-matches'));
 
+
         if(result.length_valid && result.luhn_valid){
 
             type.val(matches[result.card_type.name]);
 
-           number.parent().css('position', 'relative').append('<span class="input__card-image" id="card-helper"><img src="'+template+result.card_type.name+'.svg" onerror="this.onerror=null; this.src=\''+template+result.card_type.name+'.png\'" /></span>')
+            $('.help-card').length &&  $highlighter.find('.help-card').remove();
 
-
+            $highlighter.attr('class', result.card_type.name.toLowerCase().replace(' ', '_')+' is-card');
+            $submit.removeClass('hidden');
 
         } else if(!result.length_valid || result.luhn_valid){
+            $submit.addClass('hidden');
+            $highlighter.attr('class', '');
 
-            number.parent().find('#card-helper').remove();
-            //trigger validation
+            !$('.help-card').length &&  $highlighter.append('<span class="help-card">please review your card number.</span>');
+            type.val('');
         }
 
     }, { accept: $.parseJSON(type.attr('data-valid')) });
