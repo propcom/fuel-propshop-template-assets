@@ -58,33 +58,56 @@ document.getElementById('sage-payment-form') && (function($){
     'use strict';
 
     var number = $('#payment_details--card_number'), 
-        type = $('#payment_details--card_type'), 
+        $type = $('#payment_details--card_type'), 
         $highlighter = $('#js-ps-card-highlighter'),
-        $submit = $('#payment_details--submit');
+        $submit = $('#payment_details--submit'),
+        $cards = $('.js-card-type'),
+        assignValue = function(payload){
+             $cards.addClass('is-fade');
+             typeof payload === 'object' && (function(){
+                payload.removeClass('is-fade');
+                $type.val(payload.attr('id'));
+             }());
+
+            $submit.attr('disabled', false);
+
+        };
+
+        // DOM nodes initialization
+        
+        $submit.attr('disabled', true);
+        $('.js-type-list').addClass('hidden');
+        $('.payment-methods').removeClass('hidden');
+
+
 
    number.validateCreditCard(function(result){
 
-        var matches = $.parseJSON(type.attr('data-matches'));
+        console.log(result);
+
+        var matches = $.parseJSON($type.attr('data-matches'));
 
 
         if(result.length_valid && result.luhn_valid){
 
-            type.val(matches[result.card_type.name]);
-
-            $('.help-card').length &&  $highlighter.find('.help-card').remove();
-
-            $highlighter.attr('class', result.card_type.name.toLowerCase().replace(' ', '_')+' is-card');
-            $submit.removeClass('hidden');
+            assignValue($('#'+result.card_type.name));
 
         } else if(!result.length_valid || result.luhn_valid){
-            $submit.addClass('hidden');
-            $highlighter.attr('class', '');
 
-            !$('.help-card').length &&  $highlighter.append('<span class="help-card">please review your card number.</span>');
-            type.val('');
+            $cards.removeClass('is-fade');
+            $submit.attr('disabled', true);
+            
         }
 
-    }, { accept: $.parseJSON(type.attr('data-valid')) });
+    }, { accept: $.parseJSON($type.attr('data-valid')) });
+
+
+   $(document).on('click', '.js-card-type', function(e){
+
+        e.preventDefault();
+        assignValue($(this));
+
+   });
 
 }(jQuery));
 

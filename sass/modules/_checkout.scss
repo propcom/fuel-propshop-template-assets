@@ -490,40 +490,19 @@
 
 .payment-method{
 	@include transition(318ms opacity $easeOut);
+
+	&:nth-child(1){
+		margin-left: 0 !important;
+	}
+	
+	&.is-fade{
+		@include opacity(0.15);
+	}	
+
+}
+
+input:disabled{
 	@include opacity(0.15);
-
-}
-
-.is-card{
-	&.visa{
-		.payment-method--visa{
-			@include opacity(1);
-		}
-	}
-}
-
-.is-card{
-	&.mastercard{
-		.payment-method--mastercard{
-			@include opacity(1);
-		}
-	}
-}
-
-.is-card{
-	&.maestro{
-		.payment-method--maestro{
-			@include opacity(1);
-		}
-	}
-}
-
-.is-card{
-	&.americanexpress{
-		.payment-method--americanexpress{
-			@include opacity(1);
-		}
-	}
 }
 
 
@@ -730,4 +709,14 @@
 .continue-shopping{
 
 	@include col(4);
+}
+
+
+.help-card{
+	display: block;
+	text-align: center;
+	text-transform: uppercase;
+	padding-top: 10px;
+
+	@include font-size($base-font-size, $base-font-size);
 }
