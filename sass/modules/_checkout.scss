@@ -491,12 +491,19 @@
 .payment-method{
 	@include transition(318ms opacity $easeOut);
 
+
 	&:nth-child(1){
 		margin-left: 0 !important;
 	}
 	
 	&.is-fade{
 		@include opacity(0.15);
+	}
+
+	img{
+		
+		height: percentage(50/78);
+
 	}	
 
 }
