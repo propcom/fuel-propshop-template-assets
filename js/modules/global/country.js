@@ -6,7 +6,9 @@
 
 			el.options[el.selectedIndex] ? option = el.options[el.selectedIndex].value : option = '';
 
-			hasChanged === 1 && window.location = option;
+			hasChanged === 1 && (function(){
+				window.location = option;
+			}());
 
 			hasChanged = 1;
 
