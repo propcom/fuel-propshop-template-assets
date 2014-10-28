@@ -27,11 +27,11 @@ Mountain View, California, 94041, USA.
     var card, card_type, card_types, get_card_type, is_valid_length, is_valid_luhn, normalize, validate, validate_number, _i, _len, _ref, _ref1;
     card_types = [
       {
-        name: 'American Express',
+        name: 'AMEX',
         pattern: /^3[47]/,
         valid_length: [15]
       }, {
-        name: 'Diner\'s Club',
+        name: 'DC',
         pattern: /^30[0-5]/,
         valid_length: [14]
       }, {
@@ -47,27 +47,27 @@ Mountain View, California, 94041, USA.
         pattern: /^35(2[89]|[3-8][0-9])/,
         valid_length: [16]
       }, {
-        name: 'Laser',
+        name: 'LASER',
         pattern: /^(6304|670[69]|6771)/,
         valid_length: [16, 17, 18, 19]
       }, {
-        name: 'Visa',
+        name: 'UKE',
         pattern: /^(4026|417500|4508|4844|491(3|7))/,
         valid_length: [16]
       }, {
-        name: 'Visa',
+        name: 'VISA',
         pattern: /^4/,
         valid_length: [13, 14, 15, 16]
       }, {
-        name: 'Mastercard',
+        name: 'MC',
         pattern: /^5[1-5]/,
         valid_length: [16]
       }, {
-        name: 'Mastercard Debit',
+        name: 'MCDEBIT',
         pattern: /^5[1-5]/,
         valid_length: [16, 17, 18, 19]
       }, {
-        name: 'Maestro',
+        name: 'MAESTRO',
         pattern: /^(5018|5020|5038|6304|6759|676[1-3])/,
         valid_length: [12, 13, 14, 15, 16, 17, 18, 19]
       }, {

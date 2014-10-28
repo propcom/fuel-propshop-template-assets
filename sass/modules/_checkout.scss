@@ -482,17 +482,29 @@
 
 .payment-methods{
 
-
-	&__imgs{
-
-
-		&__img{
-
-			float: right;
-			padding-left: 10px;
-			width: 25%;
-		}
+	div{
+		@extend %cleared;
 	}
+}
+
+
+.payment-method{
+	@include transition(318ms opacity $easeOut);
+
+
+	&:nth-child(1){
+		margin-left: 0 !important;
+	}
+	
+	&.is-fade{
+		@include opacity(0.15);
+	}
+
+
+}
+
+input:disabled{
+	@include opacity(0.15);
 }
 
 
@@ -699,4 +711,14 @@
 .continue-shopping{
 
 	@include col(4);
+}
+
+
+.help-card{
+	display: block;
+	text-align: center;
+	text-transform: uppercase;
+	padding-top: 10px;
+
+	@include font-size($base-font-size, $base-font-size);
 }

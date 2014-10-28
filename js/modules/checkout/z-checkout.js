@@ -57,27 +57,57 @@ document.getElementById('sage-payment-form') && (function($){
 
     'use strict';
 
-    var number = $('#payment_details--card_number'), type = $('#payment_details--card_type'), template = type.attr('data-template');
+    var number = $('#payment_details--card_number'), 
+        $type = $('#payment_details--card_type'), 
+        $highlighter = $('#js-ps-card-highlighter'),
+        $submit = $('#payment_details--submit'),
+        $cards = $('.js-card-type'),
+        assignValue = function(payload){
+             $cards.addClass('is-fade');
+             typeof payload === 'object' && (function(){
+                payload.removeClass('is-fade');
+                $type.val(payload.attr('id'));
+             }());
+
+            $submit.attr('disabled', false);
+
+        };
+
+        // DOM nodes initialization
+        
+        $submit.attr('disabled', true);
+        $('.js-type-list').addClass('hidden');
+        $('.payment-methods').removeClass('hidden');
+
+
 
    number.validateCreditCard(function(result){
 
-        var matches = $.parseJSON(type.attr('data-matches'));
+        console.log(result);
+
+        var matches = $.parseJSON($type.attr('data-matches'));
+
 
         if(result.length_valid && result.luhn_valid){
 
-            type.val(matches[result.card_type.name]);
-
-           number.parent().css('position', 'relative').append('<span class="input__card-image" id="card-helper"><img src="'+template+result.card_type.name+'.svg" onerror="this.onerror=null; this.src=\''+template+result.card_type.name+'.png\'" /></span>')
-
-
+            assignValue($('#'+result.card_type.name));
 
         } else if(!result.length_valid || result.luhn_valid){
 
-            number.parent().find('#card-helper').remove();
-            //trigger validation
+            $cards.removeClass('is-fade');
+            $submit.attr('disabled', true);
+            
         }
 
-    }, { accept: $.parseJSON(type.attr('data-valid')) });
+    }, { accept: $.parseJSON($type.attr('data-valid')) });
+
+
+   $(document).on('click', '.js-card-type', function(e){
+
+        e.preventDefault();
+        assignValue($(this));
+
+   });
 
 }(jQuery));
 

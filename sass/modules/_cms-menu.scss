@@ -75,9 +75,10 @@ $cms-menu-line-height : 28;
 
 	&--footer-menu{
 
-		padding: 20px 0 0;
-		margin: 20px 0 0;
-		border-top: 2px solid lightGrey;
+		padding: 20px 0 ;
+		margin: 20px 0 10px;
+		border-top: 1px solid lightGrey;
+		border-bottom: 1px solid lightGrey;
 
 		&__menu{
 			list-style: none;

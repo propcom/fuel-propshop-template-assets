@@ -15,7 +15,13 @@
 
 	&--checkbox{
 
-		float: left
+		float: left;
+		width: auto;
+		margin-right: 6px;
+
+		+ span{
+			line-height: #{$base-font-size}px;
+		}
 	}
 
 	.error &{
@@ -117,5 +123,12 @@
 		}
 
 
+	}
+}
+
+// Selects validation
+.error{
+	.styled-select{
+		border-color: $error;
 	}
 }

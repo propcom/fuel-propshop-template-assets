@@ -3,21 +3,21 @@
 
 	window.imager.onImagesReplaced =  function(){
 
-		//window.GetSizes && 'addEventListener' in window && window.GetSizes(this, document.body.clientWidth); 
+		//window.GetSizes && 'addEventListener' in window && window.GetSizes(this, document.body.clientWidth);
 
 
 		/**
 		* Checks the DOM for zoom wrapper element via and id, if the element exists instanciates elevateZoom
-		* 
+		*
 		*/
 		document.getElementById('js-ps-zoom-wrapper') && (function(){
 
 			$.removeData($(".js-ps-zoom").get(0));
 
-			document.querySelector('.zoomContainer') && document.body.removeChild(document.querySelector('.zoomContainer')); 
+			document.querySelector('.zoomContainer') && document.body.removeChild(document.querySelector('.zoomContainer'));
 
-			$(".js-ps-zoom").elevateZoom({ 
-				zoomType	: "inner", 
+			$(".js-ps-zoom").elevateZoom({
+				zoomType	: "inner",
 				cursor      : "crosshair",
 				easing : true,
 				responsive: true,
@@ -35,7 +35,7 @@
 
 /**
  * Checks the Dom for the presence of a slider class and initiazes it
- */							
+ */
 document.querySelector('.js-ps-slider') && (function(){
 
 	new Slider('.js-ps-slider', {
@@ -140,7 +140,7 @@ document.getElementById('propshop-customer')&& (function($){
 				'dataType': 'json',
 				'success': function (data) {
 
-					var state_select = $('.js-state-code'); 
+					var state_select = $('.js-state-code');
 
 					state_select.empty();
 
@@ -195,6 +195,32 @@ document.getElementById('js-ps-wishlist-grid') && (function($){
 	})
 
 }(jQuery));
+
+
+
+document.getElementById('js-ps-newsletter') && (function($){
+
+	$(document).on('submit', '#js-ps-newsletter form', function(e){
+		e.preventDefault();
+		var action = $('#js-ps-newsletter form').attr('action');
+		var data = $('#js-ps-newsletter form').serialize();
+		$.ajax({
+			url: action,
+			type: 'POST',
+			cache: false,
+			data: data,
+			success: function(data) {
+				$('#js-ps-newsletter').replaceWith(data);
+			}
+		}).done(function(){
+			document.getElementById('js-ps-ajax-overlay') && document.body.removeChild(document.getElementById('js-ps-ajax-overlay'));
+		}).fail(function(){
+			alert('newsletter sign up failed');
+		});
+	});
+
+}(jQuery));
+
 
 
 /**
