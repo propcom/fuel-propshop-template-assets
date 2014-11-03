@@ -700,3 +700,10 @@
 
 	@include col(4);
 }
+.forgotten-password{
+	background: $tertiaryColor;
+	border: 1px solid $quarternaryColor;
+	float: left;
+	@include font-size(12, 28);
+	@include col--alpha(8);
+}
