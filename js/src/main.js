@@ -202,15 +202,16 @@ document.getElementById('js-ps-newsletter') && (function($){
 
 	$(document).on('submit', '#js-ps-newsletter form', function(e){
 		e.preventDefault();
-		var action = $('#js-ps-newsletter form').attr('action');
-		var data = $('#js-ps-newsletter form').serialize();
+		var action = $(this).attr('action');
+		var data = $(this).serialize();
+		var self = this;
 		$.ajax({
 			url: action,
 			type: 'POST',
 			cache: false,
 			data: data,
 			success: function(data) {
-				$('#js-ps-newsletter').replaceWith(data);
+				$(self).parents('#js-ps-newsletter').replaceWith(data);
 			}
 		}).done(function(){
 			document.getElementById('js-ps-ajax-overlay') && document.body.removeChild(document.getElementById('js-ps-ajax-overlay'));
