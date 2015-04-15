@@ -70,7 +70,7 @@
 		msg.find('.js-ps-alert-copy').html(message);
 		msg.removeClass('visuallyhidden');
 
-		$(document.body).prepend(msg);
+		msg.insertBefore('#js-ps-alert-template');
 	};
 
 
