@@ -15,22 +15,18 @@ document.getElementById('propshop-checkout')&& (function($){
 
     'use strict';
 
-    var signupForm = $('#js-ps-checkout-signup-form'), loginForm = $('#js-ps-checkout-login-form'), activeForm = $('.is-open');
-    activeForm.css('height', function(){
-         return (activeForm.children('div').get(0).clientHeight + parseInt(activeForm.css('padding-top')) + parseInt(activeForm.css('padding-bottom')) ) + 'px';
-    });
+    var signupForm = $('#js-ps-checkout-signup-form'), loginForm = $('#js-ps-checkout-login-form'), activeForm = $('.js-is-open');
 
     $(document).on('click', '#js-ps-checkout-signup-btn', function(e){
 
         e.preventDefault();
 
-        if(!signupForm.hasClass('is-open')){
+        if(!signupForm.hasClass('js-is-open')){
 
-            signupForm.css('height', function(){
-                return signupForm.children('div').get(0).clientHeight + 'px';
-            }).addClass('is-open');
+            signupForm.slideDown().addClass('js-is-open');
 
-            loginForm.css('height', '0px').removeClass('is-open');
+            loginForm.slideUp().removeClass('js-is-open');
+
         }
     });
 
@@ -39,14 +35,14 @@ document.getElementById('propshop-checkout')&& (function($){
 
         e.preventDefault();
 
-        if(!loginForm.hasClass('is-open')){
+        if(!loginForm.hasClass('js-is-open')){
 
-            loginForm.css('height', function(){
-                return loginForm.children('div').get(0).clientHeight + 'px';
-            }).addClass('is-open');
+            loginForm.slideDown().addClass('js-is-open');
 
-            signupForm.css('height', '0px').removeClass('is-open');
+            signupForm.slideUp().removeClass('js-is-open');
+
         }
+        
     });
 
 
