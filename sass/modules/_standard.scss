@@ -59,21 +59,7 @@ $standard-form-margin-bottom: 5;
 		}
 		
 		background: $quarternaryColor;
-		height: 0;
 		margin-bottom: #{$standard-form-margin-bottom}px;
-		overflow: hidden;
-
-		@include adv-transition(618ms, $easeOut, 0, height, opacity);
-		@include opacity(0);
-
-
-		&.is-open{
-
-			height: auto;
-
-			@include opacity(1);
-		}			
-
 
 		&__h{
 
@@ -148,4 +134,15 @@ $standard-form-margin-bottom: 5;
 			height: auto;
 		}
 	}
+}
+
+
+.content-reveal {
+
+	display: none;
+
+	&--open {
+		display: block;
+	}	
+
 }
