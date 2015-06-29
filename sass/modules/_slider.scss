@@ -1,477 +1,147 @@
-.slider-headings{
+/*! Flickity v1.0.0
+http://flickity.metafizzy.co
+---------------------------------------------- */
 
-  &__title{
-    text-align: center;
+.flickity-enabled {
+  position: relative;
+  &:focus {
+    outline: none;
   }
-
-  &__subtitle{
-    text-align: center;
+  &.is-draggable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
-
 }
 
+.flickity-viewport {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  .flickity-enabled.is-draggable & {
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: grab;
+    &.is-pointer-down {
+      cursor: -webkit-grabbing;
+      cursor: grabbing;
+    }
+  }
+}
 
-.slider{
+.flickity-slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
 
-	&__list{
+.flickity-prev-next-button {
+  position: absolute;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  background: hsla(0, 0%, 100%, 0.75);
+  cursor: pointer;
+  @include transform(translateY(-50%));
 
+  &:hover {
+    background: white;
+  }
 
-	}
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 5px #09F;
+  }
 
-	&__item{
+  &:active {
+    filter: alpha(opacity=60); /* IE8 */
+    opacity: 0.6;
+  }
 
+  &:disabled {
+    filter: alpha(opacity=30); /* IE8 */
+    opacity: 0.3;
+    cursor: auto;
+  }
 
-		&__caption{
-			@extend %absolute-center;
-			background: white;
-		}
-	}
+  &.previous {
+    left: 10px;
+    .flickity-rtl & {
+      left: auto;
+      right: 10px;
+    }
+  }
 
-  &__btn{
+  &.next {
+    right: 10px;
+    .flickity-rtl & {
+      left: 10px;;
+      right: auto;
+    }
+  }
 
-     $btn-colour: grey;
-     $btn-size: 40px;
-
+  svg{
     position: absolute;
-      top: 50%;
-    width: 0;
-    height: 0;
-    border-top: $btn-size solid transparent;
-    border-bottom: $btn-size solid transparent;
-
-    @include hide-text;
-    @include opacity(.4);
-    @include transform( translateY(-50%) );
-
-    z-index: 1;
-
-
-
-    &--previous{
-       left: 10px; 
-       border-right: $btn-size solid $btn-colour;
-
-    }
-
-    &--next{
-        right: 10px;
-       border-left: $btn-size solid $btn-colour;
-    
-    }
-  }
-}
-
-// JS dependencies
-// 
-// 
-
-$slider-js-class: js-ps-slider;
-
-.#{$slider-js-class}{
-
-    position: relative;
-
-    padding-bottom: percentage(500/1240);
-
-    &-list{
-    overflow: hidden;
-    position: absolute;
-      left: 0;
-      top: 0;
-    width: 100%;  
-    padding-bottom: percentage(500/1240);
-     @include hardwareAccelerate;
-
-      &-item{
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-     @include hardwareAccelerate;
-
-     &-current{
-
-      display: block;
-      z-index: 10;
-
-    }
-
-    &-link{
-      display: block;
-
-
-    }
-
+    left: 20%;
+    top: 20%;
+    width: 60%;
+    height: 60%;
   }
 
-}
-}
+  .arrow {
+    fill: $templatePrimary;
+  }
 
-@mixin slider--slide(){
-
-      $speed: 382;
-
-     .transition-slide{
-
-   .#{$slider-js-class}{
-
-      &-list{
-
-      &-item{
-
-        &-current{
-
-            @include animation(fadeIn, center center, #{$speed}ms, cubic-bezier(0.455, 0.03, 0.515, 0.955), 0, 1, normal, both);
-
-        }
-
-        &-hide{
-
-          &-prev{
-
-            @include animation(slideToLeft, center center, #{$speed}ms, linear, 10ms, 1, normal, both);
-            display: block;
-
-          } 
-
-          &-next{
-        
-            display: block;
-            @include animation(slideToRight, center center, #{$speed}ms, linear, 10ms, 1, normal, both);
-            
-          }
-        }
-
-        &-show{
-
-
-          &-prev{
-
-            @include animation(slideFromLeft, center center, #{$speed}ms, linear, 10ms, 1, normal, both);
-
-          }
-
-          &-next{
-
-            @include animation(slideFromRight, center center, #{$speed}ms, linear, 10ms, 1, normal, both);
-
-          }
-        }
-      }
-    }
-
-    }
-
+  &.no-svg {
+    color: $templatePrimary;
+    font-size: 26px;
     
   }
-
-
-    @include frames(slideFromLeft){
-      0%{
-        @include transform(translateX(-100%));
-      }
-    } 
-
-    @include frames(slideToLeft){
-      99%{
-          @include opacity(1);
-      }
-
-      100%{
-          @include opacity(0);
-        @include transform(translateX(-100%));
-      }
-    }
-
-    @include frames(slideFromRight){
-      0%{
-        @include transform(translateX(100%));
-      }
-    }
-
-    @include frames(slideToRight){
-      99%{
-          @include opacity(1);
-      }
-
-      100%{
-          @include opacity(0);
-        @include transform(translateX(100%));
-      }
-    }
-
 }
 
-@include slider--slide();
 
+/* ---- page dots ---- */
 
-@mixin slider--slide-vertical(){
-
-      $v-speed: 382;
-
-     .transition-slide-vertical{
-
-   .#{$slider-js-class}{
-
-      &-list{
-
-      &-item{
-
-        &-current{
-
-            @include animation(fadeIn, center center, #{$v-speed}ms, cubic-bezier(0.455, 0.03, 0.515, 0.955), 0, 1, normal, both);
-
-        }
-
-        &-hide{
-
-          &-prev{
-
-            @include animation(slideToTop, center center, #{$v-speed}ms, linear, 10ms, 1, normal, both);
-            display: block;
-
-          } 
-
-          &-next{
-        
-            display: block;
-            @include animation(slideToBottom, center center, #{$v-speed}ms, linear, 10ms, 1, normal, both);
-            
-          }
-        }
-
-        &-show{
-
-
-          &-prev{
-
-            @include animation(slideFromTop, center center, #{$v-speed}ms, linear, 10ms, 1, normal, both);
-
-          }
-
-          &-next{
-
-            @include animation(slideFromBottom, center center, #{$v-speed}ms, linear, 10ms, 1, normal, both);
-
-          }
-        }
-      }
-    }
-
-    }
-
-    
-  }
-
-
-    @include frames(slideFromTop){
-      0%{
-        @include transform(translateY(-100%));
-      }
-    } 
-
-    @include frames(slideToTop){
-      99%{
-          @include opacity(1);
-      }
-
-      100%{
-          @include opacity(0);
-        @include transform(translateY(-100%));
-      }
-    }
-
-    @include frames(slideFromBottom){
-      0%{
-        @include transform(translateY(100%));
-      }
-    }
-
-    @include frames(slideToBottom){
-      99%{
-          @include opacity(1);
-      }
-
-      100%{
-          @include opacity(0);
-        @include transform(translateY(100%));
-      }
-    }
-
+.flickity-page-dots {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+  line-height: 1;
+  left: 0;
+  right: 0;
 }
 
-//@include slider--slide-vertical();
+.flickity-rtl .flickity-page-dots { direction: rtl; }
 
-
-
-@mixin slider--fold(){
-
-      $speed: 382;
-
-     .transition-fold{
-
-   .#{$slider-js-class}{
-
-      &-list{
-
-      &-item{
-
-        &-hide{
-          &-prev, &-next{
-            display: block;
-          }
-        }
-
-        &-show{
-
-
-          &-prev{
-            display: block;
-            @include animation(foldFromLeft, bottom center, #{$speed}ms, linear, 0, 1, normal, both);
-
-          }
-
-          &-next{
-            display: block;
-            @include animation(foldFromRight, top center, #{$speed}ms, linear, 0, 1, normal, both);
-
-          }
-        }
-      }
-    }
-
-    }
-
-    
-  }
-
-
-    @include frames(foldFromLeft){
-      0%{
-        @include opacity(0.4);
-        @include transform(rotateX(-90deg));
-      }
-      90%{
-        @include opacity(1);
-      }
-    } 
-
-
-    @include frames(foldFromRight){
-      0%{
-         @include opacity(0.4);
-        @include transform(rotateX(90deg));
-      }
-
-      90%{
-        @include opacity(1);
-      }
-    }
-
+.flickity-page-dots .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 8px;
+  background: $templatePrimary;
+  border-radius: 50%;
+  filter: alpha(opacity=25); /* IE8 */
+  opacity: 0.25;
+  cursor: pointer;
 }
 
-//@include slider--fold();
-
-@mixin slider--scale(){
-
-  .transition-scale{
-
-   .#{$slider-js-class}{
-
-      &-list{
-
-      &-item{
-
-        &-current{
-            @include opacity(0);
-           @include animation(fadeIn, center center, 618ms, cubic-bezier(0.455, 0.03, 0.515, 0.955), 0, 1, normal, both);
-
-        }
-
-        &-hide{
-
-          &-prev, &-next{
-
-            display: block;
-
-            @include animation(scaleOut, center center, 618ms, cubic-bezier(0.455, 0.03, 0.515, 0.955), 0, 1, normal, both);
-            
-          }
-        }
-      }
-    }
-
-    }
-
-    
-  }
-
-
-    @include frames(scaleOut){
-    100%{
-      @include opacity(0);
-      @include transform(scale(1.6));
-    }
-  }
-
-  @include frames(fadeIn){
-    0%{
-      @include opacity(0);
-    }
-    100%{
-      @include opacity(1);
-    }
-  }
-
+.flickity-page-dots .dot.is-selected {
+  filter: alpha(opacity=100); /* IE8 */
+  opacity: 1;
 }
 
-//@include slider--scale();
+.slider__item {
+  width: 100%;
 
-
-
-@mixin slider--fade(){
-
-   .transition-fade{
-
-   .#{$slider-js-class}{
-
-      &-list{
-
-      &-item{
-
-        &-current{
-
-            @include animation(fadeIn, center center, 618ms, cubic-bezier(0.455, 0.03, 0.515, 0.955), 0, 1, normal, both);
-
-        }
-
-        &-hide{
-
-          &-prev, &-next{
-
-            display: block;
-            z-index: 10000;
-            
-          }
-        }
-      }
-    }
-
-    }
-
-    
+  &__image {
+    display: block;
   }
-
-  @include frames(fadeIn){
-    0%{
-      @include opacity(0);
-    }
-    100%{
-      @include opacity(1);
-    }
-  }
-
 }
-//@include slider--fade();
-
