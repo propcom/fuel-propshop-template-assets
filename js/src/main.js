@@ -36,11 +36,14 @@
 /**
  * Checks the Dom for the presence of a slider class and initiazes it
  */
-document.querySelector('.js-ps-slider') && (function(){
+document.querySelector('.js-slider') && (function(){
 
-	new Slider('.js-ps-slider', {
-		imgr: window.imager,
-		modernizr : window.Modernizr
+	$('.js-slider').flickity({
+		cellAlign: 'left',
+		contain: true,
+		lazyLoad: true,
+		wrapAround: true,
+		imagesLoaded: true
 	});
 
 }());
