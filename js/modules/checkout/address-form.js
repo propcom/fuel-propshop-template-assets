@@ -33,7 +33,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 				return;
 			}
 
-			$.ajax('/customer/rest/address.json', {
+			$.ajax(_u('/customer/rest/address.json'), {
 				'type': 'GET',
 				'data': {
 					id: $(this).val()
@@ -55,7 +55,7 @@ document.getElementById('js-ps-billing-form') && document.getElementById('js-ps-
 		update_states: function (country, callback) {
 			var self = this;
 
-			$.ajax('/customer/rest/address_states.json', {
+			$.ajax(_u('/customer/rest/address_states.json'), {
 				'type': 'get',
 				'async': false,
 				cache: false,

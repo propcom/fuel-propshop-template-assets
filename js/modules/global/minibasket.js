@@ -19,7 +19,7 @@ document.getElementById('js-ps-minibasket') && (function($){ // IIFE is only ran
 		 * Polls the /basket/mini restful action via ajax to return the updated minibasket markup      
 		 */
 		$.ajax({
-			url: '/basket/mini',
+			url: _u('/basket/mini'),
 			type: 'GET',
 			cache: false,
 			success: function(data){

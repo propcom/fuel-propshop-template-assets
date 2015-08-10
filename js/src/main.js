@@ -133,7 +133,7 @@ document.getElementById('propshop-customer')&& (function($){
 
     	$this = $(this);
 
-        $.ajax('/customer/rest/address_states.json', {
+        $.ajax(_u('/customer/rest/address_states.json'), {
 				'type': 'get',
 				'async': true,
 				cache: false,
@@ -207,7 +207,7 @@ document.getElementById('js-ps-newsletter') && (function($){
 		var data = $(this).serialize();
 		var self = this;
 		$.ajax({
-			url: action,
+			url: _u(action),
 			type: 'POST',
 			cache: false,
 			data: data,

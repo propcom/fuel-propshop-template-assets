@@ -18,7 +18,7 @@ $(function(){
 			if(copy_address_field || matched) {
 				shipping_options_ajax && shipping_options_ajax.abort();
 				shipping_options_ajax = $.ajax({
-					url:'/checkout/shipping_options/',
+					url:_u('/checkout/shipping_options/'),
 					type:'POST',
 					data:$(this).closest('form').serialize(),
 					dataType:'JSON',

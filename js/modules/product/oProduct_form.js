@@ -77,7 +77,7 @@
 		 * When we init the ProductForm object we instantiate the variants property via ajax, the built in promise in the $.ajax method takes care of firing the code when the response is returned
 		 */
 		$.ajax({
-			url: '/product/rest_variants/variant_options/' + self.product_id + '.json',
+			url: _u('/product/rest_variants/variant_options/' + self.product_id + '.json'),
 			type: 'GET',
 			cache: false,
 			global: false,
