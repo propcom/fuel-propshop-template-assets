@@ -14,9 +14,9 @@ document.getElementById('js-ps-category-page') && (function($){
 
         // Abort the active request
         filter_request && filter_request.abort();
-    
+
         filter_request = $.ajax({
-            url: '/search/index',
+            url: _u('/search/index'),
             type: 'GET',
             data: reqData,
             cache: false,
