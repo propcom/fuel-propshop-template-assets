@@ -115,7 +115,7 @@ document.getElementById('js-ps-checkout-review-shipping') && (function($){
 function getQuote(input){
 
         $.ajax({
-            url: '/checkout/rest/shipping_quote.json',
+            url: _u('/checkout/rest/shipping_quote.json'),
             type: 'GET',
             data: { id : input.val()},
             success: function(data) {

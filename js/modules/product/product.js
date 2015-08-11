@@ -47,7 +47,7 @@ document.getElementById('js-prop-add-to-basket-form') && (function($) {
 	// AJAX load in the recently viewed products
 	// Do this with AJAX rather than raw PHP else we lose the ability to varnish cache when a product page is hit
 	if (recent) {
-		$.get('/product/product/view_recent/', {
+		$.get(_u('/product/product/view_recent/'), {
 			products: recent
 		},
 		function(data) {
@@ -70,7 +70,7 @@ document.getElementById('js-prop-add-to-basket-form') && (function($) {
 		 * http://api.jquery.com/jquery.get/
 		 */
 
-		$.get('/product/view_info/' + variant).done(function(data) {
+		$.get(_u('/product/view_info/' + variant)).done(function(data) {
 
 			/**
 			 * Replacing the markup in the variant's info container by the response returned
@@ -166,7 +166,7 @@ document.getElementById('js-ps-ajax-wishlist-logged') && (function($) {
 		e.preventDefault();
 
 		$.ajax({
-			url: '/wishlist/rest/add.json',
+			url: _u('/wishlist/rest/add.json'),
 			data: {
 				product_id: $('#js-ps-product-variant-id').val()
 			},
@@ -252,7 +252,7 @@ document.getElementById('js-ps-share-email') && (function($) {
 
 
 		$.ajax({
-			url: '',
+			url: _u(''),
 			data: formData,
 			type: 'POST',
 			async: true,
