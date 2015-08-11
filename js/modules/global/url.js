@@ -11,20 +11,23 @@
  * @return {string}
  */
 function _u(url) {
-	if ( ! window.url_domain) {
-		var url_domain = document.querySelector('body').dataset['urldomain'];
-		if ( ! url_domain) {
-			url_domain = window.location.protocol + '//' + window.location.host;
-		}
+	"use strict";
 
-		// Make sure there is always a trailing slash
-		url_domain = url_domain.replace(/\/*$/, '/');
+	// Assingns a url default value just in case it's not set and removes any leading slashes
+	url = (url || '').replace(/^\//, '');
 
-		window.url_domain = url_domain;
-	}
+	// Checks if window.url_domain exists, otherwise returns a value based on the functions logic
+	window.url_domain = (window.url_domain || (function (u) {
 
-	// Remove any leading slash
-	url = url.replace(/^\//, '');
+		//Checks for the return value of the data attribute, otherwise applies base path.
+		u = u || window.location.protocol + '//' + window.location.hostname;
+
+		// Return the url domain making sure there is a trailing slash at the end
+		return u;
+
+	}(document.body.getAttribute('data-urldomain')))).replace(/\/*$/, '/');
+
+	// window.url_domain = window.url_domain.replace(/\/*$/, '/');
 
 	return window.url_domain + url;
 }
