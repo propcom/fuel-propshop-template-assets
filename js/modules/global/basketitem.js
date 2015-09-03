@@ -136,10 +136,10 @@
 
 	$.fn.basketItem.defaults = {
 		method : 'POST',
-		addUrl : _u('/basket/rest/add.json'),
-		removeUrl : _u('/basket/rest/delete.json'),
-		incrementUrl : _u('/basket/rest/incr.json'),
-		decrementUrl : _u('/basket/rest/decr.json'),
+		addUrl : '/basket/rest/add.json',
+		removeUrl : '/basket/rest/delete.json',
+		incrementUrl : '/basket/rest/incr.json',
+		decrementUrl : '/basket/rest/decr.json',
 		productId : ''
 	};
 
